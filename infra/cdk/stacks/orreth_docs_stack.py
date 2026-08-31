@@ -101,6 +101,16 @@ class OrrethDocsStack(Stack):
             ],
         )
 
+        if hosted_zone and docs_domain:
+            route53.ARecord(
+                self,
+                "DocsAlias",
+                zone=hosted_zone,
+                record_name=docs_domain,
+                target=route53.RecordTarget.from_alias(
+                    targets.CloudFrontTarget(distribution)),
+            )
+
         # every deploy ships the fresh build and invalidates the edge cache.
         s3deploy.BucketDeployment(
             self,
