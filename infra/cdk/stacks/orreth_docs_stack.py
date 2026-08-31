@@ -121,6 +121,57 @@ class OrrethDocsStack(Stack):
             distribution_paths=["/*"],
         )
 
+        # 0064 — the apex (JB's lock, 2026-08-31): orreth.ai itself, blank
+        # until today, 301-redirects to the book. The viewer-request function
+        # answers before any origin is consulted; the bucket origin is never
+        # reached and never listed.
+        if hosted_zone and zone_name and docs_domain:
+            apex_cert = acm.Certificate(
+                self,
+                "ApexCert",
+                domain_name=zone_name,
+                subject_alternative_names=[f"www.{zone_name}"],
+                validation=acm.CertificateValidation.from_dns(hosted_zone),
+            )
+            apex_fn = cloudfront.Function(
+                self,
+                "ApexRedirect",
+                code=cloudfront.FunctionCode.from_inline(
+                    "function handler(event){return {statusCode:301,"
+                    "statusDescription:'Moved Permanently',headers:{location:"
+                    f"{{value:'https://{docs_domain}'+event.request.uri}}}}}};}}"
+                ),
+            )
+            apex_dist = cloudfront.Distribution(
+                self,
+                "ApexCDN",
+                default_behavior=cloudfront.BehaviorOptions(
+                    origin=origins.S3BucketOrigin.with_origin_access_control(bucket),
+                    viewer_protocol_policy=cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+                    cache_policy=cloudfront.CachePolicy.CACHING_DISABLED,
+                    function_associations=[
+                        cloudfront.FunctionAssociation(
+                            function=apex_fn,
+                            event_type=cloudfront.FunctionEventType.VIEWER_REQUEST,
+                        ),
+                    ],
+                ),
+                domain_names=[zone_name, f"www.{zone_name}"],
+                certificate=apex_cert,
+                price_class=cloudfront.PriceClass.PRICE_CLASS_100,
+            )
+            for rec_id, rec_name in (("ApexAlias", zone_name),
+                                     ("WwwAlias", f"www.{zone_name}")):
+                route53.ARecord(
+                    self,
+                    rec_id,
+                    zone=hosted_zone,
+                    record_name=rec_name,
+                    target=route53.RecordTarget.from_alias(
+                        targets.CloudFrontTarget(apex_dist)),
+                )
+            CfnOutput(self, "ApexRedirectTo", value=f"https://{docs_domain}")
+
         CfnOutput(self, "CloudFrontDomain", value=distribution.distribution_domain_name)
         CfnOutput(self, "CloudFrontDistId", value=distribution.distribution_id)
         if docs_domain:

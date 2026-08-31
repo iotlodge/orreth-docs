@@ -29,6 +29,7 @@ export default defineConfig({
 						{ label: 'Quickstart', slug: 'build/quickstart' },
 						{ label: 'Build your first world', slug: 'build/first-world' },
 						{ label: 'Build your first capability', slug: 'build/first-capability' },
+						{ label: 'Bring your own agent', slug: 'build/bring-your-own-agent' },
 					],
 				},
 				{
