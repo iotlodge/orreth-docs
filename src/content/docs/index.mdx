@@ -1,0 +1,80 @@
+---
+title: What is Orreth
+description: Orreth is a governed runtime for agentic systems — a small kernel your agents join, and capabilities you build on top of it.
+template: splash
+hero:
+  title: Orreth
+  tagline: A governed runtime for agentic systems — every action signed, every identity permanent, every consequence waiting on a human.
+  actions:
+    - text: See the anatomy of a running world
+      link: /learn/anatomy/
+      icon: right-arrow
+    - text: What works today
+      link: /learn/what-works-today/
+      icon: seti:notebook
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Two elements
+
+Orreth is not a framework you embed in your code. It is a **runtime your agents live in** — and it is exactly two elements:
+
+<CardGrid>
+	<Card title="The machine" icon="setting">
+		A small kernel binary (`orrethd`) that keeps the permanent record: every
+		action is a signed record, every agent and tool carries an unforgeable
+		identity for life, every permission only ever narrows as it is delegated,
+		and every model call is metered against the name that spent it. The kernel
+		**verifies signatures but cannot create them** — private keys never enter
+		it. One binary runs any tier of a deployment; a small JSON profile tells
+		it which tier to be.
+	</Card>
+	<Card title="Capabilities" icon="puzzle">
+		The purposes built on top — by you, or by Orreth itself: agents, tools,
+		and complete workflows. A capability is **declarations, never code in the
+		kernel's path**: it is installed by dropping a folder, rendered by the
+		console without loading foreign JavaScript, and lifecycled (start, stop,
+		retire) by a human's word. Remove the folder and it is gone; its records
+		remain.
+	</Card>
+</CardGrid>
+
+## How that differs from an agent framework
+
+Frameworks — LangGraph, AgentField, CrewAI — help you *write* an agent. Orreth is where that agent *lives*. An agent built with any framework joins an Orreth deployment through a human-approved gate, receives a permanent identity, works under permissions that can only narrow, files signed records of everything it does, and stops at a human gate before anything with consequence completes. Your existing agents keep their framework; Orreth supplies the institution around them — identity, memory, governance, metering, and audit.
+
+## Start here
+
+<CardGrid stagger>
+	<Card title="The anatomy of a running world" icon="open-book">
+		What actually exists when Orreth runs — the three bodies of the system,
+		what a universe, an ecosystem, and a floor really are, and why the whole
+		topology is data you can rewrite.
+		[Read the anatomy →](/learn/anatomy/)
+	</Card>
+	<Card title="What works today" icon="approve-check">
+		A docs site that only tells you what's proven. This page is maintained
+		from the project's standing register of claims, evidence, and honest
+		gaps — including what does *not* exist yet.
+		[See the register →](/learn/what-works-today/)
+	</Card>
+	<Card title="Glossary" icon="translate">
+		Orreth's console speaks a compact working vocabulary. Every term, in the
+		machine's own plain-English definitions — the same dictionary the live
+		console serves.
+		[Open the glossary →](/learn/glossary/)
+	</Card>
+	<Card title="Build and Reference tracks" icon="rocket">
+		Quickstart, build-your-first-world, the SDK, capability authoring, the
+		HTTP API, and the configuration reference are being written now — each
+		page ships together with the packaging work that makes it true.
+	</Card>
+</CardGrid>
+
+## See it live
+
+A captured moment of a real running Orreth universe is public at
+[demo.orreth.ai](https://demo.orreth.ai) — every view a real screenshot-grade
+snapshot of the console, from the live record of the machine that produced it.

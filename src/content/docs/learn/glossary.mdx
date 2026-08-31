@@ -1,0 +1,44 @@
+---
+title: Glossary
+description: Every term of Orreth's working vocabulary, in the machine's own plain-English definitions — the same dictionary the live console serves.
+---
+
+import glossary from '../../../data/glossary.json';
+
+Orreth's console speaks a compact working vocabulary. The definitions below
+are **the machine's own**: they are served live by the running console (every
+canon word there is a clickable definition), and the project's test suite
+holds each one to a plain-English contract — self-contained, jargon-free, and
+under 240 characters. This page and the console share one dictionary; when a
+definition improves at the machine's editing gates, this page inherits it at
+the next refresh.
+
+<table>
+	<thead>
+		<tr>
+			<th>Term</th>
+			<th>Meaning</th>
+		</tr>
+	</thead>
+	<tbody>
+		{Object.entries(glossary)
+			.sort(([a], [b]) => a.localeCompare(b))
+			.map(([term, def]) => (
+				<tr>
+					<td>
+						<strong>{term}</strong>
+					</td>
+					<td>{def}</td>
+				</tr>
+			))}
+	</tbody>
+</table>
+
+## A note on the two vocabularies
+
+These docs lead with plain engineering terms and show the machine's names as
+labels — *"the tool registry (shown in the console as **the Farm**)"*. The
+console keeps its own register because several of its words are load-bearing
+distinctions with no shorter engineering equivalent (*saddled* is not merely
+"configured"; *quarantined* is not merely "disabled"). When you meet a dotted
+underline in the live console, it is this dictionary answering.
