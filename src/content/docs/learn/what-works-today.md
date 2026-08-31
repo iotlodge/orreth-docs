@@ -96,6 +96,12 @@ most of it demonstrated by a human working through the console with no script.
 - **Outside agents join as themselves.** A LangGraph agent has joined a
   running universe through the same governed gate as everything else, kept its
   own framework, and worked under a lease.
+- **The kernel image is published, and a world stands on it from three
+  files.** `ghcr.io/iotlodge/orrethd` is publicly pullable (2026-08-31, the
+  first seam this documentation cut), and the
+  [first-world example](/build/first-world/) — two tier profiles and a
+  compose file — was proven whole against it: floor joined under universe,
+  presence beating up, rules cascading down, console serving.
 
 ## True but partial — the boundary, stated
 
@@ -117,9 +123,10 @@ decoupling**: each tutorial page is written as if the packages existed, and
 every step that turns out to be impossible from outside the monorepo names a
 seam to cut. The current honest list:
 
-- **No published container image yet.** Running Orreth today means cloning the
-  repository and using its dev script. Publishing the kernel image is the
-  first seam; the ten-minute quickstart ships with it.
+- ~~No published container image~~ — **shipped 2026-08-31**: see
+  `ghcr.io/iotlodge/orrethd` in the proven tier above. The *full* experience
+  (residents, cognition) still runs from the repository — packaging the
+  agentic layer is a later, deeper seam.
 - **The SDK is not on a package index yet.** `orreth-agent` (Python, one
   dependency) is packageable as-is and will be published as the Build track's
   second seam.
