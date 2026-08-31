@@ -123,7 +123,7 @@ Growing it is more of the same data: a third tier is one more profile and
 five compose lines. An ecosystem between universe and floor is a profile
 with scope `u:first/e:something` and two `--parent` edits.
 
-Giving the world *minds* — the built-in staff, or your own agents joining
-through the governed gate — is the next page in this track, and it ships
-together with the SDK's publication (seam S2 of the
-[docs-driven decoupling](/learn/what-works-today/#does-not-exist-yet--being-built-by-this-documentation-effort)).
+Giving the world *purposes* is the next page in this track:
+[build your first capability](/build/first-capability/) — and the SDK for
+giving it *minds* is published:
+[`pip install orreth-agent`](https://pypi.org/project/orreth-agent/).

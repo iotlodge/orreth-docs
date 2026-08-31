@@ -28,11 +28,17 @@ export default defineConfig({
 					items: [
 						{ label: 'Quickstart', slug: 'build/quickstart' },
 						{ label: 'Build your first world', slug: 'build/first-world' },
+						{ label: 'Build your first capability', slug: 'build/first-capability' },
 					],
 				},
-				// The rest of the Build track and the Reference track arrive with the
-				// next spoonfuls of design dive 0064 — the sidebar only ever lists
-				// pages that exist.
+				{
+					label: 'Reference',
+					items: [
+						{ label: 'The capability manifest', slug: 'reference/capability-manifest' },
+					],
+				},
+				// More pages arrive with the next spoonfuls of design dive 0064 —
+				// the sidebar only ever lists pages that exist.
 			],
 		}),
 	],

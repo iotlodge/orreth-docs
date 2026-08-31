@@ -127,12 +127,15 @@ seam to cut. The current honest list:
   `ghcr.io/iotlodge/orrethd` in the proven tier above. The *full* experience
   (residents, cognition) still runs from the repository — packaging the
   agentic layer is a later, deeper seam.
-- **The SDK is not on a package index yet.** `orreth-agent` (Python, one
-  dependency) is packageable as-is and will be published as the Build track's
-  second seam.
-- **The capability manifest has no machine-readable schema yet** — the
-  contract is proven in code and documented in design prose; the schema and a
-  panel-kinds reference arrive with the capability tutorial.
+- ~~The SDK is not on a package index~~ — **shipped 2026-08-31**:
+  [`pip install orreth-agent`](https://pypi.org/project/orreth-agent/)
+  (Apache-2.0, one dependency), proven by a fresh install from the live
+  index; the full public surface is now exported at the package top.
+- ~~The capability manifest has no reference~~ — **documented 2026-08-31**:
+  the [manifest reference](/reference/capability-manifest/) carries the
+  contract and all thirteen panel kinds, and the SDK exports the same closed
+  vocabulary (`PANEL_KINDS`) plus a validating builder. A formal JSON-Schema
+  file remains future work.
 - **Bring-your-own-package capabilities** — today a capability installs from
   the repository's own folder; installing one from an outside package awaits
   the trust machinery for it.
