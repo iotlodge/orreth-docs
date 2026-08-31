@@ -23,8 +23,13 @@ export default defineConfig({
 						{ label: 'Glossary', slug: 'learn/glossary' },
 					],
 				},
-				// The Build and Reference tracks arrive with the next spoonfuls of
-				// design dive 0064 — the sidebar only ever lists pages that exist.
+				{
+					label: 'Build',
+					items: [{ label: 'Quickstart', slug: 'build/quickstart' }],
+				},
+				// The rest of the Build track and the Reference track arrive with the
+				// next spoonfuls of design dive 0064 — the sidebar only ever lists
+				// pages that exist.
 			],
 		}),
 	],
