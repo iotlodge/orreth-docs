@@ -34,6 +34,10 @@ export default defineConfig({
 				{
 					label: 'Reference',
 					items: [
+						{ label: 'The HTTP API', slug: 'reference/http-api' },
+						{ label: 'Configuration — the dials', slug: 'reference/configuration' },
+						{ label: 'The residents', slug: 'reference/residents' },
+						{ label: 'The contracts', slug: 'reference/contracts' },
 						{ label: 'The capability manifest', slug: 'reference/capability-manifest' },
 					],
 				},

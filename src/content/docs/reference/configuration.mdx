@@ -1,0 +1,74 @@
+---
+title: Configuration — the dials
+description: Every operating value of the machine, generated from the dial registry itself — name, bounds, default, home, and what each governs.
+---
+
+import dials from '../../../data/dials.json';
+
+Orreth's operating values are not scattered config files — they are
+**dials**: each one *declared* in firmware (name, type, bounds, what it
+governs, its blast radius, and the why that chose it) and *valued* on the
+governed shelf, where a human turns it through the console's edit door.
+Every turn is a versioned record with lineage; an out-of-bounds turn is
+refused with the declaration's own teaching; a value takes hold live within
+its declared horizon, no restart.
+
+The table below is **generated from the dial registry itself** (the same
+declarations the machine enforces), so it cannot drift from the code. The
+*default* column is each dial's genesis value — a fresh world's starting
+word; on a running world the standing value lives on the shelf, and the
+console's settings room shows it live with an ✎ door beside it.
+
+Where a dial's **home** says *ladder*, a floor may carry its own override
+on its own shelf, and the most specific word wins (subject → floor →
+universe). A home of *universe* means one value for the whole world,
+turned only at the universe's own door.
+
+<table>
+	<thead>
+		<tr>
+			<th>Dial</th>
+			<th>Governs</th>
+			<th>Default</th>
+			<th>Bounds</th>
+			<th>Home</th>
+		</tr>
+	</thead>
+	<tbody>
+		{Object.entries(dials).map(([name, d]) => (
+			<tr>
+				<td>
+					<strong>{name}</strong>
+					{d.unit && (
+						<>
+							<br />
+							<small>{d.unit}</small>
+						</>
+					)}
+				</td>
+				<td>
+					{d.governs}
+					<br />
+					<small><em>blast: {d.blast}</em></small>
+				</td>
+				<td>
+					{typeof d.genesis === 'object'
+						? `an ordering of ${Object.keys(d.genesis).length} kinds`
+						: String(d.genesis)}
+				</td>
+				<td>{d.min !== undefined ? `${d.min} – ${d.max}` : '—'}</td>
+				<td>{d.home}</td>
+			</tr>
+		))}
+	</tbody>
+</table>
+
+Two families of values are deliberately **not** dials, by the machine's own
+razor: constitutional limits (a death's abort margin, the witness floor)
+stay firmware — changing one is a release of the machine, not a setting —
+and a capability's own numbers (a trading desk's holding period) belong to
+that capability's craft, never to the kernel's drawer.
+
+Environment variables seed a **fresh** world's genesis values (the
+`ORRETH_*` names in each declaration) and are demoted thereafter — the env
+can start a value, never override a standing one.
