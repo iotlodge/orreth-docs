@@ -5,9 +5,9 @@ description: A complete two-tier Orreth universe from three small files — two 
 
 The [anatomy page](/learn/anatomy/) makes a claim worth testing: **the
 topology is data.** No tier of an Orreth deployment is hard-coded anywhere —
-a universe is just the kernel binary wearing a universe-shaped JSON profile,
-and a floor is the same binary wearing a floor-shaped one, told who its
-parent is. This page proves it: you will build a brand-new world named
+a universe is simply the engine program started with universe-shaped
+settings (a small JSON file called a profile), and a floor is the *same
+program* started with floor-shaped settings and told who its parent is. This page proves it: you will build a brand-new world named
 `u:first` from three small files, without cloning anything.
 
 Everything below is a worked, tested example — it lives at
@@ -28,12 +28,15 @@ recreate its four files from this page) and mint:
 
 ```bash
 uv run --with cryptography python mint_root.py
+# · minted a new root seed → .root-seed (keep it; it IS your world's root identity)
+# · public key → .env for compose: ORRETH_ROOT_PUB=z8iOefpX…
+# · next: docker compose up -d
 ```
 
-This creates `.root-seed` (the private half — yours, created once, reused
-forever) and writes the public half into `.env`, where compose hands it to
-the containers as `ORRETH_ROOT_PUB`. Run it twice and it reuses the seed:
-your world keeps one identity for life.
+That's what you'll see, and it means: the script generated a keypair, kept
+the private half in `.root-seed` right beside it (yours — created once,
+reused on every future run), and wrote the public half into `.env`, where
+compose hands it to the containers. Your world keeps one identity for life.
 
 ## 2. The two profiles — the tiers as data
 

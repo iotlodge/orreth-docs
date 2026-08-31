@@ -3,11 +3,13 @@ title: "Quickstart: a running world in ten minutes"
 description: Clone the repository, start the development rig, and walk into a live governed universe through its console.
 ---
 
-This gets you from nothing to a **live three-tier Orreth universe with a
-console in your browser**. It is the honest version of a quickstart: today
-you run Orreth from its repository with one script. (A `docker pull`
-quickstart against a published kernel image is the very next seam this
-documentation project cuts — this page will shrink when it lands.)
+This gets you from nothing to a **running Orreth world with a console in
+your browser** — three connected instances of the engine (a universe, a
+zone under it, and a workroom under that), which is how a real deployment
+is shaped. It is the honest version of a quickstart: today you run Orreth
+from its repository with one script. If you only want the bare engine and
+your own topology, [Build your first world](/build/first-world/) does it
+from a published image, no clone needed.
 
 ## What you need
 
@@ -18,8 +20,8 @@ documentation project cuts — this page will shrink when it lands.)
   (identity, residents, cognition) runs host-side through it; it manages its
   own Python, so you don't need to.
 - **git**, and about 5 GB of free disk for images.
-- macOS or Linux. (The rig's self-healing keeper is macOS-specific; everything
-  else is not.)
+- macOS or Linux. (One optional extra — a helper that auto-restarts the
+  stack after crashes or reboots — is macOS-only; everything else is not.)
 
 ## 1. Clone and start
 

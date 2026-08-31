@@ -6,25 +6,29 @@ description: Every door of a running Orreth world — the kernel's 35 endpoints 
 A running Orreth world answers on two kinds of doors, and knowing which is
 which explains most of what you'll see:
 
-- **Kernel doors** — served by every `orrethd` node (ports 4500/4501/4502 on
-  the dev rig; whatever your compose says elsewhere). These are the contract
-  surface: identical at every tier, verified and metered, stable.
-- **Agentic-layer doors** — served by the Python worker on **:4562**. These
-  feed the console's richer rooms (brain, observatory, atlas…). They are the
-  layer currently being decoupled — treat their shapes as informative, not
-  contractual.
+- **Kernel endpoints** — served by every instance of the engine (`orrethd`;
+  ports 4500/4501/4502 on the development stack, whatever your compose file
+  says elsewhere). These are the stable, versioned API: identical at every
+  level of a deployment, every call verified and billed.
+- **Agentic-layer endpoints** — served by the Python worker on **:4562**.
+  These feed the console's richer rooms (brain, observatory, atlas…). That
+  layer is mid-refactor, so treat these shapes as informative, not
+  guaranteed.
 
-Three laws every door obeys:
+Three rules every endpoint obeys:
 
-1. **Refusal wears one face.** Permission failure, budget failure, missing
-   record, revoked identity — all return the same
-   `403 {"error": "request cannot be served under this capability"}`. A
-   prober learns nothing from the shape of a no.
-2. **The kernel verifies, never signs.** Writes carry the author's
-   signature; reads carry a capability token, re-verified at presentation
-   all the way to the pinned root, with scopes that only narrow.
-3. **The prompt never passes through.** Model doors authorize and meter;
-   cognition stays on the caller's side.
+1. **Every "no" is identical.** A permission failure, an exhausted budget, a
+   missing record, a revoked identity — all return the same
+   `403 {"error": "request cannot be served under this capability"}`, so
+   probing the API teaches an attacker nothing. (The project's name for
+   this: *refusal wears one face*.)
+2. **The kernel checks signatures but cannot create them.** Writes must
+   arrive already signed by their author; reads must carry a permission
+   token, re-checked on every use back to the operator's root key, with
+   permissions that only ever shrink as they're passed along.
+3. **Prompt content never enters the kernel.** The model endpoints decide
+   *whether* a call is allowed and count its cost; the actual thinking
+   happens on the caller's side.
 
 ## Kernel doors
 

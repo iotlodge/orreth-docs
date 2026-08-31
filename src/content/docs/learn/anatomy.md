@@ -16,15 +16,18 @@ A running Orreth deployment is three distinct bodies:
 One small Rust binary (~4,000 lines across six crates). It is a **verifying
 record server**:
 
-- **An append-only record store.** Everything that happens is a signed,
-  content-addressed record (shown in the console as a *memory*). A record's id
-  *is* the cryptographic hash of its content, so tampering — on disk, on the
-  wire, anywhere — is caught on read. Nothing is silently rewritten.
+- **An append-only record store.** Everything that happens is written down as
+  a signed record (shown in the console as a *memory*) and never edited
+  afterward. Each record's id is a fingerprint computed from its own content
+  — so if anything alters the bytes, on disk or on the wire, the fingerprint
+  stops matching and the tampering is caught the moment anyone reads it.
 - **An identity and permission system.** Every agent, tool, and human seat
-  carries a decentralized identifier (a *DID* — an identity card that cannot
-  be forged or reused). Permissions travel as capability tokens that can only
-  **narrow** as they are delegated, and every token is re-verified at the
-  moment it is presented, all the way up to one pinned root of trust.
+  carries an identity card that cannot be forged or reused (technically a
+  *DID*, a key-backed identifier it keeps for life). Permissions are passed
+  along as tokens that can only **shrink** — if I'm allowed to read one floor,
+  I can hand you a token for less than that, never more — and every token is
+  re-checked at the moment it's used, tracing back to one root key the
+  operator holds (*the pinned root of trust*).
 - **A model gateway.** The kernel authorizes and meters every model call —
   which model, whose budget, how many tokens — but **never sees the prompt**.
   Cognition happens on the agent's side.
