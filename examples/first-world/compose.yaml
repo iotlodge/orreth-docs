@@ -1,0 +1,56 @@
+# PROVENANCE: Fable 5 (claude-fable-5) — 0064 The Open Book, the first world · 2026-08-31
+# Your first Orreth world: ONE kernel image, TWO tiers, differing only by the
+# JSON profile each container mounts. The topology is data.
+#
+#   uv run --with cryptography python mint_root.py   # once — mints your root key
+#   docker compose up -d
+#   curl localhost:4600/health                        # the universe
+#   curl localhost:4601/health                        # the floor, joined under it
+#   open http://localhost:4600/window                 # the console
+services:
+  pg:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_PASSWORD: orreth
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+    restart: unless-stopped
+
+  universe:
+    image: ghcr.io/iotlodge/orrethd:0.63.465
+    command: >
+      --profile /profiles/first-universe.json --port 4600 --bind 0.0.0.0
+      --store-dir /data/bodies --root-pub ${ORRETH_ROOT_PUB}
+      --pg postgres://postgres:orreth@pg:5432/postgres
+    ports: ["4600:4600"]
+    volumes:
+      - ./profiles:/profiles:ro
+      - universe-bodies:/data/bodies
+    depends_on:
+      pg: { condition: service_healthy }
+    restart: unless-stopped
+
+  floor-main:
+    image: ghcr.io/iotlodge/orrethd:0.63.465
+    command: >
+      --profile /profiles/first-floor.json --port 4601 --bind 0.0.0.0
+      --parent http://universe:4600
+      --store-dir /data/bodies --root-pub ${ORRETH_ROOT_PUB}
+      --pg postgres://postgres:orreth@pg:5432/postgres
+    ports: ["4601:4601"]
+    volumes:
+      - ./profiles:/profiles:ro
+      - floor-bodies:/data/bodies
+    depends_on:
+      pg: { condition: service_healthy }
+    restart: unless-stopped
+
+volumes:
+  pg-data:
+  universe-bodies:
+  floor-bodies:

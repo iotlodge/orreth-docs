@@ -25,7 +25,10 @@ export default defineConfig({
 				},
 				{
 					label: 'Build',
-					items: [{ label: 'Quickstart', slug: 'build/quickstart' }],
+					items: [
+						{ label: 'Quickstart', slug: 'build/quickstart' },
+						{ label: 'Build your first world', slug: 'build/first-world' },
+					],
 				},
 				// The rest of the Build track and the Reference track arrive with the
 				// next spoonfuls of design dive 0064 — the sidebar only ever lists

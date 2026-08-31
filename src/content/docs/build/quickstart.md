@@ -110,6 +110,8 @@ re-seeded behind your back.
   body by body.
 - [What works today](/learn/what-works-today/) — what of this is proven, and
   what isn't yet.
-- **Build your first world** and **build your first capability** are the next
-  pages in this track — each ships together with the packaging seam that
-  makes it true from outside the repository.
+- [Build your first world](/build/first-world/) — a brand-new two-tier
+  universe from three small files against the published kernel image, no
+  clone required.
+- **Build your first capability** is the next page in this track — it ships
+  together with the SDK's publication.
