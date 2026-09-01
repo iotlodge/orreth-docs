@@ -1,0 +1,47 @@
+/* The book wears the glass's own light — both palettes lifted verbatim from
+   the console (window.html :root + [data-theme="light"]): the night view is
+   additive light on deep blue-black, the day view is ink-wash on warm paper,
+   never an inversion. Starlight's dark mode maps to the night glass, its
+   light mode to the Daylight Glass. */
+
+/* ── night (Starlight dark = :root) ─────────────────────────────────── */
+:root {
+	--sl-color-accent-low: #3a2e17;
+	--sl-color-accent: #d4a960; /* the brass */
+	--sl-color-accent-high: #e8ce9c;
+	--sl-color-white: #eaeffa; /* the star */
+	--sl-color-gray-1: #c9d2e8;
+	--sl-color-gray-2: #8894b4; /* the dim */
+	--sl-color-gray-3: #5e6a8e;
+	--sl-color-gray-4: #2a3960; /* hair2 */
+	--sl-color-gray-5: #1c2947; /* the hair */
+	--sl-color-gray-6: #0b1226; /* the deep */
+	--sl-color-black: #080d1c; /* the void */
+}
+
+/* ── day (Starlight light) — paper, ink, bronze ─────────────────────── */
+:root[data-theme='light'] {
+	--sl-color-accent-low: #ebdfc0;
+	--sl-color-accent: #9c721d; /* day brass */
+	--sl-color-accent-high: #6f4f10;
+	--sl-color-white: #262c3d; /* the ink */
+	--sl-color-gray-1: #404763;
+	--sl-color-gray-2: #5d6377;
+	--sl-color-gray-3: #8a8168;
+	--sl-color-gray-4: #bfb499;
+	--sl-color-gray-5: #d6cdb8;
+	--sl-color-gray-6: #e9e3d3; /* the deep, day */
+	--sl-color-gray-7: #efeadb;
+	--sl-color-black: #f1ede2; /* warm paper */
+}
+
+/* ── the glass's typographic signature: small-caps serif headings ───── */
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+h1[data-page-title],
+.site-title span {
+	font-family: Palatino, Georgia, serif;
+	font-variant-caps: small-caps;
+	letter-spacing: 0.05em;
+}

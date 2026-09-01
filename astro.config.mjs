@@ -13,6 +13,7 @@ export default defineConfig({
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/iotlodge/orreth' },
 			],
+			customCss: ['./src/styles/orreth.css'],
 			sidebar: [
 				{
 					label: 'Learn',
