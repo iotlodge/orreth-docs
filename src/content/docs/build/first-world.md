@@ -65,14 +65,14 @@ memory survives restarts):
 
 ```yaml
   universe:
-    image: ghcr.io/iotlodge/orrethd:0.63.465
+    image: ghcr.io/iotlodge/orrethd:0.64.458
     command: >
       --profile /profiles/first-universe.json --port 4600 --bind 0.0.0.0
       --store-dir /data/bodies --root-pub ${ORRETH_ROOT_PUB}
       --pg postgres://postgres:orreth@pg:5432/postgres
 
   floor-main:
-    image: ghcr.io/iotlodge/orrethd:0.63.465
+    image: ghcr.io/iotlodge/orrethd:0.64.458
     command: >
       --profile /profiles/first-floor.json --port 4601 --bind 0.0.0.0
       --parent http://universe:4600
