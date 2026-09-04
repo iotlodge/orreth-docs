@@ -45,3 +45,13 @@ h1[data-page-title],
 	font-variant-caps: small-caps;
 	letter-spacing: 0.05em;
 }
+
+/* mermaid diagrams (learn/how-the-kernel-works) — a drawing, not a code block */
+pre.mermaid {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+}

@@ -1,0 +1,276 @@
+---
+title: How the kernel works
+description: The anatomy of Orreth in six pictures — the shape of the world, the signed record, how work happens, how memory rises, what the machine believes, and the two books that make one mind.
+---
+
+Six pictures explain most of Orreth. Each one below starts with the plain
+version, then shows the diagram, then names the law it draws. (These were
+distilled from an outside architect's deep read of the repository — every
+diagram describes machinery that exists today, and the
+[what-works-today register](/learn/what-works-today/) stays the honest
+boundary.)
+
+## 1 · The shape of the world
+
+A running deployment is a tree of worlds: one **universe** at the top, any
+number of **ecosystems** (bounded worlds) inside it, any number of
+**fields** (workrooms) inside those, and living identities — agents,
+tools, models — at the leaves. Rules only travel down, and may only get
+stricter. Memory travels up, and gets summarized on the way. A human sits
+above it all, and anything with consequences waits for that human's word.
+
+<pre class="mermaid">{`
+flowchart TB
+    C["CUSTODIAN<br/>blind custody · freeze without reading"]
+    H["THE HUMAN SEAT<br/>originates Objectives · approves consequence"]
+    U["UNIVERSE<br/>foundation + apex<br/>all-time memory · Canon · Chronicle"]
+    E["ECOSYSTEMS<br/>bounded worlds · mid-horizon memory"]
+    F["FIELDS<br/>where governed work meets living identities"]
+    A["LIVING IDENTITIES<br/>residents · workforce · tools · models"]
+
+    C -. "availability control<br/>not content authority" .-> U
+    H -->|"Objective · consent · gates"| U
+
+    U ==>|"CANON DOWN<br/>floors · charters · standards · skills<br/>tighten only"| E
+    E ==>|"policy down"| F
+    F ==>|"resolved law + apertures"| A
+
+    A -->|"CHRONICLE UP<br/>observations · runs · receipts"| F
+    F -->|"distill under contract"| E
+    E -->|"essential meaning rises"| U
+
+    A -. "retrieve LOCAL first" .-> F
+    F -. "time-horizon remainder UP" .-> E
+    E -. "deeper remainder UP" .-> U
+    U -->|"Sourced · Verified · explicit unknowns"| H
+
+    classDef apex fill:#f2a91d,color:#101625,stroke:#ffd36a,stroke-width:2px;
+    classDef mid fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
+    classDef field fill:#087d86,color:#efffff,stroke:#55d8d7;
+    classDef life fill:#17233a,color:#eef2ff,stroke:#7890b5;
+    classDef human fill:#251a46,color:#f4edff,stroke:#b79ce8,stroke-width:2px;
+    classDef custody fill:#202635,color:#d4d9e6,stroke:#69738b;
+    class U apex;
+    class E mid;
+    class F field;
+    class A life;
+    class H human;
+    class C custody;
+`}</pre>
+
+| Direction | What moves | The law |
+|---|---|---|
+| **Down** | Rules, policy floors, charters, skills (the **Canon**) | A child world may tighten inherited rules; it may never loosen them. |
+| **Up** | Memory, evidence, run statistics (the **Chronicle**) | Raw detail stays near the lives that made it; summarized meaning rises. A parent never reaches in. |
+| **Up on demand** | Retrieval | Search locally first, then escalate by time horizon and budget. A partial answer must say what was not searched. |
+| **Narrower** | Authority | Delegated permission only ever shrinks — in scope, time, action, and budget. |
+| **Back to the human** | Consequence | Agents may detect, plan, propose, and argue. Consequential changes wait at gates; silence never approves. |
+
+## 2 · The atom: a signed record
+
+Everything that happens becomes one kind of thing: a record, named by the
+hash of its own bytes and signed by the identity that made it, appended to
+one log. Every search index, every dashboard, every view in the console is
+a **projection** of that log — disposable, rebuildable, never a second
+truth. When something must be destroyed, the governed purge erases the
+content everywhere at once and leaves a signed stub proving the
+destruction happened.
+
+<pre class="mermaid">{`
+flowchart LR
+    E["Event / observation / thought"]
+    R["MemoryRecord<br/>content-addressed · DID-signed"]
+    W["Worldline coordinate<br/>identity · scope · two clocks · O·I·O·T"]
+    B["Body store<br/>bytes / object / artifact"]
+    L["Signed log<br/>the sole truth"]
+    P1["Time + tag projection"]
+    P2["Meaning projection<br/>lexical + vector + standing"]
+    P3["Seven RAG rows"]
+    P4["Window · Brain · Orrery"]
+    P5["Rollups + standings"]
+
+    E --> R
+    W --> R
+    R -->|"signed pointer + hash"| B
+    R --> L
+    L --> P1
+    L --> P2
+    L --> P3
+    L --> P4
+    L --> P5
+
+    X["Governed purge"]
+    X -->|"body physically erased"| B
+    X -->|"stub + lineage remain"| L
+    X -->|"evict / rebuild"| P1
+    X -->|"evict / rebuild"| P2
+    X -->|"dead everywhere"| P3
+`}</pre>
+
+**The law it draws:** the signed log is truth; every index and every glass
+is a rebuildable projection. Seven retrieval strategies can compete
+without creating seven realities, and the worldline cannot be silently
+rewritten.
+
+## 3 · How work happens
+
+Work in Orreth is not a chain of function calls — it is a **purpose
+graph** that outlives every process involved in it. A human states an
+**Objective** (the why). A planning seat breaks it into bounded
+**Intentions** (the what), each delegated with only a sliver of context:
+the intent, a budget, references, and pinned behavior — never the whole
+plan. Workers produce **Observations**; models produce **Thoughts**; and
+an independent scribe — never the actor itself — writes the graded record
+of what happened.
+
+<pre class="mermaid">{`
+sequenceDiagram
+    actor Human
+    participant O as Orchestration seat
+    participant G as Human gate
+    participant F as Fingertip at target floor
+    participant M as Governed mind / skill
+    participant S as Independent scribe / reviewer
+    participant C as Chronicle
+
+    Human->>O: OBJECTIVE — the why
+    O->>C: signed Objective + proposed plan
+    O->>G: readable plan, graph, budget, questions
+    G-->>O: approve / decline
+
+    alt approved
+        O->>C: signed Intention + Aperture
+        Note over O,F: Only the sliver rides down:<br/>intent · budget · refs · behavior pins
+        O->>F: INTENTION — delegated what
+        F->>M: OBSERVATION task
+        M-->>F: THOUGHT / deterministic skill result
+        S->>C: RunRecord + grade<br/>author is never the actor
+        F-->>O: outcome + evidence
+        O->>C: assembled Objective outcome
+        O-->>Human: sourced report + dark/waiting branches
+    else declined or silent
+        O->>C: the refusal / expiry is retained
+    end
+`}</pre>
+
+The **aperture** — the signed, content-addressed opening a thought ran
+inside — makes "what could this mind see?" a lookup instead of an
+investigation. And a seat that only knows its slice can only leak its
+slice, can only be misled about its slice, and can be audited against its
+slice.
+
+## 4 · How memory rises
+
+No world can keep everything at full detail forever, so Orreth does not
+pretend to. Raw experience stays near the lives that produced it; each
+tier summarizes before meaning climbs; and every summary is governed by a
+**distortion contract** — a declaration of what must survive, what may
+compress, and what loss is prohibited. A summary that violates its
+contract is refused at save. Every summary keeps a signed chain back to
+its sources, and the information lost is measured, not accidental.
+
+<pre class="mermaid">{`
+flowchart BT
+    R0["Recent raw experience<br/>abundant · high fidelity · local"]
+    D1["Field distillation<br/>dedup · summarize · preserve intolerables"]
+    D2["Ecosystem distillation<br/>longer horizon · lower volume"]
+    U["Universe memory<br/>all-time essential meaning"]
+    SK["Crystallized skill<br/>procedural memory that earned reuse"]
+
+    R0 -->|"distortion contract"| D1
+    D1 -->|"signed derived_from chain"| D2
+    D2 -->|"measured loss"| U
+    U -->|"mentor craft + rubric"| SK
+    SK -. "versioned Canon cascades down" .-> R0
+`}</pre>
+
+**The law it draws:** honest, governed degradation — never silent loss.
+Learning is what makes safe forgetting possible: once a craft is proven
+and crystallized as a skill, the details it was learned from may fade.
+
+## 5 · What the machine believes
+
+A signature proves who said a thing, when, and that it has not changed —
+it never proves the thing is *true*. So every piece of knowledge carries
+an **epistemic standing**, and standing outranks relevance in every
+search: a perfectly matching claim from a discredited source still ranks
+dead.
+
+<pre class="mermaid">{`
+flowchart LR
+    V["verified / human-trusted"]
+    C["corroborated"]
+    U["untrusted / quarantined"]
+    I["investigating"]
+    R["recalled"]
+
+    U -->|"independent receipts"| C
+    C -->|"challenge / contradiction"| I
+    I -->|"revalidated"| C
+    I -->|"discredited lineage"| R
+    V -->|"freshness or human challenge"| I
+
+    R -. "ranks dead" .-> X["excluded unless explicitly asking for the dead"]
+`}</pre>
+
+An untrusted finding may still speak — dampened and labeled. Corroboration
+counts independent voices, never repeated echoes. And when a source is
+discredited, the recall walks its lineage: everything it taught the world,
+and everything derived from that, is found and marked.
+
+## 6 · The two books, one mind
+
+The **Chronicle** is the world's memory of experience — what happened,
+why, what it cost, who judged it. The **Canon** is the world's rulebook
+and behavior — every policy, prompt, skill, and dial, versioned forever.
+The loop between them is how the machine improves: Chronicle evidence
+proposes a change, an independent seat grades it, a human gates the
+consequence, and the new Canon governs the next Chronicle.
+
+<pre class="mermaid">{`
+flowchart TB
+    HUMAN["HUMAN<br/>purpose, legitimacy, judgment"]
+    CANON["CANON<br/>the rulebook — versioned behavior"]
+    CHRONICLE["CHRONICLE<br/>the memory of experience"]
+    IDENTITIES["LIVING IDENTITIES<br/>residents, workforce, services, minds"]
+    WORLD["WORLD<br/>the environment perceived and changed"]
+    GLASS["GLASS<br/>legibility without hidden authority"]
+
+    HUMAN -->|"objective and consequence authority"| CANON
+    CANON -->|"compiled law, apertures, gates, resources"| IDENTITIES
+    IDENTITIES -->|"governed action"| WORLD
+    WORLD -->|"observations and receipts"| CHRONICLE
+    IDENTITIES -->|"thoughts, decisions, outcomes"| CHRONICLE
+    CHRONICLE -->|"evidence and proposed change"| CANON
+    CHRONICLE --> GLASS
+    CANON --> GLASS
+    GLASS -->|"understanding and judgment"| HUMAN
+`}</pre>
+
+**The law it draws:** a universe is a version of the Canon executing over
+the state of the Chronicle, through governed identities, against a world,
+under human purpose. No mechanism grades its own yardstick, and the
+machine never renews its own ultimate purpose — that seat is the human's,
+permanently.
+
+## Where governance meets what you build
+
+The kernel is deliberately purpose-blind: identity, one signed log, gates,
+and meters — it does not know what any agent is *for*. Between the kernel
+and your purposes lives the **resident firmware** — becky (identity), ada
+(minds), charlotte (tools), the librarian (knowledge), vera (judgment),
+governance (the floors). Everything you install — a
+[capability](/build/first-capability/), a
+[world of your own](/build/first-world/), an
+[agent you bring](/build/bring-your-own-agent/) — is governed from its
+first breath, because every join, thought, tool call, and record passes
+through that firmware, and the kernel beneath has no other way to run it.
+
+One razor keeps the layers honest: **what you can change in production is
+purpose; what takes a release is firmware.** Your capability's prompts and
+schedules stay editable through gates; the words the residents run on do
+not.
+
+*To see all of this live rather than in diagrams, the
+[demo](https://demo.orreth.ai) is a captured moment of a real running
+universe — and the [anatomy page](/learn/anatomy/) walks its parts.*
