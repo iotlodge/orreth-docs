@@ -23,7 +23,7 @@ most of it demonstrated by a human working through the console with no script.
 - **Two implementations, one truth.** The Python reference and the Rust kernel
   agree byte-for-byte on canonical record content, held by a cross-language
   parity suite. The full behavioral model is covered by a conformance suite of
-  450 tests.
+  484 tests.
 - **Refusal wears one face.** A permissions failure, a budget failure, and a
   missing record all return the identical error shape — someone probing the
   system learns nothing from how it says no.
@@ -72,6 +72,30 @@ most of it demonstrated by a human working through the console with no script.
   field on the envelope, a tag on the signed exchange record, a spoken
   sentence in the console's reply, and a column on the fuel ledger — so
   per-style cost is a query.
+
+**The router that learns** *(dive 0066)*
+
+- **Every ask is read before it routes.** A declared, versioned analyzer
+  emits what kind of question it is, how many parts, how fresh the answer
+  must be, and how confident the read is — pinned into every routing choice.
+  An ambiguous ask (from an asker who didn't demand speed) earns exactly one
+  governed thought that picks from the eleven-name menu and parks honestly
+  when it stumbles; a clear ask never waits on a mind.
+- **Every choice is joined to its rewards.** A routing decision derives from
+  the exact rulebook version that made it; the answer derives from the
+  choice; judge scores, latency, cost, and the human's thumb all reach it by
+  the records' own references. A 👎 vetoes a sample from the standings — it
+  never tilts a score, so agreeable answers can't farm approval.
+- **The router argues; a human decides.** Bayesian standings replay answered
+  questions through the styles not chosen (zero serving risk), and only a
+  challenger whose credible floor clears the incumbent's ceiling — with real
+  volume on both sides — may stage a rule change, as an evidence-carrying
+  card at the operator's gate. Thin evidence refuses. Nothing learns by
+  stealth.
+- **Exploration lives inside a bound the dial can never widen.** A small,
+  dialed share of asks deliberately tries an unchosen style — always
+  confessed on the record — and its ceiling is firmware: set in advance,
+  not turnable past it.
 
 **The doors that answer** *(kernel 0.71)*
 
