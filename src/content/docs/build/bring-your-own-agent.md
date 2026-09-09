@@ -115,6 +115,11 @@ bearer token ever does), the choice of retrieval variant is a field and a
 record rather than an inference, and a repeated question may serve from the
 world's cache — always confessed in the envelope, never silently.
 
+`variant` accepts any of the world's eleven styles by name (`"advanced"`,
+`"graph"`, `"hyde"`, …) or is left to Auto. And a governed mind's generation
+takes `_variant=` per call *(0.3.0)*: the metered cost of that thought lands
+on the fuel ledger wearing the style's name, so per-style cost is a query.
+
 ## When your agent needs to think
 
 This example is deterministic on purpose. To give a joined agent a *mind*,

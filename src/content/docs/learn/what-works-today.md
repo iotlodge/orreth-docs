@@ -23,7 +23,7 @@ most of it demonstrated by a human working through the console with no script.
 - **Two implementations, one truth.** The Python reference and the Rust kernel
   agree byte-for-byte on canonical record content, held by a cross-language
   parity suite. The full behavioral model is covered by a conformance suite of
-  398 tests.
+  450 tests.
 - **Refusal wears one face.** A permissions failure, a budget failure, and a
   missing record all return the identical error shape — someone probing the
   system learns nothing from how it says no.
@@ -49,6 +49,29 @@ most of it demonstrated by a human working through the console with no script.
   an absent agent goes dormant, never deleted; admission leases expire and
   renew; and no self is ever renamed — relabeling would counterfeit
   continuity.
+
+**The eleven-style retrieval engine** *(dive 0065)*
+
+- **Eleven retrieval styles, declared and serving.** Naive · Advanced ·
+  Hierarchical · Multimodal · Multi-Agent · Reasoning-First ·
+  Memory-Augmented · Graph · Hybrid · HyDE · Corrective — each a firmware
+  declaration (its composition, requirements, cost class, and its delta in
+  one plain sentence) with its working numbers as governed, gate-checked
+  craft. The servable menu *derives* from the registry; a declared style
+  whose flow is dark falls to the baseline loudly, on the record.
+- **Asks read standing projections, not per-question rebuilds.** Chunk and
+  tree rows (and their vectors) stand in Postgres, cut once by the same
+  deterministic knife the rebuild uses; the graph lives beside them with
+  every edge carrying its witness record and span. Both are confined to the
+  ids a caller's retrieve already authorized, evicted the moment a purge
+  lands, and rebuildable from the signed log at will.
+- **The harness grades all eleven** — quality, latency, and the context cost
+  a style asks a reader to consume — and the tournament's field derives from
+  the registry, never a hand-kept list.
+- **The selection is never a secret.** Which style served an answer is a
+  field on the envelope, a tag on the signed exchange record, a spoken
+  sentence in the console's reply, and a column on the fuel ledger — so
+  per-style cost is a query.
 
 **The doors that answer** *(kernel 0.71)*
 

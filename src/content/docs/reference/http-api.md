@@ -70,6 +70,16 @@ env twins (`ORRETH_RATE_PER_MIN`, `ORRETH_BODY_LIMIT_BYTES`).
 | `POST /requests/resolve` | A decision lands — and *(0.71)* it must present a root-chained credential carrying the narrow `resolve` grant (the one credential-less step: a joiner answering its nonce challenge). Status transitions are validated; a settled word — done, denied, cancelled — is never rewritten |
 | `POST /worker/pulse` | The agentic layer's heartbeat; silence beyond the threshold is witnessed and, under consent, rung to a human |
 
+### The standing projections *(kernel 0.65 machinery, shipped in the 0.71 line)*
+
+| Method · Path | What it does |
+|---|---|
+| `POST /chunks` · `POST /chunks/missing` · `POST /chunks/search` | The standing chunk/tree projection: the sweep lands a record's rows whole (pointers into derived text, never blobs); the worklist answers only for the caller's own ids; search runs chunk-grain cosine over exactly the ids the caller's retrieve authorized |
+| `POST /graph` · `POST /graph/missing` · `POST /graph/walk` | The graph projection: terms as nodes, within-span co-occurrence as edges, every edge naming its witness record and span; the walk finds witnesses binding the ask's terms — inside the authorized id set only, never a second read path |
+
+All six are token-guarded with the one refusal face; both projections are
+evicted in the same breath as a purge and rebuild from the signed log.
+
 ### Models (shown in the console as *the Stable*)
 
 | Method · Path | What it does |
