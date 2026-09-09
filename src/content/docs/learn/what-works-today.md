@@ -23,7 +23,7 @@ most of it demonstrated by a human working through the console with no script.
 - **Two implementations, one truth.** The Python reference and the Rust kernel
   agree byte-for-byte on canonical record content, held by a cross-language
   parity suite. The full behavioral model is covered by a conformance suite of
-  371 tests.
+  398 tests.
 - **Refusal wears one face.** A permissions failure, a budget failure, and a
   missing record all return the identical error shape — someone probing the
   system learns nothing from how it says no.
@@ -39,10 +39,36 @@ most of it demonstrated by a human working through the console with no script.
 - **Identity survives the process.** An agent that restarts rejoins as the
   same self, with its history intact. Joining is a human-approved request;
   permissions chain to one pinned root and only ever narrow.
+- **A stranger's world can admit agents without holding the root key**
+  *(kernel 0.71)*. The publishable **join door** ships with the SDK: the
+  operator's root signs the door's credential once, offline, and never enters
+  a serving process; the door challenges each joiner to prove its key, stages
+  the request, and mints a properly chained lease only on the operator's own
+  word — proven end to end against the published image and package alone.
 - **The roster breathes honestly.** Present is distinguished from remembered;
   an absent agent goes dormant, never deleted; admission leases expire and
   renew; and no self is ever renamed — relabeling would counterfeit
   continuity.
+
+**The doors that answer** *(kernel 0.71)*
+
+- **The request queue is closed to forgers.** Resolving any request demands a
+  root-chained credential carrying a narrow `resolve` grant; the one
+  credential-less step is a joiner answering its own challenge; a settled
+  decision is never rewritten; and the fuel ledger accepts a reconciliation
+  only from the credential's own subject.
+- **Machines ask and are answered, structurally.** A signed `ask` (the
+  asker's own key — never a stealable token on the public queue) returns a
+  structured envelope: the reply, its citations, which retrieval variant
+  served it, and the whole decision record behind the choice. A failed
+  signature is treated as forgery in every mode.
+- **Knocking is metered per identity.** Every consequential door counts
+  requests per identity in a fixed window; at the ceiling the answer names
+  an honest retry wait, one caller's flood never slows another, and body
+  size is a deliberate, dialed limit — all tunable as governed dials.
+- **Repeated questions serve from a confessed cache.** Same words, same
+  floor, same guardrail version — and only while the answer's signed record
+  still stands; every cache hit says so in the envelope.
 
 **Governance in action**
 

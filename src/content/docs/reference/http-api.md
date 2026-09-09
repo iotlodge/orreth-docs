@@ -32,6 +32,13 @@ Three rules every endpoint obeys:
 
 ## Kernel doors
 
+**The traffic law** *(kernel 0.71)*: the consequential doors meter knocking
+per identity in a fixed one-minute window. At the ceiling a door answers
+`429` with an honest `retry_after_s`; one caller's flood never slows
+another; request bodies refuse loudly at a deliberate ceiling (`413`). Both
+ceilings are governed dials (`rate-per-min`, `body-limit-kb`) with plane-side
+env twins (`ORRETH_RATE_PER_MIN`, `ORRETH_BODY_LIMIT_BYTES`).
+
 ### Records — the fabric
 
 | Method · Path | What it does |
@@ -60,7 +67,7 @@ Three rules every endpoint obeys:
 |---|---|
 | `GET /organs` · `POST /organs/pin` | The pinned staff roster · pin one, via a chain-verified token |
 | `GET /requests` · `POST /requests` | The human decision queue — list it, or file an ask (unsigned input; the queue mints the id) |
-| `POST /requests/resolve` | A human's decision lands — done or denied, with words |
+| `POST /requests/resolve` | A decision lands — and *(0.71)* it must present a root-chained credential carrying the narrow `resolve` grant (the one credential-less step: a joiner answering its nonce challenge). Status transitions are validated; a settled word — done, denied, cancelled — is never rewritten |
 | `POST /worker/pulse` | The agentic layer's heartbeat; silence beyond the threshold is witnessed and, under consent, rung to a human |
 
 ### Models (shown in the console as *the Stable*)
@@ -68,7 +75,7 @@ Three rules every endpoint obeys:
 | Method · Path | What it does |
 |---|---|
 | `POST /model/authorize` | Token-verified model resolution + budget debit; a miss climbs to the parent |
-| `POST /model/meter` | Reconcile estimated vs. actual tokens on the running bill |
+| `POST /model/meter` | Reconcile estimated vs. actual tokens on the running bill — *(0.71)* token-verified: only the credential's own subject may be reconciled |
 | `GET /model/usage` · `POST /model/replenish` | A subject's fuel state · refill it to its allowance (a human's act) |
 | `GET /stable` | Every approved mind here and below, with per-agent usage |
 | `POST /stable/hello` · `POST /stable/state` | A mind's canary beat (three earn `available`) · a governed lifecycle move |

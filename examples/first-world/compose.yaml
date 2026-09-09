@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
 
   universe:
-    image: ghcr.io/iotlodge/orrethd:0.64.458
+    image: ghcr.io/iotlodge/orrethd:0.71.477
     command: >
       --profile /profiles/first-universe.json --port 4600 --bind 0.0.0.0
       --store-dir /data/bodies --root-pub ${ORRETH_ROOT_PUB}
@@ -36,7 +36,7 @@ services:
     restart: unless-stopped
 
   floor-main:
-    image: ghcr.io/iotlodge/orrethd:0.64.458
+    image: ghcr.io/iotlodge/orrethd:0.71.477
     command: >
       --profile /profiles/first-floor.json --port 4601 --bind 0.0.0.0
       --parent http://universe:4600
@@ -49,6 +49,28 @@ services:
     depends_on:
       pg: { condition: service_healthy }
     restart: unless-stopped
+
+  # The join door (optional — kernel 0.71 / orreth-agent 0.2.0): lets agents
+  # knock and be admitted at YOUR word, while your root key stays in its file.
+  # Mint the door's credential once (the root signs it offline, right here):
+  #   uv run --with 'orreth-agent>=0.2' python -m orreth_agent.joindoor mint \
+  #     --root-seed .root-seed --root-did did:web:example.com:u:first \
+  #     --scope u:first/f:main --out door.json
+  # Then `docker compose --profile door up -d`. Approvals stay yours:
+  #   python -m orreth_agent.joindoor pending --field http://localhost:4601
+  #   python -m orreth_agent.joindoor approve <req-id> --door door.json --field http://localhost:4601
+  join-door:
+    image: python:3.12-slim
+    command: >
+      sh -c "pip install -q 'orreth-agent>=0.2' &&
+             python -m orreth_agent.joindoor serve
+             --door /door.json --field http://floor-main:4601"
+    volumes:
+      - ./door.json:/door.json:ro
+    depends_on:
+      - floor-main
+    restart: unless-stopped
+    profiles: ["door"]
 
 volumes:
   pg-data:

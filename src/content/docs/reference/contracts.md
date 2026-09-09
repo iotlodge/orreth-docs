@@ -18,7 +18,7 @@ same objects work at any tier of any topology.
 | `common` | Orreth common definitions | The 13 shared primitives every other contract references: DID, ContentHash, Sig, ScopePath, the two clocks, SemVer, Duration, TimeWindow, Space, Selector, Budget, StandardRef |
 | `memory-record` | MemoryRecord | **The atom of the fabric**: the append-only, content-addressed, signed record — with visibility facets, retention, and distillation lineage |
 | `retrieval` | Query / RetrievalResult | The read path: space × time, budget-gated; a budget miss is indistinguishable from a permission miss |
-| `capability-token` | CapabilityToken | Attenuation-only permission: every delegation hop narrows, verified at presentation to the pinned root |
+| `capability-token` | CapabilityToken | Attenuation-only permission: every delegation hop narrows, verified at presentation to the pinned root. Kernel 0.71 added the narrow `resolve` action on the `queue` space — tending the request queue no longer requires any broader grant |
 | `identity` | Identity | The immortal thread — memory keyed to the identity, never the process; attachment and governed transfer |
 | `tier-profile` | TierProfile | The dials that make one binary a universe, ecosystem, or floor — retention, budgets, cadences, trust root, horizon |
 | `run-record` | RunRecord | One unit of work, resident-authored — evaluations are never self-asserted |
@@ -38,7 +38,7 @@ The honest shape, worth knowing if you build against the wire:
 
 - **The Python reference validates directly** — every wire object in the
   conformance suite is checked against these schemas at test time
-  (371 tests).
+  (398 tests).
 - **The Rust kernel is held indirectly** — the Python reference generates
   language-neutral input→output fixtures, and the kernel's own test suite
   replays them byte-for-byte (canonicalization, signatures, the resolver's

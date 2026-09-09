@@ -97,6 +97,24 @@ Orreth appears only at the edges: `join()` for admission, `recall()` and
 for CrewAI, AutoGen, or plain Python and the edges don't change — the
 [AgentSurface contract](/reference/contracts/) is deliberately SDK-neutral.
 
+## When your agent needs an answer *(new in 0.2.0)*
+
+A joined agent can ask its world a question through the governed retrieval
+and read a **structured** answer:
+
+```python
+env = client.ask("what does this floor remember about deploys?")
+env["reply"]       # the answer
+env["variant"]     # which retrieval row served it — never a secret
+env["citations"]   # whole record refs — every one opens
+env["exchange"]    # the signed record of this Q&A, judgeable by a human
+```
+
+The ask is signed with the agent's own key (asks ride a public queue, so no
+bearer token ever does), the choice of retrieval variant is a field and a
+record rather than an inference, and a repeated question may serve from the
+world's cache — always confessed in the envelope, never silently.
+
 ## When your agent needs to think
 
 This example is deterministic on purpose. To give a joined agent a *mind*,

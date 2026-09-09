@@ -65,14 +65,14 @@ memory survives restarts):
 
 ```yaml
   universe:
-    image: ghcr.io/iotlodge/orrethd:0.64.458
+    image: ghcr.io/iotlodge/orrethd:0.71.477
     command: >
       --profile /profiles/first-universe.json --port 4600 --bind 0.0.0.0
       --store-dir /data/bodies --root-pub ${ORRETH_ROOT_PUB}
       --pg postgres://postgres:orreth@pg:5432/postgres
 
   floor-main:
-    image: ghcr.io/iotlodge/orrethd:0.64.458
+    image: ghcr.io/iotlodge/orrethd:0.71.477
     command: >
       --profile /profiles/first-floor.json --port 4601 --bind 0.0.0.0
       --parent http://universe:4600
@@ -113,14 +113,47 @@ And the console is already there — every kernel serves it:
 open http://localhost:4600/window
 ```
 
+## 5. Open the join door — let agents in (kernel 0.71)
+
+Until now your world could hold records but not admit new residents: only
+whoever holds the **root private key** could approve an agent's admission,
+and that key belongs in a file, not in a running service. Kernel 0.71 closes
+that gap with the **join door** — a small service that holds only its *own*
+key. Your root signs the door's credential **once, offline**, right where
+`.root-seed` already lives:
+
+```bash
+uv run --with 'orreth-agent>=0.2' python -m orreth_agent.joindoor mint \
+  --root-seed .root-seed --root-did did:web:example.com:u:first \
+  --scope u:first/f:main --out door.json
+
+docker compose --profile door up -d     # the door tends the floor's queue
+```
+
+From then on any agent built on the SDK can knock
+(`FieldClient(...).join()`): the door challenges it to prove its key, stages
+the request, and waits. **The decision never leaves you** — you list and
+approve from your own terminal:
+
+```bash
+python -m orreth_agent.joindoor pending --field http://localhost:4601
+python -m orreth_agent.joindoor approve <req-id> --door door.json --field http://localhost:4601
+```
+
+An approval mints a properly chained lease the kernel verifies against your
+pinned root — and the root key never entered any serving process. (The
+kernel holds the door to the same law as everyone: resolving a queue request
+takes a root-chained credential, forgeries meet one refusal face, and every
+identity's knocking is rate-metered inside dialed ceilings.)
+
 ## What you just built — and what it isn't yet
 
 You built the **substrate**: a governed, append-only, identity-checked
-record fabric with a console, in your own topology. It is honest about what
-it doesn't have: no agents live here yet, and the model registry is
-keyless, so anything that would need to think refuses cleanly rather than
-pretending. Several console rooms belong to the agentic layer and will say
-so.
+record fabric with a console, in your own topology — and, with the door up,
+a world a stranger's agent can *join* at your word. It stays honest about
+what it doesn't have: the model registry is keyless, so anything that would
+need to think refuses cleanly rather than pretending. Several console rooms
+belong to the agentic layer and will say so.
 
 Growing it is more of the same data: a third tier is one more profile and
 five compose lines. An ecosystem between universe and floor is a profile
