@@ -23,7 +23,7 @@ most of it demonstrated by a human working through the console with no script.
 - **Two implementations, one truth.** The Python reference and the Rust kernel
   agree byte-for-byte on canonical record content, held by a cross-language
   parity suite. The full behavioral model is covered by a conformance suite of
-  484 tests.
+  495 tests.
 - **Refusal wears one face.** A permissions failure, a budget failure, and a
   missing record all return the identical error shape — someone probing the
   system learns nothing from how it says no.
@@ -72,6 +72,25 @@ most of it demonstrated by a human working through the console with no script.
   field on the envelope, a tag on the signed exchange record, a spoken
   sentence in the console's reply, and a column on the fuel ledger — so
   per-style cost is a query.
+
+**The act draws itself** *(dive 0067)*
+
+- **One graph language for every picture of work.** Who did what, in what
+  order, what each step saw and cost — validated so that **every box is a
+  door to the real record behind it** (a picture with a dead box is refused),
+  and the narrative reads aloud, each sentence lighting its nodes. Four
+  existing views — the objective walk, the capability pipeline, the live
+  schematic, the deployment map — all speak it now, drawn by one drawer with
+  one export.
+- **The answer wears its thinking.** Open an answered question's record and
+  the picture beneath it shows who chose the retrieval style, why (in the
+  router's own sentence), what answered, and every judgment that has landed
+  since — projected from signed records alone, growing as new judgments land,
+  and honestly incomplete when a record has been purged.
+- **The deepest envelope opens.** Any seat in an objective's walk can show
+  exactly what rode down to it — the signed aperture: the law it ran under,
+  its task and budget, the knowledge it was handed — fetched whole by the
+  work's own coordinate.
 
 **The router that learns** *(dive 0066)*
 
