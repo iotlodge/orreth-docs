@@ -120,6 +120,35 @@ world's cache — always confessed in the envelope, never silently.
 takes `_variant=` per call *(0.3.0)*: the metered cost of that thought lands
 on the fuel ledger wearing the style's name, so per-style cost is a query.
 
+## When your agent's thoughts need guardrails *(new in 0.4.0)*
+
+The SDK carries the kernel's own content rails. Pass a composed rule set to
+`GovernedThink(client, rails={...})` and the lane checks content exactly the
+way the kernel's lanes do: **inputs before the model call** — a refused
+exchange returns a plain refusal sentence and spends nothing — and
+**outputs before they return**, masked where the rules say mask. Detectors
+for payment cards (Luhn-checked) and personal identifiers (SSNs, emails,
+phone numbers) ship built in; `orreth_agent.rails` is parity-tested against
+the kernel reference, so one law holds in both packages.
+
+```python
+from orreth_agent.chassis import GovernedThink
+
+rails = {"rules": [
+    {"match": {"category": "pci", "direction": "both"}, "action": "refuse",
+     "reason": "payment-card data never rides a prompt or an answer"},
+    {"match": {"category": "pii", "direction": "leaving"}, "action": "mask",
+     "reason": "people's details are not retrieval output"}]}
+think = GovernedThink(client, rails=rails)
+```
+
+Also in 0.4.0: `authorize()` now carries the world's **context pin** — the
+id of the exact policy snapshot (guardrails included) each thought runs
+under. A world that demands the pin refuses an unpinned thought with the
+same face as any other refusal, and the SDK refetches the fresh law once
+and retries by itself. Older SDKs cannot send the pin, so upgrade before
+your world turns the demand on.
+
 ## When your agent needs to think
 
 This example is deterministic on purpose. To give a joined agent a *mind*,
