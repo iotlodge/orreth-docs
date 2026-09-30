@@ -1,0 +1,92 @@
+---
+title: Tools and levers
+description: The nine built-in tools a kernel seeds on the shelf and the fifteen levers the kernel itself can pull — both generated from the declarations both kernels read.
+---
+
+import tools from '../../../data/tools.json';
+import levers from '../../../data/levers.json';
+
+Two catalogues are data, not code, in kernel 0.1.0 — files both kernels read, and the tables
+below are generated from copies of those files (`spine/tools.v0.json` and `spine/levers.v0.json`
+at 0.1.0), so they cannot drift from what the kernel enforces.
+
+## The built-in tools
+
+A **tool** is what a body runs. Its declaration — name, words, input schema, consequence class,
+flags — is the kernel's; its execution stays body-side, bound by name, and a body refuses to
+start when a declaration has no executor. The kernel authorizes, journals and meters every call
+and never runs one itself. A tool not declared in a body's template is refused with a teaching.
+MCP-born tools never live here — their server lists them onto the shelf.
+
+<table>
+	<thead>
+		<tr>
+			<th>Tool</th>
+			<th>Consequence</th>
+			<th>What it does</th>
+			<th>Arguments</th>
+		</tr>
+	</thead>
+	<tbody>
+		{tools.tools.map((t) => (
+			<tr>
+				<td>
+					<code>{t.name}</code>
+				</td>
+				<td>{t.consequence}</td>
+				<td>{t.description}</td>
+				<td>
+					{Object.entries(t.input_schema.properties || {})
+						.map(([k]) => k + ((t.input_schema.required || []).includes(k) ? '' : '?'))
+						.join(' · ') || '—'}
+				</td>
+			</tr>
+		))}
+	</tbody>
+</table>
+
+The consequence class decides the ladder: **routine** runs at once; **consequential** holds at the
+interlock for a person's yes (proof L2); **grave** asks for the person's authenticator code and a
+master's click (L3). A tool marked `ground` runs on the ground's own side; one marked `master`
+needs a master's seat.
+
+## The levers
+
+A **lever** is what the kernel does with its own hands, through the same door a person would. When
+a watch goes red the planner is shown the levers this door serves for that watch's metric and
+answers in the catalogue; a routine lever runs at once under the intention's authority, a
+consequential one holds at the interlock for a person's click, and a grave one is never pulled by
+the kernel. `for` names the watch metrics a lever can remedy (`*` any; none means declared, never
+offered as a remedy); `settles` is how long the kernel waits after pulling before it re-reads the
+watch.
+
+<table>
+	<thead>
+		<tr>
+			<th>Lever</th>
+			<th>Consequence</th>
+			<th>What it does</th>
+			<th>Needs</th>
+			<th>Remedies</th>
+			<th>Settles</th>
+		</tr>
+	</thead>
+	<tbody>
+		{levers.levers.map((l) => (
+			<tr>
+				<td>
+					<code>{l.name}</code>
+				</td>
+				<td>{l.consequence}</td>
+				<td>{l.description}</td>
+				<td>{Object.keys(l.needs).join(' · ')}</td>
+				<td>{l.for.length ? l.for.join(' · ') : '—'}</td>
+				<td>{l.settles_s ? l.settles_s + ' s' : '—'}</td>
+			</tr>
+		))}
+	</tbody>
+</table>
+
+Every lever pulled lands as `orreth.lever.pulled.v1` on the record, attributed to the intention
+that pulled it or the person who did; the panel lights the monitor and the intent track toward the
+body it acts on — red while it is held at the interlock for your word.

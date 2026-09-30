@@ -1,0 +1,11 @@
+# The gateway (LiteLLM) needs a model list before it will answer for one, and the kernel reads
+# that list before it adds a mind — so a fresh gateway starts with the kernel's own default mind
+# declared here. The key's VALUE stays in your environment; only its name is written down.
+# The kernel and the stablekeeper keep every other mind through the gateway's own doors.
+model_list:
+  - model_name: haiku
+    litellm_params:
+      model: anthropic/claude-haiku-4-5-20251001
+      api_key: os.environ/ANTHROPIC_API_KEY
+general_settings:
+  store_model_in_db: true

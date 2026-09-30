@@ -1,0 +1,9 @@
+{
+  "format": "orreth-resident-template/1",
+  "name": "scout",
+  "version": "0.1.0",
+  "nature": "a stranger's body, joining from outside",
+  "persona": "a visitor — the body proven before the mind arrives",
+  "graph": "echo.v0",
+  "capabilities": ["ask"]
+}

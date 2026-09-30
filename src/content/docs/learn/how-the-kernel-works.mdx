@@ -1,276 +1,193 @@
 ---
 title: How the kernel works
-description: The anatomy of Orreth in six pictures — the shape of the world, the signed record, how work happens, how memory rises, what the machine believes, and the two books that make one mind.
+description: Six pictures — the road an ask takes, how a body joins, how a person is seated, how a red watch is cured, the four memories, and how two worlds speak.
 ---
 
-Six pictures explain most of Orreth. Each one below starts with the plain
-version, then shows the diagram, then names the law it draws. (These were
-distilled from an outside architect's deep read of the repository — every
-diagram describes machinery that exists today, and the
-[what-works-today register](/learn/what-works-today/) stays the honest
-boundary.)
+Six pictures explain most of kernel 0.1.0. Each starts with the plain version, then the diagram,
+then the law it draws. Every diagram describes machinery that runs today; the
+[what-works-today register](/learn/what-works-today/) stays the honest boundary.
 
-## 1 · The shape of the world
+## 1 · The road an ask takes
 
-A running deployment is a tree of worlds: one **universe** at the top, any
-number of **ecosystems** (bounded worlds) inside it, any number of
-**fields** (workrooms) inside those, and living identities — agents,
-tools, models — at the leaves. Rules only travel down, and may only get
-stricter. Memory travels up, and gets summarized on the way. A human sits
-above it all, and anything with consequences waits for that human's word.
-
-<pre class="mermaid">{`
-flowchart TB
-    C["CUSTODIAN<br/>blind custody · freeze without reading"]
-    H["THE HUMAN SEAT<br/>originates Objectives · approves consequence"]
-    U["UNIVERSE<br/>foundation + apex<br/>all-time memory · Canon · Chronicle"]
-    E["ECOSYSTEMS<br/>bounded worlds · mid-horizon memory"]
-    F["FIELDS<br/>where governed work meets living identities"]
-    A["LIVING IDENTITIES<br/>residents · workforce · tools · models"]
-
-    C -. "availability control<br/>not content authority" .-> U
-    H -->|"Objective · consent · gates"| U
-
-    U ==>|"CANON DOWN<br/>floors · charters · standards · skills<br/>tighten only"| E
-    E ==>|"policy down"| F
-    F ==>|"resolved law + apertures"| A
-
-    A -->|"CHRONICLE UP<br/>observations · runs · receipts"| F
-    F -->|"distill under contract"| E
-    E -->|"essential meaning rises"| U
-
-    A -. "retrieve LOCAL first" .-> F
-    F -. "time-horizon remainder UP" .-> E
-    E -. "deeper remainder UP" .-> U
-    U -->|"Sourced · Verified · explicit unknowns"| H
-
-    classDef apex fill:#f2a91d,color:#101625,stroke:#ffd36a,stroke-width:2px;
-    classDef mid fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
-    classDef field fill:#087d86,color:#efffff,stroke:#55d8d7;
-    classDef life fill:#17233a,color:#eef2ff,stroke:#7890b5;
-    classDef human fill:#251a46,color:#f4edff,stroke:#b79ce8,stroke-width:2px;
-    classDef custody fill:#202635,color:#d4d9e6,stroke:#69738b;
-    class U apex;
-    class E mid;
-    class F field;
-    class A life;
-    class H human;
-    class C custody;
-`}</pre>
-
-| Direction | What moves | The law |
-|---|---|---|
-| **Down** | Rules, policy floors, charters, skills (the **Canon**) | A child world may tighten inherited rules; it may never loosen them. |
-| **Up** | Memory, evidence, run statistics (the **Chronicle**) | Raw detail stays near the lives that made it; summarized meaning rises. A parent never reaches in. |
-| **Up on demand** | Retrieval | Search locally first, then escalate by time horizon and budget. A partial answer must say what was not searched. |
-| **Narrower** | Authority | Delegated permission only ever shrinks — in scope, time, action, and budget. |
-| **Back to the human** | Consequence | Agents may detect, plan, propose, and argue. Consequential changes wait at gates; silence never approves. |
-
-## 2 · The atom: a signed record
-
-Everything that happens becomes one kind of thing: a record, named by the
-hash of its own bytes and signed by the identity that made it, appended to
-one log. Every search index, every dashboard, every view in the console is
-a **projection** of that log — disposable, rebuildable, never a second
-truth. When something must be destroyed, the governed purge erases the
-content everywhere at once and leaves a signed stub proving the
-destruction happened.
-
-<pre class="mermaid">{`
-flowchart LR
-    E["Event / observation / thought"]
-    R["MemoryRecord<br/>content-addressed · DID-signed"]
-    W["Worldline coordinate<br/>identity · scope · two clocks · O·I·O·T"]
-    B["Body store<br/>bytes / object / artifact"]
-    L["Signed log<br/>the sole truth"]
-    P1["Time + tag projection"]
-    P2["Meaning projection<br/>lexical + vector + standing"]
-    P3["Seven RAG rows"]
-    P4["Window · Brain · Orrery"]
-    P5["Rollups + standings"]
-
-    E --> R
-    W --> R
-    R -->|"signed pointer + hash"| B
-    R --> L
-    L --> P1
-    L --> P2
-    L --> P3
-    L --> P4
-    L --> P5
-
-    X["Governed purge"]
-    X -->|"body physically erased"| B
-    X -->|"stub + lineage remain"| L
-    X -->|"evict / rebuild"| P1
-    X -->|"evict / rebuild"| P2
-    X -->|"dead everywhere"| P3
-`}</pre>
-
-**The law it draws:** the signed log is truth; every index and every glass
-is a rebuildable projection. Seven retrieval strategies can compete
-without creating seven realities, and the worldline cannot be silently
-rewritten.
-
-## 3 · How work happens
-
-Work in Orreth is not a chain of function calls — it is a **purpose
-graph** that outlives every process involved in it. A human states an
-**Objective** (the why). A planning seat breaks it into bounded
-**Intentions** (the what), each delegated with only a sliver of context:
-the intent, a budget, references, and pinned behavior — never the whole
-plan. Workers produce **Observations**; models produce **Thoughts**; and
-an independent scribe — never the actor itself — writes the graded record
-of what happened.
+You type "echo, say the word HERON once". The kernel writes the ask and its fact on the ground in
+one transaction; the relay publishes the fact; the dispatcher hands it to echo's bench; echo
+serves it and its reply lands as a signed fact the same way. Under your ask a soft line — the
+journey — says each step as it happens. Nothing ever travelled off the rails, so the whole road
+can be read back later from the log.
 
 <pre class="mermaid">{`
 sequenceDiagram
-    actor Human
-    participant O as Orchestration seat
-    participant G as Human gate
-    participant F as Fingertip at target floor
-    participant M as Governed mind / skill
-    participant S as Independent scribe / reviewer
-    participant C as Chronicle
-
-    Human->>O: OBJECTIVE — the why
-    O->>C: signed Objective + proposed plan
-    O->>G: readable plan, graph, budget, questions
-    G-->>O: approve / decline
-
-    alt approved
-        O->>C: signed Intention + Aperture
-        Note over O,F: Only the sliver rides down:<br/>intent · budget · refs · behavior pins
-        O->>F: INTENTION — delegated what
-        F->>M: OBSERVATION task
-        M-->>F: THOUGHT / deterministic skill result
-        S->>C: RunRecord + grade<br/>author is never the actor
-        F-->>O: outcome + evidence
-        O->>C: assembled Objective outcome
-        O-->>Human: sourced report + dark/waiting branches
-    else declined or silent
-        O->>C: the refusal / expiry is retained
-    end
+    participant P as You (seated)
+    participant K as the kernel
+    participant G as the ground
+    participant R as the rails
+    participant B as echo (a body)
+    P->>K: POST /ask {text, session}
+    K->>G: ask row + outbox fact (ONE transaction)
+    K-->>P: 201 {ids: [ask_…]}
+    G-->>R: relay publishes orreth.ask.received.v1
+    R->>B: the dispatcher hands it to echo's bench
+    Note over B: journey: heard the ask, every word
+    B->>K: the reply, signed by echo's key
+    K->>G: reply + outbox fact (ONE transaction)
+    G-->>R: orreth.reply.v1 (pointer + hash, never the words)
+    R-->>P: the feed lights the panel; the chat shows the reply whole
 `}</pre>
 
-The **aperture** — the signed, content-addressed opening a thought ran
-inside — makes "what could this mind see?" a lookup instead of an
-investigation. And a seat that only knows its slice can only leak its
-slice, can only be misled about its slice, and can be audited against its
-slice.
+The laws: **transactional outbox, always** (a committed record cannot lack its event);
+**pointer-only payloads** on the rails (the words stay on the ground); **every ask wears its
+journey**; and **at-least-once with idempotent effects** — a fact is handed to exactly one body by
+the inbox's footprint.
 
-## 4 · How memory rises
+## 2 · How a body joins
 
-No world can keep everything at full detail forever, so Orreth does not
-pretend to. Raw experience stays near the lives that produced it; each
-tier summarizes before meaning climbs; and every summary is governed by a
-**distortion contract** — a declaration of what must survive, what may
-compress, and what loss is prohibited. A summary that violates its
-contract is refused at save. Every summary keeps a signed chain back to
-its sources, and the information lost is measured, not accidental.
+A body — the crew's or yours — never simply connects. It knocks at the desk with its DID and its
+public key, is challenged with the kernel's own nonce, proves it by signing, and then waits. The
+crew is admitted at once on the manifest's spawn ticket; a self that was admitted here before is
+admitted at once on its standing welcome; a stranger is **staged**, and its hold appears in the
+chat with Cancel as the default. Only a governing seat's yes admits it. Then the body collects its
+lease with the same key.
 
 <pre class="mermaid">{`
-flowchart BT
-    R0["Recent raw experience<br/>abundant · high fidelity · local"]
-    D1["Field distillation<br/>dedup · summarize · preserve intolerables"]
-    D2["Ecosystem distillation<br/>longer horizon · lower volume"]
-    U["Universe memory<br/>all-time essential meaning"]
-    SK["Crystallized skill<br/>procedural memory that earned reuse"]
-
-    R0 -->|"distortion contract"| D1
-    D1 -->|"signed derived_from chain"| D2
-    D2 -->|"measured loss"| U
-    U -->|"mentor craft + rubric"| SK
-    SK -. "versioned Canon cascades down" .-> R0
+stateDiagram-v2
+    [*] --> pending : POST /join {did, name, role, public_key, template_hash, policy_hash}
+    pending --> challenged : the desk's nonce, in the same breath
+    challenged --> proved : POST /join/prove — a signature over {did, join_nonce}
+    challenged --> denied : a forged proof (one face: "join refused")
+    proved --> done : the crew's spawn ticket · a standing welcome
+    proved --> staged : a stranger — join.admit held in the chat
+    staged --> done : a governing seat clicks Yes
+    staged --> denied : Cancel · fifteen minutes of silence
+    done --> [*] : POST /join/lease — the lease, chained to the root, with the fuel clause
 `}</pre>
 
-**The law it draws:** honest, governed degradation — never silent loss.
-Learning is what makes safe forgetting possible: once a craft is proven
-and crystallized as a skill, the details it was learned from may fade.
+The laws: **joining is a governed request**; **a keypair is a self** (the same key is admitted as
+the same self, life after life); **scopes only narrow** (the lease opens the body's own words at
+`/delta` and nothing more); **refusal wears one face**.
 
-## 5 · What the machine believes
+## 3 · How a person is seated
 
-A signature proves who said a thing, when, and that it has not changed —
-it never proves the thing is *true*. So every piece of knowledge carries
-an **epistemic standing**, and standing outranks relevance in every
-search: a perfectly matching claim from a discredited source still ranks
-dead.
+Every door reads who you are from a token the kernel signed, never from the page. You prove a code
+from your authenticator; the kernel — this universe's own root — mints a capability token naming
+you, your grants and your expiry, and the page carries it on every knock. On a ground nobody holds,
+the first person to prove an authenticator becomes its owner.
 
 <pre class="mermaid">{`
 flowchart LR
-    V["verified / human-trusted"]
-    C["corroborated"]
-    U["untrusted / quarantined"]
-    I["investigating"]
-    R["recalled"]
-
-    U -->|"independent receipts"| C
-    C -->|"challenge / contradiction"| I
-    I -->|"revalidated"| C
-    I -->|"discredited lineage"| R
-    V -->|"freshness or human challenge"| I
-
-    R -. "ranks dead" .-> X["excluded unless explicitly asking for the dead"]
+    E["POST /enroll {person}<br/>→ the otpauth secret + a QR"]
+    C["POST /enroll/confirm {person, code}<br/>the first code finishes enrolling"]
+    S["POST /seat {person, code}<br/>→ the seat: a signed token,<br/>its wire form, your role"]
+    D["every door:<br/>authorization: Bearer ‹wire›<br/>the feed: ?seat=‹wire›"]
+    E --> C --> S --> D
+    classDef human fill:#f2a91d,color:#101625,stroke:#ffd36a,stroke-width:2px;
+    classDef k fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
+    class E,C,S human;
+    class D k;
 `}</pre>
 
-An untrusted finding may still speak — dampened and labeled. Corroboration
-counts independent voices, never repeated echoes. And when a source is
-discredited, the recall walks its lineage: everything it taught the world,
-and everything derived from that, is found and marked.
+The laws: the unseated wear one face (`401 {"error": "not seated"}`); a seated person lacking a
+grant wears the proof's (`403`); the browser origin is closed; a knock ceiling stands at every door
+per person. A seat lasts a day; "leave my seat" ends it early, recorded.
 
-## 6 · The two books, one mind
+## 4 · How a red watch is cured
 
-The **Chronicle** is the world's memory of experience — what happened,
-why, what it cost, who judged it. The **Canon** is the world's rulebook
-and behavior — every policy, prompt, skill, and dial, versioned forever.
-The loop between them is how the machine improves: Chronicle evidence
-proposes a change, an independent seat grades it, a human gates the
-consequence, and the new Canon governs the next Chronicle.
+A watch is red while its condition holds. When one turns red, the kernel's standing Resiliency
+intention wakes. The kernel reads a **dossier** off the ground first — the watch, who it names and
+their state, the last acts on them, what happened last time — with no mind involved. It hands the
+planner that dossier and the **lever catalogue** this door serves. The planner answers in the
+catalogue: one lever and its reason. The kernel pulls the lever with its own hands, through the
+same door a person would use, as a recorded hop in the intention's session. Then it reads the
+watch again and says what happened.
 
 <pre class="mermaid">{`
 flowchart TB
-    HUMAN["HUMAN<br/>purpose, legitimacy, judgment"]
-    CANON["CANON<br/>the rulebook — versioned behavior"]
-    CHRONICLE["CHRONICLE<br/>the memory of experience"]
-    IDENTITIES["LIVING IDENTITIES<br/>residents, workforce, services, minds"]
-    WORLD["WORLD<br/>the environment perceived and changed"]
-    GLASS["GLASS<br/>legibility without hidden authority"]
-
-    HUMAN -->|"objective and consequence authority"| CANON
-    CANON -->|"compiled law, apertures, gates, resources"| IDENTITIES
-    IDENTITIES -->|"governed action"| WORLD
-    WORLD -->|"observations and receipts"| CHRONICLE
-    IDENTITIES -->|"thoughts, decisions, outcomes"| CHRONICLE
-    CHRONICLE -->|"evidence and proposed change"| CANON
-    CHRONICLE --> GLASS
-    CANON --> GLASS
-    GLASS -->|"understanding and judgment"| HUMAN
+    W["a watch turns RED<br/>orreth.watch.turned.v1"]
+    O["an OBSERVATION lands<br/>under Resiliency"]
+    DS["the kernel reads the DOSSIER<br/>off the ground — no mind"]
+    PL["the planner answers IN the catalogue:<br/>“LEVER: body.restart name=echo — BECAUSE: …”"]
+    R{"consequence?"}
+    RT["routine — pulled at once"]
+    CQ["consequential — held at the<br/>interlock for a person's click"]
+    GR["grave — never pulled by the kernel"]
+    RD["read the watch again after settles_s"]
+    OUT["cured, with its cause · self-healed ·<br/>still red → once more, then the human with the dossier"]
+    W --> O --> DS --> PL --> R
+    R --> RT --> RD
+    R --> CQ --> RD
+    R --> GR
+    RD --> OUT
+    classDef k fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
+    classDef red fill:#7a1f2b,color:#fff0f0,stroke:#ff6b7a;
+    classDef human fill:#f2a91d,color:#101625,stroke:#ffd36a,stroke-width:2px;
+    class W red;
+    class O,DS,PL,R,RT,RD,OUT k;
+    class CQ,GR human;
 `}</pre>
 
-**The law it draws:** a universe is a version of the Canon executing over
-the state of the Chronicle, through governed identities, against a world,
-under human purpose. No mechanism grades its own yardstick, and the
-machine never renews its own ultimate purpose — that seat is the human's,
-permanently.
+The laws: **the kernel never lowers the ladder because it is running on its own**; **every red is
+answered and every green attributed** (a health check grades it); **the human can always stop** —
+"stop the kernel's Resiliency intention" is a grave act, recorded, never a deletion.
 
-## Where governance meets what you build
+## 5 · The four memories, one truth
 
-The kernel is deliberately purpose-blind: identity, one signed log, gates,
-and meters — it does not know what any agent is *for*. Between the kernel
-and your purposes lives the **resident firmware** — becky (identity), ada
-(minds), charlotte (tools), the librarian (knowledge), vera (judgment),
-governance (the floors). Everything you install — a
-[capability](/build/first-capability/), a
-[world of your own](/build/first-world/), an
-[agent you bring](/build/bring-your-own-agent/) — is governed from its
-first breath, because every join, thought, tool call, and record passes
-through that firmware, and the kernel beneath has no other way to run it.
+A body has four memories and only one of them is the truth. **Working memory** is the mind
+mid-thought (the checkpointer) and is never truth. **The Record** is every word, signed and kept
+forever. **Understanding** and **the Digest** are projections over the Record — rebuildable
+accelerations that cite their sources. A purge is governed and leaves hashes, never words.
 
-One razor keeps the layers honest: **what you can change in production is
-purpose; what takes a release is firmware.** Your capability's prompts and
-schedules stay editable through gates; the words the residents run on do
-not.
+<pre class="mermaid">{`
+flowchart TB
+    B["a body"]
+    WM["WORKING MEMORY<br/>the mind mid-thought<br/>never truth"]
+    REC[("THE RECORD<br/>every word · signed · forever<br/>corrections are siblings")]
+    UND["UNDERSTANDING<br/>what it means"]
+    DIG["THE DIGEST<br/>the short version,<br/>citing its sources"]
+    P["you: verbatim recall<br/>by key · by ask · by timeframe"]
+    B <--> WM
+    B -->|"outcomes commit<br/>through governed doors"| REC
+    REC -->|"after commit"| UND
+    REC -->|"at session boundaries"| DIG
+    UND --> B
+    DIG --> B
+    P <--> REC
+    classDef k fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
+    classDef body fill:#087d86,color:#efffff,stroke:#55d8d7;
+    classDef human fill:#f2a91d,color:#101625,stroke:#ffd36a,stroke-width:2px;
+    class REC k;
+    class B,WM,UND,DIG body;
+    class P human;
+`}</pre>
 
-*To see all of this live rather than in diagrams, the
-[demo](https://demo.orreth.ai) is a captured moment of a real running
-universe — and the [anatomy page](/learn/anatomy/) walks its parts.*
+On kernel 0.1.0 the Record, recall by key and by window, sessions with their digests, the
+profile, and the compliance export stand on both kernels. Understanding is lexical; an embedding
+lane, the purge and the long-objective resume are owed — see
+[what works today](/learn/what-works-today/).
+
+## 6 · How two worlds speak
+
+Every universe is a cell: its own kernel self, database and role, benches and topics, bodies and
+keys, sealed from every other. Two cells that name each other speak over one door in messages
+signed by their kernels' own selves, the peer's DID pinned on first sight. An ask that names a cell
+routes home and is answered here; under partition it parks in plain words and resumes once.
+
+<pre class="mermaid">{`
+sequenceDiagram
+    participant P as You (cell one)
+    participant A as kernel A · u:one
+    participant S as POST /seam (signed both ways)
+    participant B as kernel B · u:two
+    participant L as librarian@two
+    P->>A: "librarian@two, what is the weather?"
+    A->>S: the command, signed by A's self (nonce · 120 s window · epoch)
+    S->>B: verified against the pinned DID
+    B->>L: served by B's own librarian
+    L-->>B: the reply
+    B-->>S: signed by B's self
+    S-->>A: landed once
+    A-->>P: answered in cell two by librarian
+    Note over A,B: B dark → the ask reads PARKED, "unreachable since"; B back → resumed once
+`}</pre>
+
+The laws: **cells = worlds** (physical isolation, a role that reaches no other database); **commands
+route home**; **the stop rides the seam first** and lands within two seconds; **a re-homed universe
+advances its epoch** and a stale epoch is fenced.

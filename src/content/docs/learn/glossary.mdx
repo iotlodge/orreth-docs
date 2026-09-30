@@ -1,17 +1,18 @@
 ---
 title: Glossary
-description: Every term of Orreth's working vocabulary, in the machine's own plain-English definitions — the same dictionary the live console serves.
+description: Every word of kernel 0.1.0's working vocabulary, in plain English — one source shared by this book's pages.
 ---
 
 import glossary from '../../../data/glossary.json';
 
-Orreth's console speaks a compact working vocabulary. The definitions below
-are **the machine's own**: they are served live by the running console (every
-canon word there is a clickable definition), and the project's test suite
-holds each one to a plain-English contract — self-contained, jargon-free, and
-under 240 characters. This page and the console share one dictionary; when a
-definition improves at the machine's editing gates, this page inherits it at
-the next refresh.
+Orreth speaks a compact vocabulary, and the same word means the same thing on the panel, in the
+chat, at the doors and in this book. Every definition below is plain, self-contained and under
+240 characters — the contract the first architecture's console held its dictionary to, kept here
+by hand for the new kernel until it serves a dictionary door of its own.
+
+This book leads with plain engineering terms and shows the machine's names as labels — *"the
+register of tools and services (the **shelf**)"*. Where a word below is capitalised, that is how
+the glass writes it.
 
 <table>
 	<thead>
@@ -22,7 +23,8 @@ the next refresh.
 	</thead>
 	<tbody>
 		{Object.entries(glossary)
-			.sort(([a], [b]) => a.localeCompare(b))
+			.filter(([term]) => !term.startsWith('_'))
+			.sort(([a], [b]) => a.localeCompare(b, undefined, { sensitivity: 'base' }))
 			.map(([term, def]) => (
 				<tr>
 					<td>
@@ -33,12 +35,3 @@ the next refresh.
 			))}
 	</tbody>
 </table>
-
-## A note on the two vocabularies
-
-These docs lead with plain engineering terms and show the machine's names as
-labels — *"the tool registry (shown in the console as **the Farm**)"*. The
-console keeps its own register because several of its words are load-bearing
-distinctions with no shorter engineering equivalent (*saddled* is not merely
-"configured"; *quarantined* is not merely "disabled"). When you meet a dotted
-underline in the live console, it is this dictionary answering.

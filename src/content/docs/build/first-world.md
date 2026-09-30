@@ -1,165 +1,118 @@
 ---
-title: Build your first world
-description: A complete two-tier Orreth universe from three small files — two JSON profiles and a compose file — against the published kernel image.
+title: Your first world
+description: Every line of the first-world compose file — the four boxes, the kernel, the dials it reads, the volumes that keep its selves, provider keys, ports, and running it beside the repository's rig.
 ---
 
-The [anatomy page](/learn/anatomy/) makes a claim worth testing: **the
-topology is data.** No tier of an Orreth deployment is hard-coded anywhere —
-a universe is simply the engine program started with universe-shaped
-settings (a small JSON file called a profile), and a floor is the *same
-program* started with floor-shaped settings and told who its parent is. This page proves it: you will build a brand-new world named
-`u:first` from three small files, without cloning anything.
+The [quickstart](/build/quickstart/) stands a world from `examples/first-world/compose.yaml`.
+This page reads that file with you, so you can change it with confidence. The world it stands is
+exactly the world the kernel's own repository stands for development — the same five services,
+the same dials — only pinned to the published image instead of built from the tree.
 
-Everything below is a worked, tested example — it lives at
-[`examples/first-world`](https://github.com/iotlodge/orreth-docs/tree/main/examples/first-world)
-in this site's own repository, and this page is kept true to it.
-
-## What you need
-
-Docker, [uv](https://docs.astral.sh/uv/), and the published kernel image
-`ghcr.io/iotlodge/orrethd` — about a 40 MB pull.
-
-## 1. Mint your root of trust
-
-An Orreth world's root of trust is a keypair **you** hold — the kernel
-verifies signatures and cannot create them, so it must be *told* its root's
-public key at start and can never invent one. Grab the example folder (or
-recreate its four files from this page) and mint:
-
-```bash
-uv run --with cryptography python mint_root.py
-# · minted a new root seed → .root-seed (keep it; it IS your world's root identity)
-# · public key → .env for compose: ORRETH_ROOT_PUB=z8iOefpX…
-# · next: docker compose up -d
-```
-
-That's what you'll see, and it means: the script generated a keypair, kept
-the private half in `.root-seed` right beside it (yours — created once,
-reused on every future run), and wrote the public half into `.env`, where
-compose hands it to the containers. Your world keeps one identity for life.
-
-## 2. The two profiles — the tiers as data
-
-A **tier profile** is the JSON that turns the one binary into a specific
-tier. The universe profile (`profiles/first-universe.json`) says, in
-essence:
-
-- *I am scope `u:first`, the top.* Distilled memory keeps **forever**;
-  retrieval may reach the whole past.
-- *One rule binds everyone under me:* records of failure are kept raw for 90
-  days — "failures always survive." Rules like this cascade **down** to
-  every child, and children can only tighten them, never loosen.
-- *My root of trust is `did:web:example.com:u:first`* — the name whose
-  public key you just minted. (Nothing needs to be served at that address;
-  the name is pinned to the key you supply.)
-
-The floor profile (`profiles/first-floor.json`) differs only where a
-workroom should differ: scope `u:first/f:main`, a 90-day working memory, a
-90-day retrieval horizon. Same shape, different dials — that *is* the tier
-system.
-
-## 3. One compose file, one image, two tiers
-
-The compose file runs the same image twice (plus Postgres, so the world's
-memory survives restarts):
+## The five services
 
 ```yaml
-  universe:
-    image: ghcr.io/iotlodge/orrethd:0.72.520
-    command: >
-      --profile /profiles/first-universe.json --port 4600 --bind 0.0.0.0
-      --store-dir /data/bodies --root-pub ${ORRETH_ROOT_PUB}
-      --pg postgres://postgres:orreth@pg:5432/postgres
-
-  floor-main:
-    image: ghcr.io/iotlodge/orrethd:0.72.520
-    command: >
-      --profile /profiles/first-floor.json --port 4601 --bind 0.0.0.0
-      --parent http://universe:4600
-      --store-dir /data/bodies --root-pub ${ORRETH_ROOT_PUB}
-      --pg postgres://postgres:orreth@pg:5432/postgres
+name: orreth-first
+services:
+  ground:   { image: postgres:16 }                   # the kernel's memory
+  invoke:   { image: rabbitmq:3.13-management }      # the invocation rail
+  events:   { image: apache/kafka:3.9.1 }            # the events rail
+  gateway:  { image: ghcr.io/berriai/litellm:main-stable }   # the meter
+  kernel:   { image: ghcr.io/iotlodge/orrethd:0.1.0 }        # orrethd and its crew
 ```
 
-The **only** structural difference between the two services is the profile
-they mount and one flag: `--parent`. That flag is the whole join story — at
-boot the floor pulls its parent's rules down from `/standards`, and every
-five seconds it beats its presence up to `/hello`.
+- **ground** is Postgres. The kernel migrates its forty tables on first light; the gateway keeps
+  its own ledger in a second database, `litellm`, which the one-line `ground-init.sql` creates on
+  the first start.
+- **invoke** is RabbitMQ: where work waits for the one body that claims it. The management
+  console is inside the network on port 15672 (user `orreth`) if you want to publish it.
+- **events** is Kafka, one node, KRaft. It has two listeners: `localhost:9092` for a client on the
+  host and `events:29092` for a box in the network. The kernel uses the second.
+- **gateway** is LiteLLM, run and managed by the kernel. Provider keys reach it from your
+  environment only; every body gets its own virtual key here with its budget.
+- **kernel** is `orrethd` with the crew's Python beside it, the glass page, the crew manifest, the
+  templates, the tool and lever declarations and the canon MITL reads. It waits for the other four
+  to be healthy.
+
+## The dials the kernel reads
+
+```yaml
+environment:
+  SPINE_PG:          postgresql://orreth:…@ground:5432/spine
+  SPINE_RABBIT:      amqp://orreth:…@invoke:5672/%2F
+  SPINE_KAFKA:       events:29092
+  SPINE_GATEWAY:     http://gateway:4000
+  SPINE_GATEWAY_KEY: ${ORRETH_GATEWAY_KEY:-sk-orreth-first}
+  SPINE_HUMAN_ZONE:  ${SPINE_HUMAN_ZONE:-UTC}
+```
+
+The image itself sets four more: `SPINE_BIND=0.0.0.0` (so the published port reaches the door),
+`SPINE_BODIES=crew` (seat the crew), `SPINE_BRIDGE_PORT=4600` and `ORRETH_HOME=/var/lib/orreth`.
+The whole list, with defaults, is on the [configuration](/reference/configuration/) page.
+
+Two you may want to set:
+
+- `SPINE_HUMAN_ZONE` — the ground's default time zone for a person who has not told it theirs.
+  Any person can say "my time zone is Europe/Paris" in the chat instead.
+- `SPINE_MASTERS` — person DIDs declared masters at birth (`did:orreth:person:jb`). You rarely
+  need it: the first person to enroll becomes the owner, and the owner can govern.
+
+## The volumes that keep the world
+
+```yaml
+volumes:
+  ground:   # the Postgres data — every record, ask, lease and meter line
+  seeds:    # /var/lib/orreth — the kernel's self and the crew's keys
+```
+
+The **seeds** volume is what makes identity survive the process. The kernel's own keypair — the
+root that signs every seat and lease — and the ten crew seeds live there. Keep it and the same
+selves come back at every light; `docker compose down -v` forgets them, and the next world is a
+new world with new DIDs. Never share one seeds volume between two kernels on two grounds: each
+would mint a second crew under the same names.
+
+## Provider keys and minds
+
+A key value lives in no record and no file of Orreth's. The compose passes three names through
+from your shell or a `.env` beside it — `ANTHROPIC_API_KEY`, `OPENROUTER_API_KEY`,
+`OPENAI_API_KEY` — and the gateway holds them; the kernel and the bodies see a mind's name and a
+key's *name*, never its value.
+
+- With `ANTHROPIC_API_KEY` set, the kernel registers its default mind at light: the `haiku` stall
+  (`claude-haiku-4-5-20251001`, class *fast*) with its pinned price. Every template names it.
+- With no key, the Stable is empty and every body says so honestly in its reply. Add a mind from
+  the chat: **stablekeeper, add the LLM ollama gemma3:270m as gemma** (Ollama on your machine is
+  reached as `host.docker.internal:11434`), or **stablekeeper, add the LLM openrouter
+  ‹model› as ‹name›** once that key is set. Then **assign librarian to gemma**. Each holds for your
+  yes.
+
+The stablekeeper pings every mind every ten minutes, watches price drift and announced
+retirements, and proposes — a re-pin, a swap, a refill — never acting alone.
+
+## Ports
+
+Only the kernel's door is published: `${ORRETH_PORT:-4600}:4600`. To run this world beside the
+kernel repository's own rig (which holds 4600, 4601, 5433, 5672, 9092 and 4604 on the host), start
+it with another port:
 
 ```bash
-docker compose up -d
+ORRETH_PORT=4700 docker compose up -d
 ```
 
-## 4. Prove it
+That is exactly how this book's walk was done, beside a lit development kernel, without the two
+ever touching: separate compose project, separate ground, separate seeds.
+
+## What a stranger cannot do from this file alone
+
+- **A second universe.** A cell needs its own database *and role*, sealed from the first; the
+  kernel repository's `scripts/dev.sh cell two` makes both. From compose alone you would stand a
+  second project, and the two would not yet name each other as peers.
+- **A body outside the box.** A body needs the rails reachable, not only the door; this file
+  publishes only the door. [Seat your own body](/build/your-own-body/) says what works today.
+
+## Reset
 
 ```bash
-curl localhost:4600/health
-# {"scope":"u:first","records":0,...}        — your universe
-
-curl localhost:4601/health
-# {"scope":"u:first/f:main","records":0,...} — your floor
-
-curl localhost:4600/topology
-# {"scope":"u:first","children":[{"scope":"u:first/f:main",...}]}
-#                                 ^ the floor, present under its parent
-
-curl localhost:4600/standards
-# ..."failures always survive — the apex floor, pulled by every child"...
-#    ^ the rule your floor pulled down at boot
+docker compose down        # stop; keep the ground and the seeds
+docker compose down -v     # stop; forget the world
+docker compose pull        # take a newer image when one is published — the era is one number
 ```
-
-And the console is already there — every kernel serves it:
-
-```
-open http://localhost:4600/window
-```
-
-## 5. Open the join door — let agents in (kernel 0.71)
-
-Until now your world could hold records but not admit new residents: only
-whoever holds the **root private key** could approve an agent's admission,
-and that key belongs in a file, not in a running service. Kernel 0.71 closes
-that gap with the **join door** — a small service that holds only its *own*
-key. Your root signs the door's credential **once, offline**, right where
-`.root-seed` already lives:
-
-```bash
-uv run --with 'orreth-agent>=0.2' python -m orreth_agent.joindoor mint \
-  --root-seed .root-seed --root-did did:web:example.com:u:first \
-  --scope u:first/f:main --out door.json
-
-docker compose --profile door up -d     # the door tends the floor's queue
-```
-
-From then on any agent built on the SDK can knock
-(`FieldClient(...).join()`): the door challenges it to prove its key, stages
-the request, and waits. **The decision never leaves you** — you list and
-approve from your own terminal:
-
-```bash
-python -m orreth_agent.joindoor pending --field http://localhost:4601
-python -m orreth_agent.joindoor approve <req-id> --door door.json --field http://localhost:4601
-```
-
-An approval mints a properly chained lease the kernel verifies against your
-pinned root — and the root key never entered any serving process. (The
-kernel holds the door to the same law as everyone: resolving a queue request
-takes a root-chained credential, forgeries meet one refusal face, and every
-identity's knocking is rate-metered inside dialed ceilings.)
-
-## What you just built — and what it isn't yet
-
-You built the **substrate**: a governed, append-only, identity-checked
-record fabric with a console, in your own topology — and, with the door up,
-a world a stranger's agent can *join* at your word. It stays honest about
-what it doesn't have: the model registry is keyless, so anything that would
-need to think refuses cleanly rather than pretending. Several console rooms
-belong to the agentic layer and will say so.
-
-Growing it is more of the same data: a third tier is one more profile and
-five compose lines. An ecosystem between universe and floor is a profile
-with scope `u:first/e:something` and two `--parent` edits.
-
-Giving the world *purposes* is the next page in this track:
-[build your first capability](/build/first-capability/) — and the SDK for
-giving it *minds* is published:
-[`pip install orreth-agent`](https://pypi.org/project/orreth-agent/).

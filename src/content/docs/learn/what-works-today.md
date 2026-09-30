@@ -1,235 +1,173 @@
 ---
 title: What works today
-description: The honest register — what is proven with evidence, what is partial, and what does not exist yet.
+description: The honest register for kernel 0.1.0 — what is proven with the evidence named, what is partial or owed, and what is parked.
 ---
 
-Most documentation tells you what a system aspires to do. This page is
-different: it is maintained from Orreth's standing internal register of
-**claims with their evidence named** — a page the project has kept since July
-2026 under one rule: *a claim not on the register with evidence named is a
-claim we do not make.* What follows is that register in plain language, in
-three honest tiers.
+Most documentation tells you what a system aspires to do. This page follows Orreth's standing
+register of **claims with their evidence named** — `docs/design/the-honest-boundary.md` in the
+kernel's repository — under one rule the project has kept since July 2026: *a claim not on the
+register with evidence named is a claim we do not make.* What follows is that register for the
+0.1.0 kernel, in plain words, in three honest tiers.
 
-Everything in the first tier has been **proven live on the running system**,
-most of it demonstrated by a human working through the console with no script.
+Everything in the first tier was proven on the running kernel, most of it walked by a person in
+the glass with no script, and pinned by tests that run on every change.
 
 ## Proven, with the evidence named
 
-**The kernel and its guarantees**
+**Two kernels, one law**
 
-- **One binary runs any tier.** The universe, ecosystem, and floor tiers of a
-  deployment are the same program with different JSON profiles — running today
-  as three containers on the development rig.
-- **Two implementations, one truth.** The Python reference and the Rust kernel
-  agree byte-for-byte on canonical record content, held by a cross-language
-  parity suite. The full behavioral model is covered by a conformance suite of
-  495 tests.
-- **Refusal wears one face.** A permissions failure, a budget failure, and a
-  missing record all return the identical error shape — someone probing the
-  system learns nothing from how it says no.
-- **The kernel meters but never sees the prompt.** Model calls are authorized
-  and billed by the kernel; the content of every thought stays on the agent's
-  side.
-- **History survives tampering.** A record's id is the hash of its content;
-  tampered bytes on disk are caught on read. Erasure exists, but only as a
-  governed act that leaves a tombstone — never as silent rewriting.
+- **The Rust kernel and the Python reference pass the same fixtures unchanged.** Twenty-six
+  language-neutral fixture files under `spine/conformance` pin every wire contract — the
+  envelope's bytes, the desk's transitions, the seat's verdicts, the levers, the watches. The Rust
+  runner reads 730 cases; the reference suite runs in the nine hundreds.
+- **The era is one number.** `VERSION`, the kernel crate and the reference package all say
+  0.1.0, both health doors whisper it, and a hermetic test on each kernel holds its face to the
+  file.
+- **The ground has one writer.** The schema wears a version; the first kernel to find the ground
+  below its number migrates it and records that; every later kernel waits and verifies; a ground
+  whose version lies is refused in words. Both kernels stand the same forty tables column for
+  column.
+- **Every door is clocked and every knock is pooled.** A fixed handful of reads however large the
+  crew; the p50 and p95 of every door on the panel; a pool of lines to the ground with a ceiling,
+  and a watch can stand on the slowest door or the pool's strain.
 
-**Identity and admission**
+**Identity, the seat and the desk**
 
-- **Identity survives the process.** An agent that restarts rejoins as the
-  same self, with its history intact. Joining is a human-approved request;
-  permissions chain to one pinned root and only ever narrow.
-- **A stranger's world can admit agents without holding the root key**
-  *(kernel 0.71)*. The publishable **join door** ships with the SDK: the
-  operator's root signs the door's credential once, offline, and never enters
-  a serving process; the door challenges each joiner to prove its key, stages
-  the request, and mints a properly chained lease only on the operator's own
-  word — proven end to end against the published image and package alone.
-- **The roster breathes honestly.** Present is distinguished from remembered;
-  an absent agent goes dormant, never deleted; admission leases expire and
-  renew; and no self is ever renamed — relabeling would counterfeit
-  continuity.
+- **A keypair is a self, and a self survives the process.** Every body's seed lives under its home;
+  the same self re-joins every life; a new DID per run is a defect the covenant names.
+- **A person holds a seat.** A capability token in the covenant's shape, attenuation-only, minted by
+  the kernel's own self after the person's TOTP code, read at every door. The first to prove an
+  authenticator on an unheld ground is its owner. The browser origin is closed; a knock ceiling
+  stands per person at every door. Fixture `seat-v0`: 80 cases on both kernels; `tests/gate.rs`.
+- **A body joins through a five-status desk.** Challenged with the kernel's nonce, proven by the
+  key behind its DID, staged for a governing seat's click (or admitted at once on the crew's
+  spawn ticket or its standing welcome), then a root-chained lease with the fuel clause collected
+  by the same key. A hold nobody answers in fifteen minutes is denied and recorded. Fixture
+  `desk-v0`: 86 cases; `tests/desk.rs`. This book's
+  [Seat your own body](/build/your-own-body/) page walked it from outside.
+- **The root seed is as protected as in the first architecture, or better.** Raw 32 bytes,
+  `0o600` on every path, zeroized on drop, a wrong-length file a hard error; only public keys and
+  DIDs ever leave a process. Verified by a read of both worlds' code, not adjusted.
 
-**The eleven-style retrieval engine** *(dive 0065)*
+**The crew**
 
-- **Eleven retrieval styles, declared and serving.** Naive · Advanced ·
-  Hierarchical · Multimodal · Multi-Agent · Reasoning-First ·
-  Memory-Augmented · Graph · Hybrid · HyDE · Corrective — each a firmware
-  declaration (its composition, requirements, cost class, and its delta in
-  one plain sentence) with its working numbers as governed, gate-checked
-  craft. The servable menu *derives* from the registry; a declared style
-  whose flow is dark falls to the baseline loudly, on the record.
-- **Asks read standing projections, not per-question rebuilds.** Chunk and
-  tree rows (and their vectors) stand in Postgres, cut once by the same
-  deterministic knife the rebuild uses; the graph lives beside them with
-  every edge carrying its witness record and span. Both are confined to the
-  ids a caller's retrieve already authorized, evicted the moment a purge
-  lands, and rebuildable from the signed log at will.
-- **The harness grades all eleven** — quality, latency, and the context cost
-  a style asks a reader to consume — and the tournament's field derives from
-  the registry, never a hand-kept list.
-- **The selection is never a secret.** Which style served an answer is a
-  field on the envelope, a tag on the signed exchange record, a spoken
-  sentence in the console's reply, and a column on the fuel ledger — so
-  per-style cost is a query.
+- **The kernel spawns and governs every body as a process.** Ten seats from one manifest; a body
+  that dies is restarted after a backoff; one that dies three times in five minutes is parked as
+  a fact with its last words; a refusal at birth is never restarted; every body stops whole at
+  dark. Fixture `bodies-v0`; `tests/bodies.rs`.
+- **What a tool is, both kernels read; what it does stays in the body.** Nine built-in tools are
+  declared as data; the Rust kernel seeds and probes the shelf itself; execution is bound by name
+  body-side and refuses to start when a declaration has no executor. Fixture `tools-v0`: 35 cases.
+- **The residents know who they serve.** Your name, place, time zone and free claims stand on
+  the ground, labeled by who said it, read first by every body, carried over the seam with a
+  routed ask and kept by no far cell. A withdrawn word is recorded, never deleted.
 
-**The act draws itself** *(dive 0067)*
+**The gateway and the meter**
 
-- **One graph language for every picture of work.** Who did what, in what
-  order, what each step saw and cost — validated so that **every box is a
-  door to the real record behind it** (a picture with a dead box is refused),
-  and the narrative reads aloud, each sentence lighting its nodes. Four
-  existing views — the objective walk, the capability pipeline, the live
-  schematic, the deployment map — all speak it now, drawn by one drawer with
-  one export.
-- **The answer wears its thinking.** Open an answered question's record and
-  the picture beneath it shows who chose the retrieval style, why (in the
-  router's own sentence), what answered, and every judgment that has landed
-  since — projected from signed records alone, growing as new judgments land,
-  and honestly incomplete when a record has been purged.
-- **The deepest envelope opens.** Any seat in an objective's walk can show
-  exactly what rode down to it — the signed aperture: the law it ran under,
-  its task and budget, the knowledge it was handed — fetched whole by the
-  work's own coordinate.
+- **Every thought goes through one gateway under the body's own key and lands in dollars.**
+  LiteLLM run and managed by the kernel; every body a virtual key with a budget and a renewal
+  window; every answer wears its cost; a health check holds the meter to the gateway's own
+  numbers.
+- **Minds are stalls with pinned deals.** Price drift makes a mind unhealthy and proposes a re-pin;
+  an announced retirement proposes a swap; a drained body proposes a refill. The stablekeeper
+  proposes and never acts alone.
 
-**The router that learns** *(dive 0066)*
+**The remediation rail**
 
-- **Every ask is read before it routes.** A declared, versioned analyzer
-  emits what kind of question it is, how many parts, how fresh the answer
-  must be, and how confident the read is — pinned into every routing choice.
-  An ambiguous ask (from an asker who didn't demand speed) earns exactly one
-  governed thought that picks from the eleven-name menu and parks honestly
-  when it stumbles; a clear ask never waits on a mind.
-- **Every choice is joined to its rewards.** A routing decision derives from
-  the exact rulebook version that made it; the answer derives from the
-  choice; judge scores, latency, cost, and the human's thumb all reach it by
-  the records' own references. A 👎 vetoes a sample from the standings — it
-  never tilts a score, so agreeable answers can't farm approval.
-- **The router argues; a human decides.** Bayesian standings replay answered
-  questions through the styles not chosen (zero serving risk), and only a
-  challenger whose credible floor clears the incumbent's ceiling — with real
-  volume on both sides — may stage a rule change, as an evidence-carrying
-  card at the operator's gate. Thin evidence refuses. Nothing learns by
-  stealth.
-- **Exploration lives inside a bound the dial can never widen.** A small,
-  dialed share of asks deliberately tries an unchosen style — always
-  confessed on the record — and its ceiling is firmware: set in advance,
-  not turnable past it.
+- **The kernel remediates and says what it did.** A red watch opens a forensic dossier read off the
+  ground with no mind; the planner answers in a lever catalogue declared as data; the kernel pulls
+  the lever through the same door a person would (routine at once, consequential held for a click,
+  grave never); the outcome is attributed on the record — cured with its cause, self-healed, or
+  still red and handed to the human with the dossier. Fixture `levers-v0`: 44 cases;
+  `tests/test_remediation.py`; `tests/bodies.rs` step 8 (the Rust kernel alone parks echo and cures
+  it itself).
+- **The pulse reads the money.** Fifteen watch metrics in one order on both kernels, pinned by a
+  fixture; the glass says "not measured here" for an absent value, never a zero.
 
-**The doors that answer** *(kernel 0.71)*
+**The ground and the rails**
 
-- **The request queue is closed to forgers.** Resolving any request demands a
-  root-chained credential carrying a narrow `resolve` grant; the one
-  credential-less step is a joiner answering its own challenge; a settled
-  decision is never rewritten; and the fuel ledger accepts a reconciliation
-  only from the credential's own subject.
-- **Machines ask and are answered, structurally.** A signed `ask` (the
-  asker's own key — never a stealable token on the public queue) returns a
-  structured envelope: the reply, its citations, which retrieval variant
-  served it, and the whole decision record behind the choice. A failed
-  signature is treated as forgery in every mode.
-- **Knocking is metered per identity.** Every consequential door counts
-  requests per identity in a fixed window; at the ceiling the answer names
-  an honest retry wait, one caller's flood never slows another, and body
-  size is a deliberate, dialed limit — all tunable as governed dials.
-- **Repeated questions serve from a confessed cache.** Same words, same
-  floor, same guardrail version — and only while the answer's signed record
-  still stands; every cache hit says so in the envelope.
+- **Poison is parked, never lost and never looped.** Bytes the rail carried that were never an
+  envelope, or a fact that can never apply, are parked once with their evidence; the dispatcher
+  holds at them until a person's recorded word advances it.
+- **The outbox is a queue with retention**, pruned hourly under its own beat; the feed runs on
+  thirty-three topics; the roster follows the feed, not a timer.
 
-**Governance in action**
+**Cells and the seam**
 
-- **Nothing grades its own work.** Every unit of work is recorded by a
-  separate signer, and finished work is graded by a *different* mind than the
-  one that produced it — with the grader's own cost metered under its own
-  identity.
-- **No external consequence completes on the actor's word.** The proof is
-  public: a signed deed at
-  [demo.orreth.ai/deeds/first-deed.json](https://demo.orreth.ai/deeds/first-deed.json)
-  was published, deliberately tampered, caught by the standing verification,
-  walked back, and restored — the artifact carries its own story.
-- **The machine's own parts are versioned like a constitution.** Prompts,
-  rules, and sentences are editable, versioned assets; changing one issues a
-  new named version of the whole machine; drift between the declared and
-  running version is detected and *stages* for a human, never self-heals
-  silently.
-- **The human can always stop what the machine manages.** Every standing duty
-  and running objective offers a governed cancel; a mid-flight cancellation
-  stopped 18 fanned-out work legs at their next safe boundary, on the record.
-- **The machine notices its own death.** A watchdog proved able to email its
-  human when the system was killed — content-minimal, under standing consent,
-  rate-limited so two deaths in one hour meant one email.
+- **A universe is a cell of its own, sealed from every other.** Two Rust kernels on two databases
+  and roles: the seal felt (one cell's role may not enter the other's database), the seam pinned
+  both ways, an ask routed home and answered here, the stop reaching the far cell in 0.6 s, the
+  peer dark → parked in plain words → back → resumed and landed once, a stranger and a replay
+  wearing the one face, re-homed → epoch 2 with the old home refusing. Fixture `cells-v0`: 57
+  cases; `tests/cells.rs`.
 
-**Operations you can watch**
+**The glass**
 
-- **Every thought lands on a flight recorder** — model, tokens, cost, latency,
-  including refusals — and the console's observatory renders it with each
-  panel's evidence tier declared (log-truth vs. instrument reading).
-- **A/B testing is constitutional.** Each experiment arm is a cryptographically
-  named machine version; assignment is deterministic; adopting the winner is a
-  signed human approval that keeps full lineage, loser preserved.
-- **Settings are governed, not scattered.** Thirty-six operating values —
-  cadences, budgets, thresholds — are live-tunable dials with declared bounds,
-  each turn a versioned record, out-of-bounds turns refused with a teaching.
-- **Memory has a metabolism.** Old records are compressed with **measured**
-  information loss; a record a human touched stays warm while its neighbors
-  distill; every floor breathes on a schedule.
+- **THE PANEL is a mimic panel of the kernel.** Geometry is architecture (six organs, the crew's
+  sockets from the roster, the shelf's tool lamps); light is operations (thirty-three feed topics
+  light the rails, then fade); colour is origin; three soft toggles on one drawing; every block a
+  door; full screen; the Daylight Glass; the version whisper. Walked by JB on 2026-09-29.
+- **The tour** walks a person around the live panel one part at a time, in plain words, with the
+  world still moving underneath.
+- **One name, one self.** The roster folds one row per name with earlier selves counted; a proven
+  key claiming a held name is staged for a governing seat; a watch and a peer rest on a recorded
+  row, never a delete.
 
-**Building on it**
+**The image**
 
-- **Capabilities are decoupled from the machine.** A complete working purpose
-  (a trading-analysis desk producing reports a human reads, on real market
-  data, through sixteen governed stages) installs by dropping a folder and
-  uninstalls by removing it — verified by grep: the core has zero by-name
-  references to any capability.
-- **Outside tools join safely.** MCP tool servers are onboarded through one
-  gate with secrets held by reference (credentials appear in zero records), a
-  changed tool is caught by its fingerprint and quarantined until a human
-  re-approves — rug-pull protection as structure, not scanning.
-- **Outside agents join as themselves.** A LangGraph agent has joined a
-  running universe through the same governed gate as everything else, kept its
-  own framework, and worked under a lease.
-- **The kernel image is published, and a world stands on it from three
-  files.** `ghcr.io/iotlodge/orrethd` is publicly pullable (2026-08-31, the
-  first seam this documentation cut), and the
-  [first-world example](/build/first-world/) — two tier profiles and a
-  compose file — was proven whole against it: floor joined under universe,
-  presence beating up, rules cascading down, console serving.
+- **`ghcr.io/iotlodge/orrethd:0.1.0`** is published and public; `:latest` is the same bytes. The
+  kernel and its crew in one image, verified from inside the box. This book's
+  [first world](/build/first-world/) was walked against it on 2026-09-30.
 
-## True but partial — the boundary, stated
+## Partial or owed, with the gate named
 
-- Some cognition paths are deterministic scaffolds or simulated judges — always
-  labeled as such; live model judging exists and falls back honestly when
-  ground is thin.
-- The proven deployment is a single-machine development rig. Federation,
-  hosted custody, disaster recovery, and multi-tenancy are designed but have
-  no operational evidence yet.
-- Human decisions on the request queue are persisted but not yet signed by a
-  registered signer — the signer-registry work is designed, unbuilt.
-- The projection layer degrades honestly when unavailable, but a full
-  rebuild-from-log drill at production scale has not been run.
+- **The image is linux/arm64 only.** Every image before it was too; amd64 is owed (the Rust stage
+  cross-builds).
+- **A published SDK that joins from the door alone is owed.** `orreth-agent` 0.4.0 on PyPI speaks
+  the first architecture's doors, not this desk. Today a body is `python -m orreth_spine.body`
+  from the kernel's own repository, and it needs the rails reachable, not only the door. The
+  [Seat your own body](/build/your-own-body/) page says exactly what works.
+- **The learning loops and the long objective are designed, not built.** A grader as a firmware
+  resident with signed verdicts, a lessons digest packed into context, and a 500–1000-hop objective
+  resumed at hop N as the same self are canon row 6, after row 5. Every reply is already a signed
+  fact and the per-hop checkpoint stands; no grader body, no verdict fact, no lessons digest yet.
+- **Understanding is lexical.** No embedding lane, no vector projection on this kernel; the first
+  architecture's eleven retrieval styles are a capability to re-prove atop it.
+- **No purge on this kernel yet.** A withdrawn profile word is hidden, not crypto-shredded; the
+  purge-memory tool's tombstone law is the reference's.
+- **No cascade between worlds.** Every cell wears its own policy sheet; a seat's grants only
+  narrow; but the tighten-only fold from universe to cell to body, and a content-addressed law a
+  thought names, wait for a proof that needs them.
+- **No roll-up across cells.** The meter is read by world; the seam carries the world card, the
+  roster and the answers to routed asks, not the meter. The costs panel is a named seed.
+- **A person's name is their DID.** No person keypair yet, so a person cannot delegate a seat.
+- **No bell.** Dormancy is noticed and listed; nothing reaches a person beyond the glass.
+- **The kernel is its own root.** No offline ancestor: a host compromise is a root compromise. No
+  seed backup or escrow rite; TOTP secrets and lease tokens are plaintext on the ground.
+- **Bodies are rows.** The ground is the only store; no blob lane; no read-time re-verification of
+  a body's bytes against its address.
+- **The dev cell is unsealed by design.** The health check "this cell is sealed" reads false on
+  the standard rig, whose role reaches more than one database; `scripts/dev.sh cell` seals one.
+- **Four wounds are open from the last walk**, recorded for after the refresh season: a stop's
+  words name no ask; a waiting ask's "since" wears no date; a returned publish read as delivered
+  (twenty-seven commands reached no queue on the dev ground); a failed thought's words filed as
+  an objective.
 
-## Does not exist yet — being built by this documentation effort
+## Parked, each behind a named gate
 
-This documentation project works by a rule we call **docs-driven
-decoupling**: each tutorial page is written as if the packages existed, and
-every step that turns out to be impossible from outside the monorepo names a
-seam to cut. The current honest list:
+- **Hosted custody, federation beyond two cells, disaster recovery, multi-tenant evidence** — the
+  hosting decision and a partner's real need.
+- **A capability install door** — the first architecture's sealed, signed package has no seat on
+  this kernel yet; the one chat is the one place.
+- **The Faculty and the Agent Lab** — built only when the kernel is stamped ready to test it.
+- **Voice, the multiverse portal, enterprise identity federation** — V2.
+- **The demo site and the articles** — turn after this book, in the refresh season's order.
 
-- ~~No published container image~~ — **shipped 2026-08-31**: see
-  `ghcr.io/iotlodge/orrethd` in the proven tier above. The *full* experience
-  (residents, cognition) still runs from the repository — packaging the
-  agentic layer is a later, deeper seam.
-- ~~The SDK is not on a package index~~ — **shipped 2026-08-31**:
-  [`pip install orreth-agent`](https://pypi.org/project/orreth-agent/)
-  (Apache-2.0, one dependency), proven by a fresh install from the live
-  index; the full public surface is now exported at the package top.
-- ~~The capability manifest has no reference~~ — **documented 2026-08-31**:
-  the [manifest reference](/reference/capability-manifest/) carries the
-  contract and all thirteen panel kinds, and the SDK exports the same closed
-  vocabulary (`PANEL_KINDS`) plus a validating builder. A formal JSON-Schema
-  file remains future work.
-- **Bring-your-own-package capabilities** — today a capability installs from
-  the repository's own folder; installing one from an outside package awaits
-  the trust machinery for it.
+## What became of the first architecture
 
-When an item above ships, it moves up this page — with its evidence named.
+Orreth's first architecture — seventy-three design dives, the Living Brain, the Console, the demo
+reel, the old plane and its Python simulator — was halted on 2026-09-14 for the foundation this
+kernel stands on: performance for hundreds of bodies, one signed log, one law at every layer. It
+is kept whole, never deleted, at the tag `main-v0.72-old-world`, and `docs/rearch/0009` in the
+repository is the ledger of what each old organ became here: carried, re-seated, a capability
+atop the kernel, or parked with a reason. Nothing was lost by silence.

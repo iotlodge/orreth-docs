@@ -1,0 +1,169 @@
+---
+title: The anatomy of a running world
+description: What actually exists when kernel 0.1.0 runs — the six organs, the five rails, the crew of ten bodies, the seat and the lease, the gateway, and cells.
+---
+
+When Orreth runs on a laptop there are five processes in Docker and, inside the kernel's, ten more.
+This page names every part you will meet on the panel, in the chat and in the doors, in the order
+you meet them.
+
+<pre class="mermaid">{`
+flowchart TB
+    subgraph PEOPLE["PEOPLE — outside, with a seat"]
+        H["the owner · masters · persons<br/>a TOTP proof → a signed seat"]
+    end
+    subgraph KERNEL["orrethd — the kernel (one process, :4600)"]
+        D["DESK<br/>the seat · the join desk"]
+        G["GROUND<br/>the signed record"]
+        GW["GATEWAY<br/>the meter"]
+        S["SHELF<br/>tools · services · minds"]
+        M["MONITOR<br/>watches · levers · checks"]
+        AN["ANALYZER<br/>intentions by origin"]
+        RAILS["the five rails: relay · dispatcher · scheduler · presence · intent"]
+    end
+    subgraph CREW["THE CREW — ten processes the kernel spawns and governs"]
+        RES["residents: librarian · echo"]
+        FW["firmware: planner · critic · grader · mitl<br/>toolkeeper · stablekeeper · crew · monitor"]
+    end
+    subgraph BOXES["the four boxes"]
+        PG[("Postgres<br/>the ground")]
+        MQ[("RabbitMQ<br/>the invocation rail")]
+        KF[("Kafka<br/>the events rail")]
+        LL[("LiteLLM<br/>the gateway")]
+    end
+    H -->|"the one chat · THE PANEL"| KERNEL
+    KERNEL -->|"spawn · lease · restart · park"| CREW
+    CREW -->|"every thought, under its own key"| LL
+    KERNEL --- PG
+    KERNEL --- MQ
+    KERNEL --- KF
+    KERNEL --- LL
+    classDef human fill:#f2a91d,color:#101625,stroke:#ffd36a,stroke-width:2px;
+    classDef k fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
+    classDef body fill:#087d86,color:#efffff,stroke:#55d8d7;
+    classDef box fill:#17233a,color:#eef2ff,stroke:#7890b5;
+    class H human;
+    class D,G,GW,S,M,AN,RAILS k;
+    class RES,FW body;
+    class PG,MQ,KF,LL box;
+`}</pre>
+
+## The kernel and its reference
+
+**`orrethd`** is the kernel: one Rust program that is the door on port 4600, serves the one page
+(the glass), keeps the ground's schema, runs the rails, seats the crew and holds the watches and
+levers. It is the only thing in the world that signs as the world's root.
+
+**The reference** is the same kernel written first in Python, on port 4601. It is not a fallback;
+it is the yardstick. Every law is pinned by a conformance fixture both kernels must pass
+unchanged — twenty-six fixture files today, 730 cases on the Rust side. When you read
+"both kernels" in this book, that is what it means.
+
+## The six organs
+
+The panel draws six organs, always seated, because the kernel always carries them:
+
+| Organ | What it is | Its doors |
+|---|---|---|
+| **DESK** | Who is seated and who may come in: the seat a person takes with a code from their authenticator, and the join desk every body walks through. | `/seat` · `/enroll` · `/join` |
+| **GROUND** | The kernel's memory: one Postgres database, one schema with one writer ever, forty tables; every ask, reply, fact, lease, watch and meter line. | `/recall` · `/export` · `/fact/:id` · `/parked` |
+| **GATEWAY** | The meter: LiteLLM, run and managed by the kernel. Every body has its own virtual key wearing its budget; every answer comes back with its cost. | `/minds` · `/minds/spend` |
+| **SHELF** | The register of every service the kernel governs — tools, MCP servers, stores, sources and minds — on one lifecycle ladder. | `/services` |
+| **MONITOR** | The operating state, live: the rails, the bodies, the asks, the watches, the health checks, the harness, and every lever. | `/monitor` · `/harness` · `/levers` · `/bodies` |
+| **ANALYZER** | Everything born in the chat, grouped by origin — intentions, the objectives under them, in flight and done — read from the ground. | `/analyzer` · `/intentions` · `/markers` |
+
+## The five rails
+
+The rails are the kernel's embedded loops. Each is an organ of the running kernel, breathing on the
+ground and visible on the panel as a segment that lights when a fact passes:
+
+| Rail | What it does |
+|---|---|
+| **relay** | Publishes each fact from the outbox to RabbitMQ and Kafka after the transaction that made it commits. A committed record can never lack its event. |
+| **dispatcher** | Hands each fact to the benches of the bodies it addresses. A fact that can never apply — bytes that were never an envelope — is **parked** with its evidence until a person advances past it. |
+| **scheduler** | Ticks the standing duties: the librarian's hourly review, the kernel's harness run, any cadence you gave a body. Every occurrence is an ask. |
+| **presence** | Keeps the bodies' leases while they serve; a lease that lapses reads dormant within seconds and the station goes dashed. |
+| **intent** | Turns every intention: observes what it is interested in, asks its planner, files the objective, hears the runner, and re-plans. |
+
+Underneath them are the three transports: the **ground** (Postgres) where truth lives, the
+**invocation rail** (RabbitMQ) where work waits for the one body that claims it, and the **events
+rail** (Kafka) where facts are published for anyone to replay. Every message on all three wears
+the same envelope: canonical bytes, a content hash, the authority chain (who acted for whom) and
+the marker (why). The glass listens to the **feed**, a stream of small notices; the browser never
+touches a broker.
+
+## The crew
+
+The kernel seats ten bodies when it lights, each one its own Python process it spawns and
+governs. They are declared in one manifest, `spine/crew.v0.json`, and every seat is a template
+file plus, for the workspace agents, a binding.
+
+**Residents** have a name and a persona. They are the ones who answer you:
+
+- **librarian** — reads and recalls what this world knows; keeps your words in the Record; uses
+  the weather, acquire, mark, seal and purge tools; reviews its day on the hour.
+- **echo** — repeats your words back, with no mind, so you can see the road an ask takes.
+
+**Firmware** bodies have a function and no persona. Same laws, different face:
+
+- **planner** — writes the steps of an objective; answers a red watch with one lever from the
+  catalogue.
+- **critic** — marks improvements on what the crew did.
+- **grader** — grades another body's work; it never grades its own yardstick.
+- **mitl** — the Master Mind In The Loop: has read the architecture and the covenant from disk;
+  says what an act touches before you decide.
+- **toolkeeper** — tends the shelf: probes every service, versions a changed one, proposes a
+  retire after three strikes, never retires alone.
+- **stablekeeper** — tends the Stable: pings every mind, watches price drift and end-of-life,
+  proposes a re-pin, a swap or a refill.
+- **crew** and **monitor** — the workspace agents bound to the CREW and MONITOR pulls; the
+  monitor's may propose a watch with the add-watch tool.
+
+A body that dies comes back as the same self after a backoff. One that dies three times in five
+minutes is **parked**, as a fact carrying its last words, and comes back only on a person's word.
+A body refused at birth is never restarted. At dark, every body is stopped whole.
+
+## The seat and the lease
+
+Two things stand at the DESK, and they are the same shape: a capability token in the covenant's
+form — subject, audience, grants, constraints, chain, signature — that can only narrow as it is
+passed on.
+
+A **seat** is a person's. You prove a six-digit code from your authenticator; the kernel signs a
+token naming you, what you may do here (retrieve, write, and govern for the owner and masters) and
+until when (24 hours). Every door reads who you are from the seat, never from the request. The
+first person to prove an authenticator on a ground nobody holds is its **owner**.
+
+A **lease** is a body's. It walks the join desk — challenged with the kernel's nonce, proves the
+key behind its DID, is staged for a governing seat's yes (or admitted at once on the crew manifest
+or its standing welcome) — and collects a token chained to the kernel's root with the **fuel
+clause**: a dollar allowance and the window it renews in. The lease opens the body's own words at
+the door and nothing more, for thirty days.
+
+## The Stable and the shelf
+
+The **Stable** is where minds stand: each is a stall with a pinned deal (provider, model, price)
+and an entry in the gateway. Minds live wherever they live — Anthropic, OpenRouter, Ollama on your
+machine, any OpenAI-compatible base — and a body is assigned one for all its work or for one class
+of work (fast, standard, deep). A fresh world's Stable is empty until you add a mind or give the
+gateway a provider key; a body without a mind says so honestly.
+
+The **shelf** holds every service the kernel governs on one ladder: registered → versioned →
+healthy or unhealthy → retired. Nine built-in tools are declared as data both kernels read; an MCP
+server you add lists its tools onto the shelf as identities; a store or a source is a service
+too. Retired is rest, recorded, never deletion.
+
+## Cells and the seam
+
+A universe's physical home is a **cell**: its own kernel self, its own database and role (a role
+that reaches no other database), its own benches and topics, its own bodies and keys. Cells are
+worlds. Two cells that name each other speak over one door, the **seam**, in messages signed by
+their kernels' own selves; an ask that names a cell ("librarian@two, …") routes home and is
+answered here. Under partition the ask parks in plain words and resumes once when the peer
+returns. A re-homed universe advances its **epoch** and the old home refuses to serve.
+
+## The glass
+
+One HTML page, served by either kernel, no build step: the one chat, THE PANEL, the CREW and
+MONITOR pulls, the ANALYZER hatch, the seat form, the tour and the guide. The
+[Watch](/watch/the-panel/) track is about this page.

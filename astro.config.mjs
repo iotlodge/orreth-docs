@@ -9,7 +9,7 @@ export default defineConfig({
 		starlight({
 			title: 'Orreth',
 			description:
-				'Documentation for Orreth — a governed runtime for agentic systems: a small kernel your agents join, and capabilities you build on top.',
+				'Documentation for Orreth — a kernel for fleets of agents: identity, memory, rails, meter, gate, watches and levers held in one place under one law.',
 			social: [
 				{ icon: 'rocket', label: 'Live demo', href: 'https://demo.orreth.ai' },
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/iotlodge/orreth' },
@@ -29,6 +29,7 @@ export default defineConfig({
 					label: 'Learn',
 					items: [
 						{ label: 'What is Orreth', link: '/' },
+						{ label: 'One law at every layer', slug: 'learn/one-law' },
 						{ label: 'The anatomy of a running world', slug: 'learn/anatomy' },
 						{ label: 'How the kernel works', slug: 'learn/how-the-kernel-works' },
 						{ label: 'What works today', slug: 'learn/what-works-today' },
@@ -39,23 +40,33 @@ export default defineConfig({
 					label: 'Build',
 					items: [
 						{ label: 'Quickstart', slug: 'build/quickstart' },
-						{ label: 'Build your first world', slug: 'build/first-world' },
-						{ label: 'Build your first capability', slug: 'build/first-capability' },
-						{ label: 'Bring your own agent', slug: 'build/bring-your-own-agent' },
+						{ label: 'Your first world', slug: 'build/first-world' },
+						{ label: 'Seat your own body', slug: 'build/your-own-body' },
+						{ label: 'Run it from the repository', slug: 'build/from-the-repository' },
+					],
+				},
+				{
+					label: 'Watch',
+					items: [
+						{ label: 'The panel', slug: 'watch/the-panel' },
+						{ label: 'The tour', slug: 'watch/the-tour' },
+						{ label: 'The one chat', slug: 'watch/the-one-chat' },
+						{ label: 'The monitor and its levers', slug: 'watch/the-monitor' },
+						{ label: 'The crew and the Analyzer', slug: 'watch/the-crew-and-the-analyzer' },
 					],
 				},
 				{
 					label: 'Reference',
 					items: [
-						{ label: 'The HTTP API', slug: 'reference/http-api' },
+						{ label: 'The HTTP doors', slug: 'reference/http-api' },
 						{ label: 'Configuration — the dials', slug: 'reference/configuration' },
-						{ label: 'The residents', slug: 'reference/residents' },
+						{ label: 'The crew — templates and bindings', slug: 'reference/the-crew' },
+						{ label: 'Tools and levers', slug: 'reference/tools-and-levers' },
+						{ label: 'Facts, watches and health checks', slug: 'reference/facts-watches-checks' },
 						{ label: 'The contracts', slug: 'reference/contracts' },
-						{ label: 'The capability manifest', slug: 'reference/capability-manifest' },
 					],
 				},
-				// More pages arrive with the next spoonfuls of design dive 0064 —
-				// the sidebar only ever lists pages that exist.
+				// The sidebar only ever lists pages that exist.
 			],
 		}),
 	],

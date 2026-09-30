@@ -1,30 +1,28 @@
-# first-world — a stranger's first Orreth universe
+# first-world — a stranger's first Orreth world
 
-A complete two-tier Orreth world from **three small files**: two JSON tier
-profiles and a compose file, against the published kernel image. This is the
-working proof behind the [Build your first world](https://docs.orreth.ai/build/first-world/)
-tutorial — the docs page and this folder are kept true to each other.
+The working proof behind the [quickstart](https://docs.orreth.ai/build/quickstart/) and
+[Your first world](https://docs.orreth.ai/build/first-world/): the published kernel
+`ghcr.io/iotlodge/orrethd:0.1.0` and the four boxes it stands on, from one compose file.
+Walked on 2026-09-30; the docs pages and this folder are kept true to each other.
 
 ```bash
-uv run --with cryptography python mint_root.py   # once — your root identity
-docker compose up -d
-curl localhost:4600/health     # {"scope":"u:first", ...}
-curl localhost:4601/health     # {"scope":"u:first/f:main", ...}
-curl localhost:4600/topology   # the floor, joined under its universe
-open http://localhost:4600/window
+docker compose up -d           # ground · invoke · events · gateway, then the kernel and its crew
+curl localhost:4600/health     # {"kernel":"rust","version":"0.1.0",...}
+open http://localhost:4600     # the glass: enroll, take your seat, say "tour"
+docker compose down            # sleep; keep the ground and the selves
+docker compose down -v         # forget the world
 ```
-
-Stop it with `docker compose down` (add `-v` to also forget its memory).
-
-What's in here:
 
 | File | Role |
 |---|---|
-| `mint_root.py` | Mints your world's root keypair once; the private half stays in `.root-seed` (gitignored, yours), only the public half reaches the containers. The kernel verifies and cannot sign. |
-| `profiles/first-universe.json` | The universe tier: scope `u:first`, keeps distilled memory forever, carries the one apex rule every child must honor ("failures always survive"). |
-| `profiles/first-floor.json` | A floor tier: scope `u:first/f:main`, 90-day working memory, joined under the universe by one `--parent` flag. |
-| `profiles/model-registry.json` | The model classes the gateway would offer — declared but keyless here, so anything that needs to think refuses honestly. |
-| `compose.yaml` | One kernel image, two tiers, plus Postgres so the world's memory survives restarts. |
+| `compose.yaml` | The five services, the dials the kernel reads, the two volumes that keep the world (the ground's data and the selves' seeds). |
+| `ground-init.sql` | One line: the gateway's own ledger database on the ground, made at the first start. |
+| `gateway-config.yaml` | The gateway's starting model list — the kernel's default mind by name, its key by environment name only. A fresh gateway needs a list before the kernel can add to it. |
 
-The ports (4600/4601) deliberately avoid the main development rig's range, so
-this world can run beside it.
+Provider keys ride in from your shell or a `.env` beside the compose file (`ANTHROPIC_API_KEY`,
+`OPENROUTER_API_KEY`, `OPENAI_API_KEY`); the values reach the gateway, the names reach the kernel,
+and neither lands in any record or file of Orreth's. Without a key the world stands and the crew
+say honestly that no mind stands; add one from the chat (Ollama on your machine works).
+
+The image is `linux/arm64`. To run beside the kernel repository's own rig, which holds port 4600,
+start with `ORRETH_PORT=4700 docker compose up -d`.

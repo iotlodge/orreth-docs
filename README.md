@@ -1,46 +1,46 @@
-# orreth-docs — the documentation for Orreth
+# orreth-docs — the book for Orreth
 
-The source of [docs.orreth.ai](https://docs.orreth.ai): how to **use** and
-**build with** [Orreth](https://github.com/iotlodge/orreth), a governed
-runtime for agentic systems.
+The source of [docs.orreth.ai](https://docs.orreth.ai): how to **understand**, **use** and
+**watch** [Orreth](https://github.com/iotlodge/orreth), a kernel for fleets of agents — written
+for kernel **0.1.0** and rewritten with every release.
 
-Orreth is two elements — a small kernel binary (`orrethd`) that keeps a
-signed, append-only record of everything with identity, permissions, and
-metering enforced at one door; and **capabilities**, the purposes built on top
-of it. These docs teach both, in plain engineering language, with the
-machine's own vocabulary shown as labels. A captured moment of a live
-universe is public at [demo.orreth.ai](https://demo.orreth.ai).
+Orreth's kernel, `orrethd`, holds what must be rigid for a fleet of agents — identity, memory,
+the rails, the meter, the gate, the watches and the levers — in one place under one law; people
+hold the policy; an intention is the unit of control; and a person can always stop what the
+machine manages. Because the control is rigid the experience is fluid: one chat to every agent,
+and THE PANEL, one live drawing of the world. This book is the single documentation source for
+that world; the architecture notes inside the kernel's repository are its canon, never a
+newcomer's door.
 
-## Why this repo exists (and why it is separate)
+## The four tracks
 
-This repo is the permanent home of Orreth's user- and builder-facing
-documentation, chartered as design dive **0064 — The Open Book** in the main
-repository. It is deliberately *outside* the main repo because the docs are
-written by a rule called **docs-driven decoupling**: each tutorial page is
-written as if Orreth's packages already existed, and every step that proves
-impossible from outside the monorepo names a seam to cut — publish the kernel
-image, publish the SDK, give the capability manifest a real schema. Each cut
-seam ships together with the page that proves it. The example worlds in this
-repo must consume Orreth the way a stranger would, or the docs would be
-theater.
+| Track | For | Pages |
+|---|---|---|
+| **Learn** | understanding | What is Orreth · One law at every layer · The anatomy of a running world · How the kernel works (six pictures) · What works today · Glossary |
+| **Build** | usage | Quickstart · Your first world · Seat your own body · Run it from the repository |
+| **Watch** | the glass | The panel · The tour · The one chat · The monitor and its levers · The crew and the Analyzer |
+| **Reference** | the doors as they stand | The HTTP doors · Configuration · The crew · Tools and levers · Facts, watches and health checks · The contracts |
 
 ## Layout
 
 ```
 src/content/docs/    the pages (Starlight / Astro, Markdown + MDX)
   index.mdx          What is Orreth — the landing page
-  learn/             the Learn track (anatomy · what-works-today · glossary)
+  learn/ build/ watch/ reference/
 src/data/
-  glossary.json      the machine's own 36-term dictionary, vendored from the
-                     main repo's site/fixtures/sentences.json (gloss key) —
-                     refresh it from there, never edit it here
-infra/cdk/           the deploy stack: S3 (private, OAC) + CloudFront + ACM
-                     on docs.orreth.ai, mirroring the demo site's stack
-examples/            (arrives with the Build track) worlds and capabilities
-                     that consume Orreth from outside — the decoupling proofs
+  glossary.json      the vocabulary, hand-written for 0.1.0 (plain, <240 chars each)
+  tools.json         vendored from the kernel's spine/tools.v0.json — refresh, never edit
+  levers.json        vendored from the kernel's spine/levers.v0.json — refresh, never edit
+  guide.json         vendored from the kernel's spine/guide/guide.v0.json
+  dials.json         every environment dial with its default, collected from the code
+src/styles/orreth.css   the glass's own two palettes on Starlight's tokens
+examples/
+  first-world/       the published kernel and its four boxes from one compose file (the quickstart's proof)
+  first-body/        a stranger's body through the join desk (the seat-your-own-body proof)
+infra/cdk/           the deploy stack: S3 (private, OAC) + CloudFront + ACM on docs.orreth.ai
 ```
 
-## Working on the docs
+## Working on the book
 
 ```bash
 npm install
@@ -48,44 +48,21 @@ npm run dev        # local preview at localhost:4321
 npm run build      # static build into dist/
 ```
 
-Voice rules (locked 2026-08-31, dive 0064):
+Diagrams are mermaid in `.mdx` pages as `<pre class="mermaid">{`…`}</pre>` (the template-literal
+wrapper); a site-wide script in `astro.config.mjs` renders them on pages that carry one.
 
-1. **Plain-first.** Pages lead with engineering terms; the machine's names
-   appear as product labels — "the tool registry (shown in the console as
-   **the Farm**)" — never the reverse.
-2. **The glossary is the bridge.** A canon word is introduced at first use
-   with its plain meaning; the glossary page is generated from the vendored
-   dictionary, one source of truth with the live console.
-3. **Only claim what is proven.** The what-works-today page mirrors the main
-   repo's honest-boundary register; a claim without evidence named is a claim
-   these docs do not make.
-4. **The sidebar only lists pages that exist.** No stub pages, no "coming
-   soon" links.
+The book's laws:
 
-## Deploying
+1. **Plain-first, canon as labels.** Pages lead with plain engineering words; the machine's names
+   appear beside them, never instead of them.
+2. **Walked before written.** A Build page is walked against the published image before it is
+   written; its outputs are real.
+3. **Only claim what is proven.** *What works today* follows the kernel repository's honest
+   boundary; a claim without evidence named is a claim the book does not make.
+4. **The book turns with the release.** Every page says the kernel's era; nothing of an older
+   architecture lingers. The first architecture's book (0.72) is in this repository's history.
 
-```bash
-npm run build
-cd infra/cdk
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-export TMPDIR="$HOME/.orreth/tmp"   # macOS: jsii needs a writable tmp
-PATH=".venv/bin:$PATH" npx aws-cdk@latest deploy \
-  -c docs_domain=docs.orreth.ai \
-  -c orreth_zone_id=<zone-id> -c orreth_zone_name=orreth.ai
-```
+## Licenses
 
-Run `diff` before `deploy`. The stack is the smallest possible surface — a
-private S3 bucket behind CloudFront with an origin-access control; no compute,
-no origin to probe.
-
-## Licensing
-
-- Documentation prose: **CC BY 4.0** (`LICENSE`)
-- Example code and infrastructure: **MIT** (`LICENSE-CODE`)
-
-## Provenance
-
-Authored by Claude (Fable 5) working with Jonathan Barth, under the main
-repository's provenance discipline. The documentation's claims are grounded in
-three code-verified survey reports (2026-08-31) and the main repo's standing
-registers.
+The documentation is [CC BY 4.0](LICENSE); the example code is [MIT](LICENSE-CODE). The kernel's
+source is public for review under all rights reserved; its SDK is Apache-2.0.

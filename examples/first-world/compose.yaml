@@ -1,78 +1,116 @@
-# PROVENANCE: Fable 5 (claude-fable-5) — 0064 The Open Book, the first world · 2026-08-31
-# Your first Orreth world: ONE kernel image, TWO tiers, differing only by the
-# JSON profile each container mounts. The topology is data.
+# PROVENANCE: Claude Fable 5.1 (claude-fable-5-1) — THE REFRESH SEASON step 2, the book for kernel 0.1.0 · 2026-09-30
 #
-#   uv run --with cryptography python mint_root.py   # once — mints your root key
-#   docker compose up -d
-#   curl localhost:4600/health                        # the universe
-#   curl localhost:4601/health                        # the floor, joined under it
-#   open http://localhost:4600/window                 # the console
+# Your first Orreth world: the published kernel and the four boxes it stands on.
+#
+#   docker compose up -d                       # pulls ghcr.io/iotlodge/orrethd:0.1.0 (linux/arm64)
+#   curl localhost:4600/health                 # {"kernel":"rust","version":"0.1.0",...}
+#   open http://localhost:4600                 # the glass: enroll, take your seat, say "tour"
+#
+# Provider keys ride in from your shell or a `.env` beside this file (ANTHROPIC_API_KEY,
+# OPENROUTER_API_KEY, OPENAI_API_KEY) — a key value lives in no record and no file of Orreth's.
+# Without one the world still stands: echo answers, the tour walks, the librarian's mind waits.
+name: orreth-first
+
 services:
-  pg:
-    image: pgvector/pgvector:pg16
+  ground:                              # the kernel's memory — Postgres
+    image: postgres:16
     environment:
-      POSTGRES_PASSWORD: orreth
+      POSTGRES_USER: orreth
+      POSTGRES_PASSWORD: ${ORRETH_GROUND_PASSWORD:-orreth-first}
+      POSTGRES_DB: spine
     volumes:
-      - pg-data:/var/lib/postgresql/data
+      - ground:/var/lib/postgresql/data
+      - ./ground-init.sql:/docker-entrypoint-initdb.d/ground-init.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 2s
-      timeout: 2s
-      retries: 15
+      test: ["CMD-SHELL", "pg_isready -U orreth -d spine"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
     restart: unless-stopped
 
-  universe:
-    image: ghcr.io/iotlodge/orrethd:0.72.520
-    command: >
-      --profile /profiles/first-universe.json --port 4600 --bind 0.0.0.0
-      --store-dir /data/bodies --root-pub ${ORRETH_ROOT_PUB}
-      --pg postgres://postgres:orreth@pg:5432/postgres
-    ports: ["4600:4600"]
-    volumes:
-      - ./profiles:/profiles:ro
-      - universe-bodies:/data/bodies
-    depends_on:
-      pg: { condition: service_healthy }
+  invoke:                              # the invocation rail — RabbitMQ
+    image: rabbitmq:3.13-management
+    environment:
+      RABBITMQ_DEFAULT_USER: orreth
+      RABBITMQ_DEFAULT_PASS: ${ORRETH_GROUND_PASSWORD:-orreth-first}
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
     restart: unless-stopped
 
-  floor-main:
-    image: ghcr.io/iotlodge/orrethd:0.72.520
-    command: >
-      --profile /profiles/first-floor.json --port 4601 --bind 0.0.0.0
-      --parent http://universe:4600
-      --store-dir /data/bodies --root-pub ${ORRETH_ROOT_PUB}
-      --pg postgres://postgres:orreth@pg:5432/postgres
-    ports: ["4601:4601"]
-    volumes:
-      - ./profiles:/profiles:ro
-      - floor-bodies:/data/bodies
-    depends_on:
-      pg: { condition: service_healthy }
+  events:                              # the events rail — Kafka, one node
+    image: apache/kafka:3.9.1
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:29092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,INTERNAL://events:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,INTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9092 >/dev/null 2>&1"]
+      interval: 5s
+      timeout: 10s
+      retries: 30
     restart: unless-stopped
 
-  # The join door (optional — kernel 0.71 / orreth-agent 0.2.0): lets agents
-  # knock and be admitted at YOUR word, while your root key stays in its file.
-  # Mint the door's credential once (the root signs it offline, right here):
-  #   uv run --with 'orreth-agent>=0.2' python -m orreth_agent.joindoor mint \
-  #     --root-seed .root-seed --root-did did:web:example.com:u:first \
-  #     --scope u:first/f:main --out door.json
-  # Then `docker compose --profile door up -d`. Approvals stay yours:
-  #   python -m orreth_agent.joindoor pending --field http://localhost:4601
-  #   python -m orreth_agent.joindoor approve <req-id> --door door.json --field http://localhost:4601
-  join-door:
-    image: python:3.12-slim
-    command: >
-      sh -c "pip install -q 'orreth-agent>=0.2' &&
-             python -m orreth_agent.joindoor serve
-             --door /door.json --field http://floor-main:4601"
+  gateway:                             # the meter — LiteLLM, run and managed by the kernel
+    image: ghcr.io/berriai/litellm:main-stable
+    command: ["--port", "4000", "--config", "/config.yaml"]
     volumes:
-      - ./door.json:/door.json:ro
+      - ./gateway-config.yaml:/config.yaml:ro
+    environment:
+      DATABASE_URL: postgresql://orreth:${ORRETH_GROUND_PASSWORD:-orreth-first}@ground:5432/litellm
+      LITELLM_MASTER_KEY: ${ORRETH_GATEWAY_KEY:-sk-orreth-first}
+      LITELLM_SALT_KEY: ${ORRETH_GATEWAY_SALT:-sk-orreth-first-salt}
+      STORE_MODEL_IN_DB: "True"
+      LITELLM_LOG: ERROR
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    extra_hosts: ["host.docker.internal:host-gateway"]   # Ollama on your machine, by name
     depends_on:
-      - floor-main
+      ground: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4000/health/liveliness', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 40
     restart: unless-stopped
-    profiles: ["door"]
+
+  kernel:                              # orrethd — the kernel and its crew, one image
+    image: ghcr.io/iotlodge/orrethd:0.1.0
+    ports: ["${ORRETH_PORT:-4600}:4600"]
+    environment:
+      SPINE_PG: postgresql://orreth:${ORRETH_GROUND_PASSWORD:-orreth-first}@ground:5432/spine
+      SPINE_RABBIT: amqp://orreth:${ORRETH_GROUND_PASSWORD:-orreth-first}@invoke:5672/%2F
+      SPINE_KAFKA: events:29092
+      SPINE_GATEWAY: http://gateway:4000
+      SPINE_GATEWAY_KEY: ${ORRETH_GATEWAY_KEY:-sk-orreth-first}
+      SPINE_HUMAN_ZONE: ${SPINE_HUMAN_ZONE:-UTC}
+      # the kernel registers a mind only when the key's NAME is reachable where it stands (the
+      # env-secrets law) — the names ride here too; the values are read by the gateway alone
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      OPENROUTER_API_KEY: ${OPENROUTER_API_KEY:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    volumes:
+      - seeds:/var/lib/orreth          # the kernel's self and the crew's keys — the same selves every life
+    depends_on:
+      ground: { condition: service_healthy }
+      invoke: { condition: service_healthy }
+      events: { condition: service_healthy }
+      gateway: { condition: service_healthy }
+    restart: unless-stopped
 
 volumes:
-  pg-data:
-  universe-bodies:
-  floor-bodies:
+  ground:
+  seeds:

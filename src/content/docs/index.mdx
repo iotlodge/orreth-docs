@@ -1,17 +1,17 @@
 ---
 title: What is Orreth
-description: Orreth is a governed runtime for agentic systems — a small kernel your agents join, and capabilities you build on top of it.
+description: Orreth is a kernel for fleets of agents — identity, memory, rails, meter, gate, watches and levers held in one place under one law, so people can steer and always stop.
 template: splash
 hero:
   title: Orreth
-  tagline: A governed runtime for agentic systems — every action signed, every identity permanent, every consequence waiting on a human.
+  tagline: A kernel for fleets of agents. The kernel holds the rigid control; people hold the policy; an intention is the unit of control — and a person can always stop what the machine manages.
   actions:
-    - text: See the anatomy of a running world
-      link: /learn/anatomy/
-      icon: right-arrow
-    - text: Watch the live demo
-      link: https://demo.orreth.ai
+    - text: Run it in ten minutes
+      link: /build/quickstart/
       icon: rocket
+    - text: How it works
+      link: /learn/one-law/
+      icon: right-arrow
       variant: secondary
     - text: What works today
       link: /learn/what-works-today/
@@ -21,67 +21,99 @@ hero:
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Two elements
+## The problem is entropy
 
-Orreth is not a framework you embed in your code. It is a **runtime your agents live in** — and it is exactly two elements:
+Put twenty agents on one problem and nobody can say who did what, under which rule, for how
+much, or how to stop it. Every agent brings its own identity story, its own memory, its own way
+of calling a tool, its own idea of what it may do and what it costs. Frameworks add loops; they
+do not remove the entropy.
+
+An operating system removed that entropy for programs by taking the rigid parts away from them —
+processes, files, permissions, the clock — and holding them in one place under one law. Orreth
+does that for agents.
+
+## What the kernel holds
 
 <CardGrid>
-	<Card title="The machine" icon="setting">
-		One small always-running engine program — the kernel, `orrethd` — that
-		keeps the permanent record: every
-		action is a signed record, every agent and tool carries an unforgeable
-		identity for life, every permission only ever narrows as it is delegated,
-		and every model call is metered against the name that spent it. The kernel
-		**verifies signatures but cannot create them** — private keys never enter
-		it. One binary runs any tier of a deployment; a small JSON profile tells
-		it which tier to be.
+	<Card title="Identity" icon="approve-check">
+		A keypair is a self, and a self survives the process. An agent re-joins as the same self
+		every life; a person sits with a seat the kernel minted after a proof.
 	</Card>
-	<Card title="Capabilities" icon="puzzle">
-		The purposes built on top — by you, or by Orreth itself: agents, tools,
-		and complete workflows. A capability is **declarations, never code in the
-		kernel's path**: it is installed by dropping a folder, rendered by the
-		console without loading foreign JavaScript, and lifecycled (start, stop,
-		retire) by a human's word. Remove the folder and it is gone; its records
-		remain.
+	<Card title="Memory" icon="document">
+		One signed, append-only record on the ground. Corrections are siblings, never overwrites;
+		a purge is a governed act that leaves a hash, never words.
+	</Card>
+	<Card title="Rails" icon="random">
+		Every ask, reply, fact and tool call rides the same envelope over the same rails —
+		Postgres, RabbitMQ, Kafka. Poison is parked with its evidence; nothing is lost.
+	</Card>
+	<Card title="Meter" icon="seti:default">
+		Every thought an agent has goes through one gateway under the agent's own key and lands
+		in dollars. Nothing thinks off-meter.
+	</Card>
+	<Card title="Gate" icon="seti:lock">
+		An agent joins through a five-status desk; a person's word is the only thing that admits it;
+		permissions only narrow; refusal wears one face.
+	</Card>
+	<Card title="Watches and levers" icon="warning">
+		The kernel watches its own doors, benches, leases and outbox. Every remedy is a lever a
+		person can see, and a consequence holds until a person says yes.
 	</Card>
 </CardGrid>
 
-## How that differs from an agent framework
+## Because the control is rigid, the experience is fluid
 
-Frameworks — LangGraph, AgentField, CrewAI — help you *write* an agent. Orreth is where that agent *lives*. An agent built with any framework joins an Orreth deployment through a human-approved gate, receives a permanent identity, works under permissions that can only narrow, files signed records of everything it does, and stops at a human gate before anything with consequence completes. Your existing agents keep their framework; Orreth supplies the institution around them — identity, memory, governance, metering, and audit.
+There is **one chat** to every agent in the world, and **THE PANEL**: one live drawing of the world
+where the geometry is what is declared, the light is what is happening, and the colour is who did
+it — amber a person, cyan an agent, violet the kernel, red a watch or a hold.
+
+People sit outside the machine and apply control: policy, security, a hand on the interlock, the
+forensic turn. Orreth applies its ontology to the running state so the world stays
+**reproducible, trusted, understood, and evolving**. Intentions such as cost, recovery time and
+return on investment are how people control scale.
+
+## Three ways to work
+
+- **Do it yourself.** Build or bring your own agent and seat it here under the same laws.
+- **Work with the crew.** You and the residents and firmware craft the words, the skills and the
+  plan together, with MITL — the mind-in-the-loop that has read the architecture — at your elbow.
+- **Ask the kernel to take the lead.** Say what you want kept true, and the rails bring in the
+  planner, the critic and the crew to observe, plan, act and report.
+
+In every one of the three, a consequential act holds until a person says yes. The dial is how
+much of the engineering you do — never whether a person is in the loop.
 
 ## Start here
 
 <CardGrid stagger>
-	<Card title="The anatomy of a running world" icon="open-book">
-		What actually exists when Orreth runs — the three bodies of the system,
-		what a universe, an ecosystem, and a floor really are, and why the whole
-		topology is data you can rewrite.
-		[Read the anatomy →](/learn/anatomy/)
+	<Card title="Quickstart" icon="rocket">
+		The published kernel and the four boxes it stands on, from one compose file. Enroll,
+		take your seat, and say “tour”.
+		[Run the quickstart →](/build/quickstart/)
+	</Card>
+	<Card title="One law at every layer" icon="open-book">
+		Why the kernel, the crew and your own agent all work the same way — and where people
+		sit in that picture.
+		[Understand it →](/learn/one-law/)
+	</Card>
+	<Card title="The panel and the tour" icon="laptop">
+		The kernel drawn as a control room's panel, and the soft line that walks you around it
+		in plain words.
+		[Watch it →](/watch/the-panel/)
 	</Card>
 	<Card title="What works today" icon="approve-check">
-		A docs site that only tells you what's proven. This page is maintained
-		from the project's standing register of claims, evidence, and honest
-		gaps — including what does *not* exist yet.
+		A book that only tells you what is proven. This page follows the project's standing
+		register of claims, evidence and honest gaps.
 		[See the register →](/learn/what-works-today/)
-	</Card>
-	<Card title="Glossary" icon="translate">
-		Orreth's console speaks a compact working vocabulary. Every term, in the
-		machine's own plain-English definitions — the same dictionary the live
-		console serves.
-		[Open the glossary →](/learn/glossary/)
-	</Card>
-	<Card title="Quickstart" icon="rocket">
-		A running three-tier universe with a console in your browser, in ten
-		minutes, from one script. The rest of the Build track — first world,
-		first capability, the SDK — and the Reference track are being written
-		now, each page shipping with the packaging work that makes it true.
-		[Run the quickstart →](/build/quickstart/)
 	</Card>
 </CardGrid>
 
-## See it live
+## Where it stands
 
-A captured moment of a real running Orreth universe is public at
-[demo.orreth.ai](https://demo.orreth.ai) — every view a real screenshot-grade
-snapshot of the console, from the live record of the machine that produced it.
+Kernel **0.1.0** is the first release of Orreth's second architecture. It runs on one laptop today:
+two kernels under one law (the Rust kernel `orrethd` and its Python reference), a crew of ten
+bodies, the ground and the rails, the gateway, cells, the seat and the desk, and the remediation
+rail. The source is public at [github.com/iotlodge/orreth](https://github.com/iotlodge/orreth); the
+image is `ghcr.io/iotlodge/orrethd:0.1.0`. The first architecture — seventy-three design dives and
+the console they built — is kept whole at the tag `main-v0.72-old-world`, and nothing of it is taught
+here.
