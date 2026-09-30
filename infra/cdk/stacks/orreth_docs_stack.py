@@ -11,6 +11,7 @@ them the CloudFront URL serves.
 """
 from aws_cdk import (
     CfnOutput,
+    Duration,
     RemovalPolicy,
     Stack,
     Tags,
@@ -112,13 +113,37 @@ class OrrethDocsStack(Stack):
             )
 
         # every deploy ships the fresh build and invalidates the edge cache.
+        # Pages (HTML, sitemap, pagefind) must always revalidate: a browser that
+        # kept an old page shows the old sidebar beside the new one (seen 2026-09-30
+        # after the kernel rewrite). The hashed assets under _astro/ never change
+        # under the same name, so they may be held for a year.
         s3deploy.BucketDeployment(
             self,
             "DeploySite",
             sources=[s3deploy.Source.asset(site_dir)],
             destination_bucket=bucket,
+            exclude=["_astro/*"],
+            cache_control=[
+                s3deploy.CacheControl.set_public(),
+                s3deploy.CacheControl.max_age(Duration.seconds(0)),
+                s3deploy.CacheControl.must_revalidate(),
+            ],
             distribution=distribution,
             distribution_paths=["/*"],
+        )
+        s3deploy.BucketDeployment(
+            self,
+            "DeployAssets",
+            sources=[s3deploy.Source.asset(site_dir)],
+            destination_bucket=bucket,
+            exclude=["*"],
+            include=["_astro/*"],
+            prune=False,
+            cache_control=[
+                s3deploy.CacheControl.set_public(),
+                s3deploy.CacheControl.max_age(Duration.days(365)),
+                s3deploy.CacheControl.immutable(),
+            ],
         )
 
         # 0064 — the apex (JB's lock, 2026-08-31): orreth.ai itself, blank

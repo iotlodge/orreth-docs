@@ -5,6 +5,14 @@ import starlight from '@astrojs/starlight';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://docs.orreth.ai',
+	// The 0.72 book's pages that left with the kernel rewrite (2026-09-30) point onward, never 404:
+	// an old link in an article or a search index still lands on the nearest page of the kernel's book.
+	redirects: {
+		'/build/first-capability': '/build/your-own-body',
+		'/build/bring-your-own-agent': '/build/your-own-body',
+		'/reference/residents': '/reference/the-crew',
+		'/reference/capability-manifest': '/reference/tools-and-levers',
+	},
 	integrations: [
 		starlight({
 			title: 'Orreth',
