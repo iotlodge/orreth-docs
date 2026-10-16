@@ -1,0 +1,112 @@
+---
+title: The true graph, the replay and the map
+description: LangGraph code is the agent's graph — the body reads its shape, every hop is a record, the canvas draws boxes inside boxes with THE HULL outermost, and the kernel draws itself the same way.
+---
+
+The Studio does not ask you to draw an agent's graph by hand. **LangGraph code is the agent's
+graph.** A real agent names a *source* — a repository at a commit with an entry `module:attr` that
+is a compiled LangGraph — and the kernel's hull runs it inside its own ring. Two built-ins stay for
+agents that need no code: **echo** (your words back, with no mind) and **think** (one metered
+mind, with a prompt and a stall when you want them). A hand-authored declaration of several nodes
+remains possible and is no longer the road for a real agent.
+
+## The body reads the shape
+
+When a body runs an import node for the first time, it reads the compiled graph's own shape — the
+same nodes-and-edges JSON LangGraph's Studio draws from — and records it on the source's row of the
+shelf. The kernel runs none of the repository's code itself; the trial run or the first ask reads
+the shape, so it stands after the first run, not at the source's registration. The run is
+streamed, so every hop is named in the reply's journey — *ran the imported graph lang-src … hops:
+greet → shout* — and the last state is the reply. An import node runs in a dev universe only; a
+prod universe refuses in words.
+
+| Say | What happens |
+|---|---|
+| **register the source bob-src from https://github.com/x/bob at a1b2c3d4e5f6 entry bob.graph:build** | A repository as a source on the shelf, through the shelf door like any service. The wizard's GRAPH step offers *+ register a source now* with the same fields. |
+| **lang1, hello** | An ask to an agent whose graph is code: the reply lands with its journey; on the canvas the hops it took light in order. |
+
+## One graph model
+
+Both kernels and the glass share one model of a graph: an entry, nodes, and edges, where **a node
+may contain a graph**. An import node contains the code's own graph; a LangGraph subgraph is a node
+of kind `graph` with its own graph inside (the reading folds the code's `parent:child` names); a
+loop in the code is a loop in the reading. The declared graph you author keeps its own format on
+the shelf — forward only at the cut — and is read into the same vocabulary, so the canvas draws
+one thing.
+
+<pre class="mermaid">{`
+flowchart LR
+    subgraph HULL["THE HULL — the kernel's ring, the outer box"]
+        hear["hear"] --> recall["recall"] --> route["route"]
+        subgraph WORK["work — your declared graph"]
+            subgraph RUN["run · import · lang-src — the code's own graph"]
+                s(("start")) --> greet["greet"] --> shout["shout"] --> e(("end"))
+                greet -.->|"a conditional way out"| e
+            end
+        end
+        route --> WORK --> reply["the reply"]
+    end
+    classDef k fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
+    classDef yours fill:#f2a91d,color:#101625,stroke:#ffd36a,stroke-width:2px;
+    classDef code fill:#087d86,color:#efffff,stroke:#55d8d7;
+    class hear,recall,route,reply k;
+    class greet,shout,s,e code;
+`}</pre>
+
+## Every hop is a record — the replay
+
+A hop is a row, not a sentence. Every hop a compiled graph takes lands on the ground: the ask it
+served (or the harness run and its case), the agent, the source, the node's full path, its
+namespace, its step, when it started, how long it took, whether it ended well, and a hash of what
+went in and out. Since the walk of 2026-10-14 the hull records a hop for every node its work stage
+walks under the graph's own name too, so a declared graph's trial lights the canvas as code does.
+One fact per run reaches the feed; the hops door (`GET /hops`, by ask or by run and case) serves the
+record and the ask's view carries it. The journey keeps its plain words for people.
+
+The glass plays hops in order at their recorded pace: a reply's hops as they arrive, the feed's
+while a trial runs, and any recorded run from the bench's card — **replay case N** plays the
+trial's hops through the boxes from the experiment room's record. *Watch the experiment* is that.
+
+## Boxes inside boxes
+
+One drawer draws any graph of the model as nested boxes. A node that contains a graph is a group:
+laid out inside first, its box a big node in its parent's layout. Layers are the longest road from
+the entry with back edges dropped (a loop is drawn, never layered); a graph with no ways out is a
+list. A group folds to one block — *4 nodes inside · lang-src · open ▸* — by a click on its header,
+and the deeper levels start folded so twenty nodes and ten subgraphs stay readable. Drag pans,
+the wheel zooms, **fit** shows the whole scaled down and never up, and first sight centres your
+graph with the ring peeking at both sides.
+
+**THE HULL is the outer box.** The agent's canvas draws the kernel's own stages as blocks — hear →
+recall → route → work → the reply, the ring every body runs — with your declared graph as the box
+inside its work stage, and an import node as a box inside that holding the code's own graph. The
+drawing is the architecture: the kernel's laws live in the ring, never in your nodes. A run lights
+the hops wherever they are nested, the ring lit with them, the reply closing it.
+
+![The Studio with a graph drawn: THE HULL as the outer box, the agent's graph inside its work stage, the code's own graph inside the import node](/images/studio-the-hull-and-a-graph.png)
+
+*A bench open at THE CARD: THE HULL outermost in violet, the agent's graph in its work stage in
+amber, the imported code's own graph in cyan, the last run's hops lit.*
+
+## The kernel draws itself the same way
+
+The kernel has one of these of itself. **HOW THE KERNEL WORKS** is a declaration in the same graph
+model, kept beside the guide and served by both kernels at the map door with each kernel's live
+numbers — which kernel, its version and schema, how many doors it answers, how many topics the feed
+carries, how many tables the ground holds, and the residents seated now. It opens in a window over
+the Panel and is drawn by the same drawer, so the kernel's picture of itself and the picture of an
+agent cannot drift apart. The [architecture track](/learn/architecture/the-kernel-map/) draws that
+map and explains each box.
+
+| Say | What happens |
+|---|---|
+| **how the kernel works** · **how does the kernel work** · **the map** | The window over the Panel: seven boxes and one ask's road numbered 1 to 7. Click a header to fold it, a block to read it; Esc closes it. **HOW IT WORKS** on the sill opens it too. |
+
+## Named, not built
+
+The hops publish with the reply, so a hop published while a run is still going is a later line.
+Time travel and state forks (LangGraph Studio's) are named, not built; the hull's hold is the
+interrupt and the session the thread, and that is all the parity claimed. The shape is read at the
+first run, never at registration. The map's road played as a run, a block on the map opening the
+organ's inspector, and a map on the demo's photograph are named. The Rust kernel reads and records
+the shape and the hops; the Python body alone runs the code, by design.

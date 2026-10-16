@@ -1,0 +1,127 @@
+---
+title: The kernel map
+description: HOW THE KERNEL WORKS — the kernel's own map of itself, seven boxes and one ask's road numbered 1 to 7, drawn here as the kernel declares it.
+---
+
+The kernel carries a map of itself. It is a **declaration** in the same graph model the Studio draws
+an agent with, kept beside the guide and turned with every change that touches a part named on it,
+and both kernels serve it at the map door with their live numbers — which kernel, its version and
+schema, how many doors it answers, how many topics the feed carries, how many tables the ground
+holds, the residents seated now. In the glass, **how the kernel works** (or HOW IT WORKS on the
+sill) draws it in a window over the Panel. This page draws the same declaration still, so you can
+read it slowly; the one in the glass is lit by the kernel it is drawn on, and its numbers are the
+true ones.
+
+The kernel's own words at the top of the map: *Orreth is a kernel: one process that holds the
+doors, runs every body through one ring, meters every mind, writes every act to a signed record,
+and watches the whole. The graph you make runs INSIDE the ring — the kernel's laws never hide in
+your nodes.*
+
+<pre class="mermaid">{`
+flowchart TB
+    subgraph YOU["YOU AND YOUR SEAT"]
+        person["a person, seated"] ~~~ glass["THE PANEL · the chat"]
+    end
+    subgraph DOORS["THE DOORS — one gate"]
+        gate["THE GATE"] ~~~ askd["the ask door"] ~~~ feed["THE FEED"] ~~~ shelfd["the shelf's doors"] ~~~ guide["the guide · the map"]
+    end
+    subgraph HULL["THE HULL — the ring every body runs"]
+        hear["hear"] --> recall["recall"] --> route["route"] -->|"chat · work · event"| work["work — YOUR graph"] --> reply["the reply"]
+    end
+    subgraph MINDS["THE MINDS — metered"]
+        gateway["THE GATEWAY — the meter"] ~~~ stable["THE STABLE"]
+    end
+    subgraph HOUSE["THE HOUSE — the kernel's crew"]
+        desk["THE DESK"] ~~~ crew["the residents"] ~~~ studio["THE STUDIO"]
+    end
+    subgraph GROUND["THE GROUND — every act a row"]
+        asks["asks and replies"] ~~~ outbox["THE OUTBOX"] ~~~ shelf["THE SHELF"] ~~~ hops["the hops"]
+    end
+    subgraph WATCHES["THE WATCHES"]
+        beats["the beats"] ~~~ measures["the five measurements"] ~~~ intentions["the intentions"]
+    end
+    glass ==>|"1 · you ask"| askd
+    askd ==>|"2 · a signed fact reaches the body"| hear
+    work ==>|"3 · a mind, on the meter"| gateway
+    reply ==>|"4 · recorded"| asks
+    outbox ==>|"5 · the fact lands on the feed"| feed
+    feed ==>|"6 · the panel lights"| glass
+    beats ==>|"7 · the watches read the record"| outbox
+    desk -.->|"a lease the desk minted"| hear
+    crew -.->|"each resident runs the ring too"| hear
+    classDef human fill:#f2a91d,color:#101625,stroke:#ffd36a,stroke-width:2px;
+    classDef k fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
+    classDef body fill:#087d86,color:#efffff,stroke:#55d8d7;
+    classDef box fill:#17233a,color:#eef2ff,stroke:#7890b5;
+    class person,glass human;
+    class gate,askd,feed,shelfd,guide,hear,recall,route,reply,desk,studio,beats,measures,intentions k;
+    class work,crew,gateway,stable body;
+    class asks,outbox,shelf,hops box;
+`}</pre>
+
+The road is amber in the glass; here it is the heavy arrows, numbered. The two dotted lines are the
+house's: a body serves under a lease the desk minted, and each resident is a body that runs the
+ring too. The blocks carry their names only; the kernel's own words for each are in the seven
+paragraphs below, and in the glass a click on a block reads them.
+
+## The seven boxes
+
+**YOU AND YOUR SEAT.** A person at a browser, enrolled once with an authenticator and seated by a
+signed token the kernel minted after a code. THE PANEL is the kernel drawn live in that browser,
+and the chat is its window. Nothing on the page is trusted: every door reads who you are from the
+seat. [How a person is seated](/learn/how-the-kernel-works/#3--how-a-person-is-seated).
+
+**THE DOORS.** Every way in, one gate: the browser origin closed, a knock ceiling per person, your
+seat's grants read at every door, and the unseated wearing one face. The ask door turns your words
+into a signed fact under your name. THE FEED is every fact as it lands, one stream the glass
+listens to. The shelf's doors serve crafts and their versions, the benches, and the hops a run
+took. The guide and this map are served the same on every kernel. The glass's map counts the doors
+this kernel answers — forty-five on the walk of 2026-10-14. [The HTTP doors](/reference/http-api/).
+
+**THE HULL.** The one ring every body runs, the crew's residents and the agents you make alike:
+**hear** (the ask read whole, its session found) → **recall** (what the body remembers of you, the
+canon it wears, the clock and the world) → **route** (the way picked: chat, work or event) →
+**work** (the template's graph — *your* nodes; an import node runs a repository's code, every hop
+recorded) → **the reply** (signed by the body, whole, with its journey in plain words). The kernel's
+laws live in the ring, never in your nodes. [The hull](/learn/architecture/the-hull/).
+
+**THE MINDS.** Metered, never inside the kernel. THE GATEWAY is one door to every mind; the meter
+counts every call, every token, every cent, for every body under its own key. THE STABLE is the
+stalls: which model answers for which body, at what price. The kernel authorizes and meters; it
+never sees the prompt. [The crew and the Analyzer](/watch/the-crew-and-the-analyzer/#the-shelf-and-the-stable-beneath-the-bodies).
+
+**THE HOUSE.** The kernel's own crew. THE DESK is joins, leases and the standing key-check — who a
+body says it is, proven on a cadence. The residents are the librarian, the planner, echo, the
+grader, the critic and the identity and security chips, each a self that outlives its process.
+THE STUDIO is where a craft is authored: the bench, the cut, the experiment, the promotion. (The
+declaration the kernel serves still writes this block as THE WORKSHOP; the pull's name turned on
+2026-10-16, and the map turns with the next change that touches it.) [The Studio](/studio/the-studio/).
+
+**THE GROUND.** One Postgres, every act a row: the asks and replies with their journeys; THE OUTBOX,
+every fact signed and ordered, from which the feed reads and nothing is invented; THE SHELF, crafts
+by kind and version, the wear table and the benches; and the hops, every step a compiled graph took
+with the node, the time and the hashes of what went in and out. The glass's map counts the tables
+and names the schema — fifty-two tables at schema 12 on the walk of 2026-10-14.
+[The four memories](/learn/how-the-kernel-works/#5--the-four-memories-one-truth).
+
+**THE WATCHES.** The kernel keeps itself: the keeper's beats (heartbeat, key-check, grade, prune,
+retention, each on a cadence); the five measurements (trust, recall, efficiency, experience, cost —
+unknown until measured, never a silent 1.0); and the intentions — Resiliency, and the Operating
+State that owns the measurements' watches. A red watch becomes an objective. [How a red watch is
+cured](/learn/how-the-kernel-works/#4--how-a-red-watch-is-cured).
+
+## One ask's road, 1 → 7
+
+1. **You ask.** Your words leave the chat for the ask door, your seat on the knock.
+2. **A signed fact reaches the body.** The ask and its fact are written in one transaction; the
+   dispatcher hands the fact to the one body it addresses, and the body's ring begins at *hear*.
+3. **A mind, on the meter.** At *work*, a think node or your code calls a mind through the gateway
+   under the body's own key; the cost comes back with the answer.
+4. **Recorded.** The reply, signed by the body, lands on the ground beside the ask with its journey.
+5. **The fact lands on the feed.** The outbox's row becomes a notice on the feed.
+6. **The panel lights.** The glass reads the notice, lights the rail, and shows the reply whole.
+7. **The watches read the record.** The beats read the outbox on their cadence; a red watch wakes
+   an intention; every green is attributed.
+
+The road in the sequence form, with the rails named, is the first of the
+[six pictures](/learn/how-the-kernel-works/#1--the-road-an-ask-takes).

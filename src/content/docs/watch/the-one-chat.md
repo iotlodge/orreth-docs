@@ -120,8 +120,9 @@ sibling, never an overwrite.
 ## Sessions and focus
 
 The chat is one window with a focus. Opening a pull — by click, or by words (*open the crew*,
-*open the monitor*) — pushes a focus: the workspace's firmware agent joins the session and the
-edges show that workspace's scope. **Esc pops it and restores the chat's scope exactly.** Inside
+*open the monitor*, *open the studio*) — pushes a focus: the workspace's firmware agent joins the
+session and the edges show that workspace's scope. With [the Studio](/studio/the-studio/) open the
+chat speaks to its agent, and a brief there is a whole agent made. **Esc pops it and restores the chat's scope exactly.** Inside
 a pull, chat closed means you work manually; chat open means you converse with that workspace's
 agent only. Sessions roll, never spill: a newly selected body reads that session's results and
 only those, plus its own worldline.

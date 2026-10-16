@@ -119,7 +119,44 @@ the glass with no script, and pinned by tests that run on every change.
   kernel and its crew in one image, verified from inside the box. This book's
   [first world](/build/first-world/) was walked against it on 2026-09-30.
 
+**The Engineered Agents phase and THE STUDIO** (on the source line after the 0.1.0 image; both
+kernels, law for law)
+
+- **Three levels on one path, each staffed.** Universe · floor · room as a scope path in one kernel
+  per cell; mode tightens down the path; a floor or room opens on a governing seat's word. Fixture
+  `levels-v0`: 69 cases on both kernels.
+- **Every body runs the hull.** Hear → recall → route → the chat, work or event edge → the
+  template's graph as the work node → the reply; the shelf widened to every craft a body is made
+  of, the wear table saying who wears what, drafts under the person until the cut.
+- **An agent's cut opens the Experiment.** A trial life of the agent's own self in an experiment
+  room; the grader, the critic, the identity chip and the security chip each signing under their
+  own name; the stamped promotion with *where the next life stands* as its field. Fixture
+  `experiments-v0`: 61 cases.
+- **The bench — one effort, one place.** An agent's drafts, step, experiments, lives and hold as
+  one row of the ground, found after a reload or from another browser; the hold's second face on
+  the card. Walked by JB on 2026-10-13 (SPEC-STUDIO-01 Part A). Fixture `benches-v0`;
+  `tests/benches.rs`.
+- **The true graph, the replay, the nested drawing and the kernel map.** A compiled LangGraph's own
+  shape read by the body and recorded on the source's row; every hop a row and one fact per run;
+  the canvas as boxes inside boxes with THE HULL outermost; the kernel's map a declaration both
+  kernels serve with their live numbers. `test_map.py`; fixture `operating-v0` grown. The formal
+  walk record of steps 8 to 10 is owed.
+- **One word to work.** *put ‹name› to work* is one held act for the chain; the cuts in one
+  transaction at the Yes. Walked by JB on 2026-10-14, validated on the ground.
+- **The agent makes it all.** One brief, one Yes: a bench, every craft as drafts, the kernel's own
+  hold filed under the human's seat; the agent never cuts, promotes, seats, registers or answers a
+  hold. Walked by JB on 2026-10-16 (Part B, PASS through step 6); `test_workshop.py`; the tools
+  re-pinned in fixture `tools-v0`. The four claims proven, the Workshop became THE STUDIO.
+
 ## Partial or owed, with the gate named
+
+- **The Studio's measure and two glass wounds.** Step 7 of the walk — how well Orreth made the
+  agent against a hand-written one — is the owner's to write. A bench the agent made, opened at
+  THE CARD, draws the wizard's stock instead of its own crafts; the MIND chip reads the template's
+  mind while the seat wears the binding's. Time travel and state forks are named, not built; the
+  compiled graph's shape is read at its first run, never at registration.
+- **The Studio is not in the published image.** `ghcr.io/iotlodge/orrethd:0.1.0` of 2026-09-30
+  predates the Engineered Agents phase; the Studio runs from the repository.
 
 - **The image is linux/arm64 only.** Every image before it was too; amd64 is owed (the Rust stage
   cross-builds).

@@ -1,0 +1,163 @@
+---
+title: The kernel's interoperability modes
+description: How humans address the kernel, the human's dial of involvement, how agents are addressed, the doors, and where a life stands — the five ways things meet the kernel.
+---
+
+Everything that reaches the kernel reaches it in one of a few declared ways, and the kernel says
+which one it heard. This page is those ways side by side: how a **person** addresses the kernel;
+how much of the person a task takes; how an **agent** is addressed; the **doors** themselves; and
+**where a life stands**.
+
+## 1 · How humans address the kernel — the kind of an ask
+
+There are no chat modes. The chip under the composer reads the kind from your words — **thought ·
+objective · intention** — and one click or one word flips it. The kind is minted as the ask's
+marker, with the ask, in one transaction, so *the kernel read this as an objective; you confirmed*
+is on the record.
+
+| Kind | Say | What it is |
+|---|---|---|
+| **thought** | *what is the temperature outside?* | One answer, now. Nothing in the world changes. |
+| **objective** | *objective: get the weather tool healthy again* | A bounded outcome the crew owns until it is done: the planner writes the steps, the crew acts, the Analyzer shows the tree under its origin. |
+| **intention** | *keep this world resilient: when a watch goes red, get it green* | A standing purpose above objectives, with no end and a stop. It wakes on what it is interested in — a red watch, a clock — plans the next objective itself and files it; the loop turns. |
+| **a cadence** | *echo, every 5 seconds, say the time, please* | The smallest intention: cadence only. *echo, stop* rests it; *echo, restart intention 'every 5 seconds'* stands it again. |
+
+An intention is a record: its words, what it serves (business · security · resiliency ·
+compliance · cost), its kind (a human's, a role's, the kernel's), the marker kinds it is
+interested in, its planner, its cadence, its gates, its stop. The kernel declares its own at boot
+with no end and each with its stop — **Business · Security · Resiliency · Compliance · Cost** —
+and, since the operating state landed, **THE OPERATING STATE**, which owns the watches on the five
+measurements while Resiliency answers every other red. Saying the kernel's own words yourself is
+refused with the reason: the kernel's is at work; stop it first, or say what is different.
+
+<pre class="mermaid">{`
+flowchart LR
+    I["INTENTION<br/>the human origin of work"] --> O["OBJECTIVE<br/>a bounded outcome"]
+    O --> A["ACT<br/>the agent origin"]
+    A --> OB["OBSERVATION<br/>what the world showed"]
+    OB --> IM["IMPROVEMENT<br/>what changes in us"]
+    OB -->|"the intention reads its observations<br/>and plans the next objective"| I
+    IM -->|"the critic proposes a draft;<br/>the Studio and the Experiment judge it"| I
+    classDef human fill:#f2a91d,color:#101625,stroke:#ffd36a,stroke-width:2px;
+    classDef k fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
+    classDef body fill:#087d86,color:#efffff,stroke:#55d8d7;
+    class I human;
+    class O,OB,IM k;
+    class A body;
+`}</pre>
+
+The markers are the loop's vocabulary: an intention is a root, its objectives children, their acts
+and observations under them; every fact wears its marker (why) beside its chain (who). The
+[Analyzer](/watch/the-crew-and-the-analyzer/#the-analyzer-hatch) is that tree, by origin.
+
+## 2 · The human's dial of involvement — manual · assist · full auto
+
+The kind of your ask decides how far the kernel goes without you, and it never goes one step
+further without a word from you. The three modes are **the human's dial**, never the machine running
+alone.
+
+| Mode | The ask | The kernel's part | Your part |
+|---|---|---|---|
+| **manual** | a thought | one body answers once | the question; you are the whole loop |
+| **manual assist** | an objective | the planner writes the steps, the crew runs them; any step that would change something holds | one word to start, one word at each hold; *stop it* at any time, what was left undone is said |
+| **full auto** | an intention, or a brief in the Studio | observes, reads the ground itself, plans, pulls a routine lever with its own hands, says what happened; you are told, not asked | declare once; decide holds when they come; rest it when you want |
+
+One law holds the dial together: **a consequence holds for a person in every mode.** A routine act
+runs at once; a **consequential** act holds at the interlock until a person clicks Yes, with Cancel
+the default and the focus; a **grave** act asks for your authenticator's code and a declared
+master's click. The kernel never lowers the ladder because it is running on its own. *Expected
+impact?* on any hold asks the Master Mind In The Loop who and what the act touches first.
+
+In the Studio, full auto is a brief: the workshop agent plans the set, drafts every craft on a
+bench and files **one** held act, *put ‹name› to work*, for your single Yes. It never cuts,
+promotes, seats, registers or answers a hold, and it never passes the gate or the promotion by
+itself — the Experiment judges and the promotion is a second Yes. Three things always tell you
+which mode a thing is in: the chip under the composer, the hold row, and the Analyzer with every
+intention and objective by origin and its stop. [The agent makes it all](/studio/the-agent-makes-it-all/).
+
+## 3 · How agents are addressed — the hull's three edges
+
+Every body runs the hull — hear → recall → route → work → the reply — and at *route* the ask's
+marker picks one of three edges. They are the three ways an agent is addressed, and the journey
+says which one it took.
+
+| Edge | Who is speaking | Examples |
+|---|---|---|
+| **chat** | a human's words to a body | *echo, say the word HERON once*; *lang1, hello* from the bench; a brief to the workshop agent |
+| **work** | assigned work — a duty on the clock, or an objective the intent loop filed | the librarian's hourly review; the kernel's harness run; *echo, every 5 seconds, say the time*; an objective's steps |
+| **event** | a response to a marker the body declared interest in | the four reviewers asked under an experiment's marker; the critic under an *improvement*; Resiliency's planner under a *watch-red* |
+
+A template declares the marker kinds it is *interested* in, and the kernel dispatches it an ask
+whenever such a marker lands, with that marker as the parent. The chain says who; the marker says
+why. [The hull](/learn/architecture/the-hull/) draws the ring.
+
+## 4 · The doors
+
+**The HTTP doors.** The Rust kernel `orrethd` is THE door on port 4600; it serves the one page and
+every door of the world. A **seat** — the capability token the kernel signed after your code — is
+read at every door, never the page; the unseated wear one face (`401 {"error": "not seated"}`), a
+seated person lacking a grant wears the proof's (`403`), the browser origin is closed and a knock
+ceiling stands per person. A body's door is its **lease**, the same shape of token, chained to the
+kernel's root and opening the body's own words and nothing more. [The HTTP doors](/reference/http-api/).
+
+**The feed.** The glass listens to one stream of small notices — a kind, an id, a reference — and
+reads each fact through a door; the browser never touches a broker. The map counts the feed's
+topics live.
+
+**MCP servers, through one door.** *toolkeeper, add the MCP server at ‹command or URL›* lands a
+server and its tools on the shelf as identities, each on the lifecycle ladder; its secrets ride by
+env name only. A template names the tools a body may use (a node may narrow them further, never
+widen), and an MCP-born tool a template names is offered only while its server stands on the shelf,
+so a ground without the server loses nothing and says nothing false. The two LangChain docs servers
+on the shelf are reached this way by the workshop agent and the librarian.
+
+**The seam, between cells.** A universe is a cell — its own kernel self, database and role, sealed
+from every other. Two cells that name each other speak over one door, the seam, in messages signed
+by their kernels' own selves, the peer's DID pinned on first sight. *librarian@two, what is the
+weather?* routes home and is answered here; under partition it parks in plain words and resumes
+once. [How two worlds speak](/learn/how-the-kernel-works/#6--how-two-worlds-speak).
+
+**Two kernels, one law.** The Python reference on port 4601 is the same kernel written first and
+stays the yardstick: every law is pinned by a conformance fixture both kernels pass unchanged, and
+the canonical bytes — sorted keys, compact separators, ASCII — are byte-identical across the SDK,
+the reference and the kernel. The Studio's doors (the benches, the hops, the map) landed on both
+kernels inside each spoonful, never after.
+
+## 5 · Where a life stands — universe · floor · room
+
+One kernel per cell serves three levels on one scope path: the **universe** (the cell itself), its
+**floors**, and their **rooms** — `u:dev/f:ops/r:bob`. Each level is staffed: a crew can be seated on
+any level by the manifest, what a body writes about itself wears its level, and a listing at a
+level sees everything within it. Governance tightens down the path — a prod universe's floors and
+rooms are prod, and *open room loose on floor three as dev* under a prod floor is refused in words.
+Recall escalates up the path.
+
+<pre class="mermaid">{`
+flowchart TB
+    U["UNIVERSE · u:dev<br/>the cell: its own kernel, ground, role, seam"]
+    F1["FLOOR · f:ops<br/>the shipped crew seats echo here"]
+    F2["FLOOR · f:three"]
+    R1["ROOM · r:bob"]
+    R2["EXPERIMENT ROOM · r:exp-bob-1<br/>a candidate's trial life runs here;<br/>nothing stands here but an arm"]
+    U --> F1
+    U --> F2
+    F1 --> R1
+    F1 --> R2
+    classDef k fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
+    classDef box fill:#17233a,color:#eef2ff,stroke:#7890b5;
+    classDef red fill:#7a1f2b,color:#fff0f0,stroke:#ff6b7a;
+    class U k;
+    class F1,F2,R1 box;
+    class R2 red;
+`}</pre>
+
+| Say | What happens |
+|---|---|
+| **what levels are here?** | Every floor and room with its mode, who is seated there, and what rolls up from within it. |
+| **open floor ops** · **open room bob on floor ops as an experiment room** | Consequential, held at the interlock; a level stands forever. |
+| **promote bob to floor ops** | The promotion's one field, **where the next life stands**: unsaid, where it stands now, else at the universe; an experiment room is refused. On the walk of 2026-10-16 the Yes seated greeter on floor ops. |
+| **show the seats** | Every promoted agent: where its life stands, its template's version, its rung — active · rested · decommissioned. |
+
+Named, not built: making a floor or a room *from* the promotion's card through the architect
+firmware; **criticality and classification** as fields of every agent's template, read by the gate,
+the reviewers and the promotion; a floor's own shelf, Stable and policy.

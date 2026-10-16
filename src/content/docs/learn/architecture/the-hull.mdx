@@ -1,0 +1,83 @@
+---
+title: The hull — the ring every body runs
+description: Every body, the crew's and yours, runs one fixed ring — hear, recall, route, one of three edges, work, the reply — and the agent's own graph is the work stage inside it.
+---
+
+A body in Orreth never runs its graph bare. Every body — the librarian, echo, the planner, and the
+agent you made this morning — runs the same fixed ring, **the hull**, and the agent's own graph is
+one stage inside it. The kernel alters the call stack without touching an agent's nodes: the seat
+words, the covenant's slice, the metered gateway, the checkpoint per hop and the stop at a safe
+boundary all live in the ring, so no graph can hide from them or leave them out.
+
+<pre class="mermaid">{`
+flowchart LR
+    subgraph HULL["THE HULL — the ring every body runs"]
+        hear["hear<br/>the ask read whole,<br/>its session found"] --> recall["recall<br/>what the body remembers of you,<br/>the canon it wears, the clock, the world"]
+        recall --> route{"route<br/>read off the ask's marker"}
+        route -->|"a human's ask"| echat["the chat edge"]
+        route -->|"a duty · an objective"| ework["the work edge"]
+        route -->|"a marker it is interested in"| eevent["the event edge"]
+        subgraph WORK["work — the template's graph: YOUR nodes"]
+            think["think · a metered mind,<br/>a prompt and a stall"]
+            imp["import · a repository's compiled LangGraph,<br/>every hop a record"]
+            echo["echo · the words back, no mind"]
+        end
+        echat --> WORK
+        ework --> WORK
+        eevent --> WORK
+        WORK --> reply["the reply<br/>signed by the body, whole,<br/>with its journey in plain words"]
+    end
+    classDef k fill:#3536a4,color:#eef2ff,stroke:#8f91ff;
+    classDef body fill:#087d86,color:#efffff,stroke:#55d8d7;
+    classDef yours fill:#f2a91d,color:#101625,stroke:#ffd36a,stroke-width:2px;
+    class hear,recall,route,echat,ework,eevent,reply k;
+    class think,imp,echo yours;
+`}</pre>
+
+## The stages
+
+- **hear** — the ask is read whole and the session it belongs to is found.
+- **recall** — the body reads what it remembers of you (your profile, labelled by who said it),
+  the canon it wears (its template, its policy, its prompt and skill), the clock and the world.
+- **route** — the way in is picked from the ask's marker and said in the journey: the **chat**
+  edge for a human's ask, the **work** edge for a duty on the clock or an objective the intent
+  loop filed, the **event** edge for a marker the body declared interest in. These three edges are
+  the three ways an agent is addressed; the [interoperability modes](/learn/architecture/interoperability-modes/)
+  page takes them one by one.
+- **work** — the template's graph, finally read: the nodes you declared or the code you imported.
+  A **think** node is one metered mind with a prompt and a stall; an **echo** node is the words
+  back with no mind; an **import** node runs a repository's compiled LangGraph at a commit, in a
+  dev universe only, and every hop it takes is a record. A way out of a node may wear a *when* —
+  the hull's edge, a pattern in the ask, a pattern in the last reply — and the hull picks the way
+  out as the run goes; a declared graph runs forward only.
+- **the reply** — signed by the body's own key, landed whole on the ground with its journey, and
+  published as a fact on the feed.
+
+Open any reply's journey in the chat (the ⌄ on its line) and you read the ring as it ran: *heard
+the ask · recalled N notes · routed to the chat edge · the work node runs graph mind.v0: think ·
+thought it through the metered gateway*.
+
+## What the ring keeps for you
+
+- **The seat words and the covenant's slice** are in recall, so a body answers under who it serves
+  and what it may do, whatever its graph says.
+- **The meter** is at work: a mind is reached only through the gateway, under the body's own key.
+- **A checkpoint per hop** is the body's working memory, never truth; the reply is the truth.
+- **The stop at a safe boundary**: a person can always stop what the machine manages, and the
+  ring is where the stop lands.
+- **Every hop a record**: since the Studio, the hull records a hop for every node its work stage
+  walks, declared or imported, so the Studio's canvas and the experiment room's replay read the
+  same rows.
+
+## The hull as the outer box
+
+The Studio draws THE HULL as the outermost box around every agent's graph — the stages as blocks,
+your graph inside its work stage, an import node a box inside that holding the code's own graph —
+and lights the ring with the hops when a run goes. The drawing is this page's picture, live. See
+[the true graph](/studio/the-true-graph/).
+
+A seed named in the canon and not built: **guardrails as a layer of the hull**, between recall and
+work, where the kernel may refuse, narrow or rewrite under rails declared on a floor — layered over
+whatever a LangGraph engineers inside its own code, the record telling a hop refused by the rail
+from one refused in the code. The stage and the record are ready for it; the rails themselves are a
+design of their own.

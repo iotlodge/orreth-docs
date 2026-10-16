@@ -66,5 +66,21 @@
   "the covenant": "The thirteen rules every body wears as a policy sheet and every model coding the kernel holds to; a body without the policy never joins.",
   "the honest boundary": "The standing register of what is proven, partial or parked, with the evidence named. A claim not on it is a claim Orreth does not make.",
   "conformance fixture": "A language-neutral file of cases both kernels must pass unchanged: given this input, expect these bytes, this hash or this refusal by name. Twenty-six of them are the contract between the two kernels.",
-  "the era": "The world's version, one number on three faces: the VERSION file, the kernel crate and the reference package. Both health doors whisper it — 0.1.0 today."
+  "the era": "The world's version, one number on three faces: the VERSION file, the kernel crate and the reference package. Both health doors whisper it — 0.1.0 today.",
+  "the Studio": "The full-screen pull where an agent is made and tried before it is seated: a bench per effort, the true graph inside the hull, one word to put it to work, an agent that makes it all from a brief. THE WORKSHOP until 2026-10-16.",
+  "bench": "A named effort under your seat in the Studio: the agent's drafts, its step in the making, its experiments, its lives and the hold it waits on, as one row of the ground. It closes when its agent joins or when you let it go.",
+  "the hull": "The fixed ring every body runs: hear, recall, route to the chat, work or event edge, then the template's graph as the work node, then the signed reply. The kernel's laws live in the ring, never in an agent's nodes.",
+  "craft": "A component a body is made of — a template, prompt, skill, policy, graph, binding or golden set — on the shelf by name and version, never a self. A draft is a craft under your seat until the cut.",
+  "golden set": "The cases an engineered agent is born with: an ask and the short words the reply must contain. The Experiment runs the candidate through them in its room.",
+  "the Experiment": "The agent's gate: a candidate cut runs as a trial life in an experiment room through its golden set, four reviewers sign verdicts under their own names, and the verdict is a proposal a person promotes or declines.",
+  "hop": "One step a graph took while serving an ask or a trial case: the node's path, when, how long, whether it ended well, and the hashes of what went in and out. A row on the ground; the canvas plays hops back in order.",
+  "the true graph": "A compiled LangGraph's own shape, read by the body the first time it runs an import node and recorded on the source's row; the canvas draws it inside the hull's work stage.",
+  "the kernel map": "HOW THE KERNEL WORKS: the kernel's declaration of itself in the one graph model — seven boxes and one ask's road numbered 1 to 7 — served by both kernels with their live numbers and drawn in a window over the Panel.",
+  "put to work": "The Studio's one word: the kernel cuts what changed on a bench in order (the prompts a graph names, the graph, the golden set, the template), skips what stands unchanged, and opens the Experiment — one held act, one Yes.",
+  "the brief": "One sentence to the workshop agent with the Studio open — make an agent called … that … — from which it opens a bench, drafts every craft and files one held act for your Yes. It never cuts, promotes, seats or answers a hold.",
+  "floor": "A level inside a universe on the scope path (u:dev/f:ops), staffed by its own crew; mode tightens down from the universe. Floors hold rooms.",
+  "room": "The narrowest level on the scope path (u:dev/f:ops/r:bob). An experiment room is where a candidate's trial life runs; nothing stands there but an arm.",
+  "the levels": "Universe, floor and room on one scope path served by one kernel per cell; a listing at a level sees everything within it, and where a promoted agent's next life stands is a field of its promotion.",
+  "the three edges": "The three ways an agent is addressed at the hull's route stage: chat (a human's words), work (a duty or an objective), event (a marker it declared interest in). The journey says which one an ask took.",
+  "the three modes": "Manual, manual assist and full auto — the human's dial of involvement, read from the kind of the ask. A consequence holds for a person in every mode; the machine never runs alone."
 }

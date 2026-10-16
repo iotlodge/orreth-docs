@@ -31,7 +31,7 @@ sequenceDiagram
     B->>K: the reply, signed by echo's key
     K->>G: reply + outbox fact (ONE transaction)
     G-->>R: orreth.reply.v1 (pointer + hash, never the words)
-    R-->>P: the feed lights the panel; the chat shows the reply whole
+    R-->>P: the feed lights the panel — the chat shows the reply whole
 `}</pre>
 
 The laws: **transactional outbox, always** (a committed record cannot lack its event);
@@ -185,7 +185,7 @@ sequenceDiagram
     B-->>S: signed by B's self
     S-->>A: landed once
     A-->>P: answered in cell two by librarian
-    Note over A,B: B dark → the ask reads PARKED, "unreachable since"; B back → resumed once
+    Note over A,B: B dark → the ask reads PARKED, "unreachable since" — B back → resumed once
 `}</pre>
 
 The laws: **cells = worlds** (physical isolation, a role that reaches no other database); **commands

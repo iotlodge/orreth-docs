@@ -39,9 +39,18 @@ export default defineConfig({
 						{ label: 'What is Orreth', link: '/' },
 						{ label: 'One law at every layer', slug: 'learn/one-law' },
 						{ label: 'The anatomy of a running world', slug: 'learn/anatomy' },
-						{ label: 'How the kernel works', slug: 'learn/how-the-kernel-works' },
 						{ label: 'What works today', slug: 'learn/what-works-today' },
 						{ label: 'Glossary', slug: 'learn/glossary' },
+					],
+				},
+				{
+					label: 'Architecture',
+					items: [
+						{ label: 'The kernel map', slug: 'learn/architecture/the-kernel-map' },
+						{ label: 'The hull — the ring every body runs', slug: 'learn/architecture/the-hull' },
+						{ label: 'How the kernel works — six pictures', slug: 'learn/how-the-kernel-works' },
+						{ label: 'The interoperability modes', slug: 'learn/architecture/interoperability-modes' },
+						{ label: 'The operating state — the five measurements', slug: 'learn/architecture/the-operating-state' },
 					],
 				},
 				{
@@ -61,6 +70,16 @@ export default defineConfig({
 						{ label: 'The one chat', slug: 'watch/the-one-chat' },
 						{ label: 'The monitor and its levers', slug: 'watch/the-monitor' },
 						{ label: 'The crew and the Analyzer', slug: 'watch/the-crew-and-the-analyzer' },
+					],
+				},
+				{
+					label: 'The Studio',
+					items: [
+						{ label: 'The Studio', slug: 'studio/the-studio' },
+						{ label: 'The true graph, the replay and the map', slug: 'studio/the-true-graph' },
+						{ label: 'One word to work', slug: 'studio/one-word-to-work' },
+						{ label: 'The agent makes it all', slug: 'studio/the-agent-makes-it-all' },
+						{ label: 'The walk — making an agent', slug: 'studio/the-walk' },
 					],
 				},
 				{

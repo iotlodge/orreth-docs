@@ -12,13 +12,15 @@ and THE PANEL, one live drawing of the world. This book is the single documentat
 that world; the architecture notes inside the kernel's repository are its canon, never a
 newcomer's door.
 
-## The four tracks
+## The six tracks
 
 | Track | For | Pages |
 |---|---|---|
-| **Learn** | understanding | What is Orreth · One law at every layer · The anatomy of a running world · How the kernel works (six pictures) · What works today · Glossary |
+| **Learn** | understanding | What is Orreth · One law at every layer · The anatomy of a running world · What works today · Glossary |
+| **Architecture** | the kernel drawn | The kernel map · The hull · How the kernel works (six pictures) · The interoperability modes · The operating state |
 | **Build** | usage | Quickstart · Your first world · Seat your own body · Run it from the repository |
 | **Watch** | the glass | The panel · The tour · The one chat · The monitor and its levers · The crew and the Analyzer |
+| **The Studio** | making an agent | The Studio · The true graph, the replay and the map · One word to work · The agent makes it all · The walk |
 | **Reference** | the doors as they stand | The HTTP doors · Configuration · The crew · Tools and levers · Facts, watches and health checks · The contracts |
 
 ## Layout
@@ -26,7 +28,8 @@ newcomer's door.
 ```
 src/content/docs/    the pages (Starlight / Astro, Markdown + MDX)
   index.mdx          What is Orreth — the landing page
-  learn/ build/ watch/ reference/
+  learn/ learn/architecture/ build/ watch/ studio/ reference/
+public/images/       photographs of the glass (studio-the-hull-and-a-graph.png — the Studio with a graph drawn)
 src/data/
   glossary.json      the vocabulary, hand-written for 0.1.0 (plain, <240 chars each)
   tools.json         vendored from the kernel's spine/tools.v0.json — refresh, never edit
