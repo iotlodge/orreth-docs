@@ -1,6 +1,6 @@
 ---
 title: The monitor and its levers
-description: The MONITOR pull — the operating state live, the fifteen watch metrics, the eleven health checks, the harness, the parked events, the peers, and every lever a person or the kernel can pull.
+description: The MONITOR pull — the operating state live, the twenty-two watch metrics, the eleven health checks, the harness, the parked events, the peers, and every lever a person or the kernel can pull.
 ---
 
 Say **open the monitor** or click MONITOR on the sill. The pull slides in with the operating
@@ -27,12 +27,13 @@ never deleted.
 
 A **watch** is a named alert on one metric: it is **red while its condition holds** —
 `metric op threshold` — and green otherwise. That sense is the kernel's, not yours or the
-agent's; a watch is never read the other way round. Fifteen metrics stand on both kernels, in one
+agent's; a watch is never read the other way round. Twenty-two metrics stand on both kernels, in one
 order, pinned by a fixture:
 
 `outbox_pending` · `oldest_outbox_age_s` · `asks_received` · `bodies_alive` · `bodies_dormant` ·
 `minds_standing` · `minds_unhealthy` · `usd_today` · `route_failures_1h` · `meter_rate_10m` ·
-`bodies_drained` · `door_p95_ms` · `pool_busy` · `pool_waiting` · `parked`
+`bodies_drained` · `door_p95_ms` · `pool_busy` · `pool_waiting` · `parked` · `trust` · `recall` ·
+`efficiency` · `experience` · `cost` · `ground_connections` · `key_checks_failed`
 
 | Say | What happens |
 |---|---|

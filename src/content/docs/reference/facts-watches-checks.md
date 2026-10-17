@@ -1,6 +1,6 @@
 ---
 title: Facts, watches and health checks
-description: The fact kinds that ride the events rail, the fifteen watch metrics, the eleven health checks, and the marker kinds a fresh world seeds.
+description: The fact kinds that ride the events rail, the twenty-two watch metrics, the eleven health checks, and the marker kinds a fresh world seeds.
 ---
 
 ## The fact kinds
@@ -25,7 +25,7 @@ lights.
 
 ## The watch metrics
 
-Fifteen, on both kernels, in this order, pinned by the fixture `watch-v0`:
+Twenty-two, on both kernels, in this order, pinned by the fixture `watch-v0` (the fifteen of 0.1.0, then the seven the Engineered Agents phase added):
 
 | Metric | Reads |
 |---|---|
@@ -44,6 +44,9 @@ Fifteen, on both kernels, in this order, pinned by the fixture `watch-v0`:
 | `pool_busy` | Lines to the ground in use. |
 | `pool_waiting` | Knocks waiting for a line. |
 | `parked` | Events the dispatcher holds at. |
+| `trust` · `recall` · `efficiency` · `experience` · `cost` | THE OPERATING STATE's five measurements, each 0 to 1 against a target of 1; absent (never zero) while there is nothing to measure. The [operating state](/learn/architecture/the-operating-state/) says how each is made. |
+| `ground_connections` | Lines to the ground held right now by the kernel and its bodies — a body holds one only while it serves. |
+| `key_checks_failed` | Bodies that failed the kernel's key-check — asked on a cadence to prove who and what they are. |
 
 A watch is `{name, metric, op, threshold}`; red while `metric op threshold` holds. `GET /monitor`
 carries every metric's current value under `values`; the glass says *not measured here* for an

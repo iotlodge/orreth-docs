@@ -42,7 +42,7 @@ They still bind; the organs that exercise them on this kernel are re-seated or o
 | `markers-v0` | The registry, the structural seed, the tree under a marker. |
 | `intent-v0` | The intention record, declare, stop, the loop's turn. |
 | `levers-v0` | The lever catalogue and the remediation rail's outcomes. |
-| `watch-v0` | The fifteen metrics in one order; a watch turning red and green. |
+| `watch-v0` | The twenty-two metrics in one order; a watch turning red and green. |
 | `tools-v0` | The tool manifest by name and bytes; the held-by rule. |
 | `services-v0` · `mcp-v0` · `minds-v0` | The shelf's ladder; the MCP client's three calls; the Stable's deals, pins and confessed degrade. |
 | `memory-v0` | The Record's landing, recall, the purge's tombstone. |
