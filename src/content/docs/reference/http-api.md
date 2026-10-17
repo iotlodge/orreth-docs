@@ -106,7 +106,7 @@ drafts and wear, the Studio, the operating state — were read from both kernels
 
 | Door | Shape |
 |---|---|
-| `GET /monitor` | `{values: {the fifteen metrics}, watches[], bodies, asks, waiting, benches, outbox, parked, topic_depth, doors[], pool, stable, harness, home}`. |
+| `GET /monitor` | `{values: {the twenty-two metrics}, watches[], bodies, asks, waiting, benches, outbox, parked, topic_depth, doors[], pool, stable, harness, home}`. |
 | `POST /watches/rest {name}` | A watch rested on a recorded row. |
 | `POST /harness/run {template}` · `POST /harness/ab` | Run the golden cases now; an A/B of model arms. |
 | `GET /parked` · `POST /parked/advance` *(governing)* | The events the dispatcher holds at — `{parked[], held, consumer}` — and the word to go past one. |
