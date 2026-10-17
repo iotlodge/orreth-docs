@@ -2,8 +2,8 @@
 #
 # Your first Orreth world: the published kernel and the four boxes it stands on.
 #
-#   docker compose up -d                       # pulls ghcr.io/iotlodge/orrethd:0.1.0 (linux/arm64)
-#   curl localhost:4600/health                 # {"kernel":"rust","version":"0.1.0",...}
+#   docker compose up -d                       # pulls ghcr.io/iotlodge/orrethd:0.2.0 (linux/arm64 or linux/amd64)
+#   curl localhost:4600/health                 # {"kernel":"rust","version":"0.2.0",...}
 #   open http://localhost:4600                 # the glass: enroll, take your seat, say "tour"
 #
 # Provider keys ride in from your shell or a `.env` beside this file (ANTHROPIC_API_KEY,
@@ -88,7 +88,7 @@ services:
     restart: unless-stopped
 
   kernel:                              # orrethd — the kernel and its crew, one image
-    image: ghcr.io/iotlodge/orrethd:0.1.0
+    image: ghcr.io/iotlodge/orrethd:0.2.0
     ports: ["${ORRETH_PORT:-4600}:4600"]
     environment:
       SPINE_PG: postgresql://orreth:${ORRETH_GROUND_PASSWORD:-orreth-first}@ground:5432/spine

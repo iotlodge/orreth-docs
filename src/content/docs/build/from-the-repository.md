@@ -11,7 +11,7 @@ a second universe, run it from the repository. One script, `scripts/dev.sh`, is 
 - Docker Desktop, running.
 - **Rust** (stable toolchain) — the kernel is a release build of `backend/plane/crates/orreth-spine`.
 - **[uv](https://docs.astral.sh/uv/)** — the Python runner for the reference and the bodies.
-- macOS or Linux, arm64 or amd64 (the *image* is arm64 only; the tree builds on both).
+- macOS or Linux, arm64 or amd64 (the published image is built for both since 0.2.0; so is the tree).
 
 ## The rig in five words
 

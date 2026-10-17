@@ -1,13 +1,13 @@
 ---
 title: What works today
-description: The honest register for kernel 0.1.0 — what is proven with the evidence named, what is partial or owed, and what is parked.
+description: The honest register for kernel 0.2.0 — what is proven with the evidence named, what is partial or owed, and what is parked.
 ---
 
 Most documentation tells you what a system aspires to do. This page follows Orreth's standing
 register of **claims with their evidence named** — `docs/design/the-honest-boundary.md` in the
 kernel's repository — under one rule the project has kept since July 2026: *a claim not on the
 register with evidence named is a claim we do not make.* What follows is that register for the
-0.1.0 kernel, in plain words, in three honest tiers.
+0.2.0 kernel, in plain words, in three honest tiers.
 
 Everything in the first tier was proven on the running kernel, most of it walked by a person in
 the glass with no script, and pinned by tests that run on every change.
@@ -21,7 +21,7 @@ the glass with no script, and pinned by tests that run on every change.
   envelope's bytes, the desk's transitions, the seat's verdicts, the levers, the watches. The Rust
   runner reads 730 cases; the reference suite runs in the nine hundreds.
 - **The era is one number.** `VERSION`, the kernel crate and the reference package all say
-  0.1.0, both health doors whisper it, and a hermetic test on each kernel holds its face to the
+  0.2.0, both health doors whisper it, and a hermetic test on each kernel holds its face to the
   file.
 - **The ground has one writer.** The schema wears a version; the first kernel to find the ground
   below its number migrates it and records that; every later kernel waits and verifies; a ground
@@ -115,12 +115,12 @@ the glass with no script, and pinned by tests that run on every change.
 
 **The image**
 
-- **`ghcr.io/iotlodge/orrethd:0.1.0`** is published and public; `:latest` is the same bytes. The
-  kernel and its crew in one image, verified from inside the box. This book's
-  [first world](/build/first-world/) was walked against it on 2026-09-30.
+- **`ghcr.io/iotlodge/orrethd:0.2.0`** is published and public for `linux/arm64` and `linux/amd64`;
+  `:latest` is the same manifest. The kernel and its crew in one image, with the Studio inside,
+  verified from inside the box on both platforms. This book's [quickstart](/build/quickstart/) was
+  re-walked against it on 2026-10-16; 0.1.0 (2026-09-30, arm64 only) stays published.
 
-**The Engineered Agents phase and THE STUDIO** (on the source line after the 0.1.0 image; both
-kernels, law for law)
+**The Engineered Agents phase and THE STUDIO** (in the 0.2.0 image; both kernels, law for law)
 
 - **Three levels on one path, each staffed.** Universe · floor · room as a scope path in one kernel
   per cell; mode tightens down the path; a floor or room opens on a governing seat's word. Fixture
@@ -155,11 +155,6 @@ kernels, law for law)
   THE CARD, draws the wizard's stock instead of its own crafts; the MIND chip reads the template's
   mind while the seat wears the binding's. Time travel and state forks are named, not built; the
   compiled graph's shape is read at its first run, never at registration.
-- **The Studio is not in the published image.** `ghcr.io/iotlodge/orrethd:0.1.0` of 2026-09-30
-  predates the Engineered Agents phase; the Studio runs from the repository.
-
-- **The image is linux/arm64 only.** Every image before it was too; amd64 is owed (the Rust stage
-  cross-builds).
 - **A published SDK that joins from the door alone is owed.** `orreth-agent` 0.4.0 on PyPI speaks
   the first architecture's doors, not this desk. Today a body is `python -m orreth_spine.body`
   from the kernel's own repository, and it needs the rails reachable, not only the door. The

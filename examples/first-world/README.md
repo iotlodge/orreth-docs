@@ -2,12 +2,12 @@
 
 The working proof behind the [quickstart](https://docs.orreth.ai/build/quickstart/) and
 [Your first world](https://docs.orreth.ai/build/first-world/): the published kernel
-`ghcr.io/iotlodge/orrethd:0.1.0` and the four boxes it stands on, from one compose file.
+`ghcr.io/iotlodge/orrethd:0.2.0` and the four boxes it stands on, from one compose file.
 Walked on 2026-09-30; the docs pages and this folder are kept true to each other.
 
 ```bash
 docker compose up -d           # ground · invoke · events · gateway, then the kernel and its crew
-curl localhost:4600/health     # {"kernel":"rust","version":"0.1.0",...}
+curl localhost:4600/health     # {"kernel":"rust","version":"0.2.0",...}
 open http://localhost:4600     # the glass: enroll, take your seat, say "tour"
 docker compose down            # sleep; keep the ground and the selves
 docker compose down -v         # forget the world
