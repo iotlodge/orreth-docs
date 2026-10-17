@@ -1,11 +1,11 @@
 ---
 title: The HTTP doors
-description: Every door of kernel 0.2.0 — the seat law every door obeys, the open doors, the governing doors, the Studio's doors, and the shapes of the ones you will knock on first.
+description: Every door of kernel 0.2.1 — the seat law every door obeys, the open doors, the governing doors, the Studio's doors, and the shapes of the ones you will knock on first.
 ---
 
 A running world answers on one door: the kernel's, port 4600 (the Python reference serves the same
 doors on 4601). Everything the glass does, it does through these doors; there is no other API.
-The doors are those of kernel 0.2.0 (2026-10-16). The shapes of the doors that stood at 0.1.0 were
+The doors are those of kernel 0.2.1 (2026-10-16; 0.2.1 changed no door). The shapes of the doors that stood at 0.1.0 were
 read from a fresh world on 2026-09-30; the shapes of the doors added since — the path, the shelf's
 drafts and wear, the Studio, the operating state — were read from both kernels' handlers on
 2026-10-16.
