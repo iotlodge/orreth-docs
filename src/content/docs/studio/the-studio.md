@@ -13,7 +13,7 @@ that serves the pull is still the workspace body `workshop`, its binding is stil
 workshop** alike. This book says *the Studio* for the place and *the workshop agent* for the body
 that answers you there.
 
-The Studio stands on both kernels and ships in the published image `ghcr.io/iotlodge/orrethd:0.2.0`
+The Studio stands on both kernels and ships in the published image `ghcr.io/iotlodge/orrethd:0.2.1`
 of 2026-10-16 (the 0.1.0 image of 2026-09-30 predated it); the [quickstart](/build/quickstart/) lights
 it, or run the kernel [from the repository](/build/from-the-repository/). The [register](/learn/what-works-today/)
 says what of it is proven and what is still owed.

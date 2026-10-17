@@ -3,7 +3,7 @@
 The working proof behind [Seat your own body](https://docs.orreth.ai/build/your-own-body/):
 a template that declares a body, and a script that walks it through the kernel's five-status
 join desk — asked and challenged, proved by its own key, staged for the owner's yes in the chat,
-then a lease with the fuel clause. Walked against `ghcr.io/iotlodge/orrethd:0.1.0` on 2026-09-30; the desk is unchanged at 0.2.0.
+then a lease with the fuel clause. Walked against `ghcr.io/iotlodge/orrethd:0.1.0` on 2026-09-30; the desk is unchanged at 0.2.1.
 
 | File | Role |
 |---|---|

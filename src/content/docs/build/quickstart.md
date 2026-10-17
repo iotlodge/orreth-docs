@@ -1,19 +1,20 @@
 ---
 title: "Quickstart: a running world in ten minutes"
-description: The published kernel 0.2.0 and the four boxes it stands on, from one compose file — then enroll, take your seat, and say “tour”.
+description: The published kernel 0.2.1 and the four boxes it stands on, from one compose file — then enroll, take your seat, and say “tour”.
 ---
 
 This gets you from nothing to a **running Orreth world with the glass in your browser**: the
 kernel `orrethd` and its crew of thirteen, standing on Postgres, RabbitMQ, Kafka and a LiteLLM
 gateway, all in Docker, from one compose file pinned to the published image
-`ghcr.io/iotlodge/orrethd:0.2.0`. Every step below was walked against that image on 2026-10-16;
+`ghcr.io/iotlodge/orrethd:0.2.1`. Every step below was walked against the 0.2.0 image on 2026-10-16 and the
+0.2.1 image's first light read the same night (it cures a stumble every body made once at a fresh world's first light);
 the outputs are real.
 
 ## What you need
 
 - **Docker Desktop** (or Docker Engine with Compose), running, with about 4 GB free for images.
 - **An arm64 or amd64 machine** — an Apple Silicon or Intel Mac, or a Linux box of either kind.
-  The 0.2.0 image is published for `linux/arm64` and `linux/amd64`; Docker picks yours.
+  The 0.2.1 image is published for `linux/arm64` and `linux/amd64`; Docker picks yours.
 - **An authenticator app** on your phone (any TOTP app) — your seat is a code it shows.
 - Optionally, **an Anthropic API key**. Without one the world still stands: echo answers, the
   tour walks, the panel lights; the librarian's mind waits until you add a mind.
@@ -42,11 +43,11 @@ curl -s localhost:4600/health
 ```
 
 ```json
-{"clients":0,"kernel":"rust","lit_at":"2026-10-17T01:49:16.659Z","rev":0,
- "schema":{"found":0,"ground":12,"kernel":12,"migrated":true},"version":"0.2.0"}
+{"clients":0,"kernel":"rust","lit_at":"2026-10-17T04:42:57.613Z","rev":0,
+ "schema":{"found":0,"ground":12,"kernel":12,"migrated":true},"version":"0.2.1"}
 ```
 
-`version` is the era, 0.2.0. `schema.migrated: true` says this kernel found an empty ground and
+`version` is the era, 0.2.1. `schema.migrated: true` says this kernel found an empty ground and
 laid down the fifty-two tables itself; the next time it lights it will find them and only verify. In
 the kernel's log you can watch the crew take their seats:
 

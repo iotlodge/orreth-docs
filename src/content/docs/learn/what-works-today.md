@@ -1,13 +1,13 @@
 ---
 title: What works today
-description: The honest register for kernel 0.2.0 — what is proven with the evidence named, what is partial or owed, and what is parked.
+description: The honest register for kernel 0.2.1 — what is proven with the evidence named, what is partial or owed, and what is parked.
 ---
 
 Most documentation tells you what a system aspires to do. This page follows Orreth's standing
 register of **claims with their evidence named** — `docs/design/the-honest-boundary.md` in the
 kernel's repository — under one rule the project has kept since July 2026: *a claim not on the
 register with evidence named is a claim we do not make.* What follows is that register for the
-0.2.0 kernel, in plain words, in three honest tiers.
+0.2.1 kernel, in plain words, in three honest tiers.
 
 Everything in the first tier was proven on the running kernel, most of it walked by a person in
 the glass with no script, and pinned by tests that run on every change.
@@ -21,7 +21,7 @@ the glass with no script, and pinned by tests that run on every change.
   envelope's bytes, the desk's transitions, the seat's verdicts, the levers, the watches. The Rust
   runner reads 730 cases; the reference suite runs in the nine hundreds.
 - **The era is one number.** `VERSION`, the kernel crate and the reference package all say
-  0.2.0, both health doors whisper it, and a hermetic test on each kernel holds its face to the
+  0.2.1, both health doors whisper it, and a hermetic test on each kernel holds its face to the
   file.
 - **The ground has one writer.** The schema wears a version; the first kernel to find the ground
   below its number migrates it and records that; every later kernel waits and verifies; a ground
@@ -115,12 +115,14 @@ the glass with no script, and pinned by tests that run on every change.
 
 **The image**
 
-- **`ghcr.io/iotlodge/orrethd:0.2.0`** is published and public for `linux/arm64` and `linux/amd64`;
-  `:latest` is the same manifest. The kernel and its crew in one image, with the Studio inside,
+- **`ghcr.io/iotlodge/orrethd:0.2.1`** is published and public for `linux/arm64` and `linux/amd64`;
+  `:latest` is the same manifest. It is 0.2.0 with one cure: on a fresh world's first light every body's
+  first serve stumbled once on a Postgres deadlock (the working memory's tables laid under the wrong lock)
+  and recovered; 0.2.1 lays them at a body's birth under a lock of their own, and a fresh first light is clean. The kernel and its crew in one image, with the Studio inside,
   verified from inside the box on both platforms. This book's [quickstart](/build/quickstart/) was
-  re-walked against it on 2026-10-16; 0.1.0 (2026-09-30, arm64 only) stays published.
+  re-walked against 0.2.0 on 2026-10-16 and 0.2.1's first light read the same night; 0.1.0 (2026-09-30, arm64 only) and 0.2.0 stay published.
 
-**The Engineered Agents phase and THE STUDIO** (in the 0.2.0 image; both kernels, law for law)
+**The Engineered Agents phase and THE STUDIO** (in the 0.2.1 image; both kernels, law for law)
 
 - **Three levels on one path, each staffed.** Universe · floor · room as a scope path in one kernel
   per cell; mode tightens down the path; a floor or room opens on a governing seat's word. Fixture
